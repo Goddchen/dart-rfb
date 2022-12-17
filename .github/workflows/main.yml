@@ -1,0 +1,35 @@
+name: main workflow
+on:
+  push:
+    branches:
+      - main
+jobs:
+  analyze:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1.3
+        with:
+          sdk: 2.18.4
+      - working-directory: dart-rfb/
+        run: dart pub get
+      - working-directory: dart-rfb/
+        run: dart analyze --fatal-infos --fatal-warnings
+  format:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1.3
+        with:
+          sdk: 2.18.4
+      - working-directory: dart-rfb/
+        run: dart format --output none --set-exit-if-changed .\example\ .\lib\ .\test\
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1.3
+        with:
+          sdk: 2.18.4
+      - working-directory: dart-rfb/
+        run: dart test
