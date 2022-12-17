@@ -1,8 +1,13 @@
-/// Support for doing something awesome.
-///
-/// More dartdocs go here.
 library dart_rfb;
 
-export 'src/dart_rfb_base.dart';
-
-// TODO: Export any libraries intended for clients of this package.
+export 'src/protocol/client_init_message.dart';
+export 'src/protocol/encoding_type.dart';
+export 'src/protocol/frame_buffer_update_message.dart';
+export 'src/protocol/frame_buffer_update_request_message.dart';
+export 'src/protocol/pixel_format.dart';
+export 'src/protocol/protocol_version_handshake_message.dart';
+export 'src/protocol/security_handshake_message.dart';
+export 'src/protocol/security_result_handshake_message.dart';
+export 'src/protocol/server_init_message.dart';
+export 'src/protocol/set_pixel_format_message.dart';
+export 'src/remote_frame_buffer_client.dart';

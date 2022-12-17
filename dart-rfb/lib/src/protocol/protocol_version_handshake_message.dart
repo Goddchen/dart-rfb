@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -20,6 +21,8 @@ class RemoteFrameBufferProtocolVersion with _$RemoteFrameBufferProtocolVersion {
 @freezed
 class RemoteFrameBufferProtocolVersionHandshakeMessage
     with _$RemoteFrameBufferProtocolVersionHandshakeMessage {
+  static const int length = 12;
+
   const factory RemoteFrameBufferProtocolVersionHandshakeMessage({
     required final RemoteFrameBufferProtocolVersion version,
   }) = _RemoteFrameBufferProtocolVersionHandshakeMessage;
@@ -57,4 +60,14 @@ class RemoteFrameBufferProtocolVersionHandshakeMessage
   }
 
   const RemoteFrameBufferProtocolVersionHandshakeMessage._();
+
+  ByteBuffer toBytes() => Uint8List.fromList(
+        version.map(
+          unknown: (final _) =>
+              throw Exception('Cannot send an unknown protocol version'),
+          v3_3: (final _) => ascii.encode('RFB 003.003\n'),
+          v3_7: (final _) => ascii.encode('RFB 003.007\n'),
+          v3_8: (final _) => ascii.encode('RFB 003.008\n'),
+        ),
+      ).buffer;
 }

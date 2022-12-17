@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:dart_rfb/src/protocol/security_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'security_handshake_message.freezed.dart';
@@ -8,9 +9,7 @@ part 'security_handshake_message.freezed.dart';
 class RemoteFrameBufferSecurityHandshakeMessage
     with _$RemoteFrameBufferSecurityHandshakeMessage {
   const factory RemoteFrameBufferSecurityHandshakeMessage({
-    required final Iterable<
-            RemoteFrameBufferSecurityHandshakeMessageSecurityType>
-        securityTypes,
+    required final Iterable<RemoteFrameBufferSecurityType> securityTypes,
   }) = _RemoteFrameBufferSecurityHandshakeMessage;
 
   factory RemoteFrameBufferSecurityHandshakeMessage.fromBytes({
@@ -21,32 +20,17 @@ class RemoteFrameBufferSecurityHandshakeMessage
       securityTypes: bytes.asUint8List().skip(1).map((final int byte) {
         switch (byte) {
           case 0:
-            return const RemoteFrameBufferSecurityHandshakeMessageSecurityType
-                .invalid();
+            return const RemoteFrameBufferSecurityType.invalid();
           case 1:
-            return const RemoteFrameBufferSecurityHandshakeMessageSecurityType
-                .none();
+            return const RemoteFrameBufferSecurityType.none();
           case 2:
-            return const RemoteFrameBufferSecurityHandshakeMessageSecurityType
-                .vncAuthentication();
+            return const RemoteFrameBufferSecurityType.vncAuthentication();
           default:
-            return const RemoteFrameBufferSecurityHandshakeMessageSecurityType
-                .invalid();
+            return const RemoteFrameBufferSecurityType.invalid();
         }
       }),
     );
   }
 
   const RemoteFrameBufferSecurityHandshakeMessage._();
-}
-
-@freezed
-class RemoteFrameBufferSecurityHandshakeMessageSecurityType
-    with _$RemoteFrameBufferSecurityHandshakeMessageSecurityType {
-  const factory RemoteFrameBufferSecurityHandshakeMessageSecurityType.invalid() =
-      RemoteFrameBufferSecurityHandshakeMessageSecurityTypeInvalid;
-  const factory RemoteFrameBufferSecurityHandshakeMessageSecurityType.none() =
-      RemoteFrameBufferSecurityHandshakeMessageSecurityTypeInvalid;
-  const factory RemoteFrameBufferSecurityHandshakeMessageSecurityType.vncAuthentication() =
-      RemoteFrameBufferSecurityHandshakeMessageSecurityTypeInvalid;
 }
