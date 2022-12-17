@@ -12,10 +12,10 @@ class RemoteFrameBufferSecurityResultHandshakeMessage
   }) = _RemoteFrameBufferSecurityResultHandshakeMessage;
 
   factory RemoteFrameBufferSecurityResultHandshakeMessage.fromBytes({
-    required final ByteBuffer bytes,
+    required final ByteData bytes,
   }) =>
       RemoteFrameBufferSecurityResultHandshakeMessage(
-        success: bytes.asUint32List()[0] == 0,
+        success: bytes.getUint32(0) == 0,
       );
 
   const RemoteFrameBufferSecurityResultHandshakeMessage._();

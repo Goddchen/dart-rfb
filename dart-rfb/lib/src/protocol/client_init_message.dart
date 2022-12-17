@@ -11,8 +11,7 @@ class RemoteFrameBufferClientInitMessage
     required final bool sharedFlag,
   }) = _RemoteFrameBufferClientInitMessage;
 
-  ByteBuffer toBytes() =>
-      Uint8List.fromList(<int>[if (sharedFlag) 1 else 0]).buffer;
+  ByteData toBytes() => ByteData(1)..setUint8(0, sharedFlag ? 1 : 0);
 
   const RemoteFrameBufferClientInitMessage._();
 }

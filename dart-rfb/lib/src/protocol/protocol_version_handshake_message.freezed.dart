@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$RemoteFrameBufferProtocolVersion {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ByteBuffer bytes) unknown,
+    required TResult Function(ByteData bytes) unknown,
     required TResult Function() v3_3,
     required TResult Function() v3_7,
     required TResult Function() v3_8,
@@ -26,7 +26,7 @@ mixin _$RemoteFrameBufferProtocolVersion {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ByteBuffer bytes)? unknown,
+    TResult? Function(ByteData bytes)? unknown,
     TResult? Function()? v3_3,
     TResult? Function()? v3_7,
     TResult? Function()? v3_8,
@@ -34,7 +34,7 @@ mixin _$RemoteFrameBufferProtocolVersion {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ByteBuffer bytes)? unknown,
+    TResult Function(ByteData bytes)? unknown,
     TResult Function()? v3_3,
     TResult Function()? v3_7,
     TResult Function()? v3_8,
@@ -97,7 +97,7 @@ abstract class _$$RemoteFrameBufferProtocolVersionUnknownCopyWith<$Res> {
           $Res Function(_$RemoteFrameBufferProtocolVersionUnknown) then) =
       __$$RemoteFrameBufferProtocolVersionUnknownCopyWithImpl<$Res>;
   @useResult
-  $Res call({ByteBuffer bytes});
+  $Res call({ByteData bytes});
 }
 
 /// @nodoc
@@ -119,7 +119,7 @@ class __$$RemoteFrameBufferProtocolVersionUnknownCopyWithImpl<$Res>
       bytes: null == bytes
           ? _value.bytes
           : bytes // ignore: cast_nullable_to_non_nullable
-              as ByteBuffer,
+              as ByteData,
     ));
   }
 }
@@ -131,7 +131,7 @@ class _$RemoteFrameBufferProtocolVersionUnknown
   const _$RemoteFrameBufferProtocolVersionUnknown({required this.bytes});
 
   @override
-  final ByteBuffer bytes;
+  final ByteData bytes;
 
   @override
   String toString() {
@@ -160,7 +160,7 @@ class _$RemoteFrameBufferProtocolVersionUnknown
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ByteBuffer bytes) unknown,
+    required TResult Function(ByteData bytes) unknown,
     required TResult Function() v3_3,
     required TResult Function() v3_7,
     required TResult Function() v3_8,
@@ -171,7 +171,7 @@ class _$RemoteFrameBufferProtocolVersionUnknown
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ByteBuffer bytes)? unknown,
+    TResult? Function(ByteData bytes)? unknown,
     TResult? Function()? v3_3,
     TResult? Function()? v3_7,
     TResult? Function()? v3_8,
@@ -182,7 +182,7 @@ class _$RemoteFrameBufferProtocolVersionUnknown
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ByteBuffer bytes)? unknown,
+    TResult Function(ByteData bytes)? unknown,
     TResult Function()? v3_3,
     TResult Function()? v3_7,
     TResult Function()? v3_8,
@@ -236,10 +236,10 @@ class _$RemoteFrameBufferProtocolVersionUnknown
 abstract class RemoteFrameBufferProtocolVersionUnknown
     implements RemoteFrameBufferProtocolVersion {
   const factory RemoteFrameBufferProtocolVersionUnknown(
-          {required final ByteBuffer bytes}) =
+          {required final ByteData bytes}) =
       _$RemoteFrameBufferProtocolVersionUnknown;
 
-  ByteBuffer get bytes;
+  ByteData get bytes;
   @JsonKey(ignore: true)
   _$$RemoteFrameBufferProtocolVersionUnknownCopyWith<
           _$RemoteFrameBufferProtocolVersionUnknown>
@@ -289,7 +289,7 @@ class _$RemoteFrameBufferProtocolVersion_3_3
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ByteBuffer bytes) unknown,
+    required TResult Function(ByteData bytes) unknown,
     required TResult Function() v3_3,
     required TResult Function() v3_7,
     required TResult Function() v3_8,
@@ -300,7 +300,7 @@ class _$RemoteFrameBufferProtocolVersion_3_3
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ByteBuffer bytes)? unknown,
+    TResult? Function(ByteData bytes)? unknown,
     TResult? Function()? v3_3,
     TResult? Function()? v3_7,
     TResult? Function()? v3_8,
@@ -311,7 +311,7 @@ class _$RemoteFrameBufferProtocolVersion_3_3
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ByteBuffer bytes)? unknown,
+    TResult Function(ByteData bytes)? unknown,
     TResult Function()? v3_3,
     TResult Function()? v3_7,
     TResult Function()? v3_8,
@@ -411,7 +411,7 @@ class _$RemoteFrameBufferProtocolVersion_3_7
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ByteBuffer bytes) unknown,
+    required TResult Function(ByteData bytes) unknown,
     required TResult Function() v3_3,
     required TResult Function() v3_7,
     required TResult Function() v3_8,
@@ -422,7 +422,7 @@ class _$RemoteFrameBufferProtocolVersion_3_7
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ByteBuffer bytes)? unknown,
+    TResult? Function(ByteData bytes)? unknown,
     TResult? Function()? v3_3,
     TResult? Function()? v3_7,
     TResult? Function()? v3_8,
@@ -433,7 +433,7 @@ class _$RemoteFrameBufferProtocolVersion_3_7
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ByteBuffer bytes)? unknown,
+    TResult Function(ByteData bytes)? unknown,
     TResult Function()? v3_3,
     TResult Function()? v3_7,
     TResult Function()? v3_8,
@@ -533,7 +533,7 @@ class _$RemoteFrameBufferProtocolVersion_3_8
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ByteBuffer bytes) unknown,
+    required TResult Function(ByteData bytes) unknown,
     required TResult Function() v3_3,
     required TResult Function() v3_7,
     required TResult Function() v3_8,
@@ -544,7 +544,7 @@ class _$RemoteFrameBufferProtocolVersion_3_8
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ByteBuffer bytes)? unknown,
+    TResult? Function(ByteData bytes)? unknown,
     TResult? Function()? v3_3,
     TResult? Function()? v3_7,
     TResult? Function()? v3_8,
@@ -555,7 +555,7 @@ class _$RemoteFrameBufferProtocolVersion_3_8
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ByteBuffer bytes)? unknown,
+    TResult Function(ByteData bytes)? unknown,
     TResult Function()? v3_3,
     TResult Function()? v3_7,
     TResult Function()? v3_8,

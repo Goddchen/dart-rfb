@@ -162,6 +162,7 @@ mixin _$RemoteFrameBufferFrameBufferUpdateMessageRectangle {
   RemoteFrameBufferEncodingType get encodingType =>
       throw _privateConstructorUsedError;
   int get height => throw _privateConstructorUsedError;
+  ByteData get pixelData => throw _privateConstructorUsedError;
   int get width => throw _privateConstructorUsedError;
   int get x => throw _privateConstructorUsedError;
   int get y => throw _privateConstructorUsedError;
@@ -185,6 +186,7 @@ abstract class $RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<
   $Res call(
       {RemoteFrameBufferEncodingType encodingType,
       int height,
+      ByteData pixelData,
       int width,
       int x,
       int y});
@@ -198,6 +200,270 @@ class _$RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<$Res,
     implements
         $RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<$Res> {
   _$RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl(
+      this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? encodingType = null,
+    Object? height = null,
+    Object? pixelData = null,
+    Object? width = null,
+    Object? x = null,
+    Object? y = null,
+  }) {
+    return _then(_value.copyWith(
+      encodingType: null == encodingType
+          ? _value.encodingType
+          : encodingType // ignore: cast_nullable_to_non_nullable
+              as RemoteFrameBufferEncodingType,
+      height: null == height
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as int,
+      pixelData: null == pixelData
+          ? _value.pixelData
+          : pixelData // ignore: cast_nullable_to_non_nullable
+              as ByteData,
+      width: null == width
+          ? _value.width
+          : width // ignore: cast_nullable_to_non_nullable
+              as int,
+      x: null == x
+          ? _value.x
+          : x // ignore: cast_nullable_to_non_nullable
+              as int,
+      y: null == y
+          ? _value.y
+          : y // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RemoteFrameBufferEncodingTypeCopyWith<$Res> get encodingType {
+    return $RemoteFrameBufferEncodingTypeCopyWith<$Res>(_value.encodingType,
+        (value) {
+      return _then(_value.copyWith(encodingType: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<
+        $Res>
+    implements
+        $RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<$Res> {
+  factory _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith(
+          _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle value,
+          $Res Function(_$_RemoteFrameBufferFrameBufferUpdateMessageRectangle)
+              then) =
+      __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {RemoteFrameBufferEncodingType encodingType,
+      int height,
+      ByteData pixelData,
+      int width,
+      int x,
+      int y});
+
+  @override
+  $RemoteFrameBufferEncodingTypeCopyWith<$Res> get encodingType;
+}
+
+/// @nodoc
+class __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<$Res>
+    extends _$RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<
+        $Res, _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle>
+    implements
+        _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<$Res> {
+  __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl(
+      _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle _value,
+      $Res Function(_$_RemoteFrameBufferFrameBufferUpdateMessageRectangle)
+          _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? encodingType = null,
+    Object? height = null,
+    Object? pixelData = null,
+    Object? width = null,
+    Object? x = null,
+    Object? y = null,
+  }) {
+    return _then(_$_RemoteFrameBufferFrameBufferUpdateMessageRectangle(
+      encodingType: null == encodingType
+          ? _value.encodingType
+          : encodingType // ignore: cast_nullable_to_non_nullable
+              as RemoteFrameBufferEncodingType,
+      height: null == height
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as int,
+      pixelData: null == pixelData
+          ? _value.pixelData
+          : pixelData // ignore: cast_nullable_to_non_nullable
+              as ByteData,
+      width: null == width
+          ? _value.width
+          : width // ignore: cast_nullable_to_non_nullable
+              as int,
+      x: null == x
+          ? _value.x
+          : x // ignore: cast_nullable_to_non_nullable
+              as int,
+      y: null == y
+          ? _value.y
+          : y // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle
+    implements _RemoteFrameBufferFrameBufferUpdateMessageRectangle {
+  const _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle(
+      {required this.encodingType,
+      required this.height,
+      required this.pixelData,
+      required this.width,
+      required this.x,
+      required this.y});
+
+  @override
+  final RemoteFrameBufferEncodingType encodingType;
+  @override
+  final int height;
+  @override
+  final ByteData pixelData;
+  @override
+  final int width;
+  @override
+  final int x;
+  @override
+  final int y;
+
+  @override
+  String toString() {
+    return 'RemoteFrameBufferFrameBufferUpdateMessageRectangle(encodingType: $encodingType, height: $height, pixelData: $pixelData, width: $width, x: $x, y: $y)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle &&
+            (identical(other.encodingType, encodingType) ||
+                other.encodingType == encodingType) &&
+            (identical(other.height, height) || other.height == height) &&
+            (identical(other.pixelData, pixelData) ||
+                other.pixelData == pixelData) &&
+            (identical(other.width, width) || other.width == width) &&
+            (identical(other.x, x) || other.x == x) &&
+            (identical(other.y, y) || other.y == y));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, encodingType, height, pixelData, width, x, y);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<
+          _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle>
+      get copyWith =>
+          __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<
+                  _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle>(
+              this, _$identity);
+}
+
+abstract class _RemoteFrameBufferFrameBufferUpdateMessageRectangle
+    implements RemoteFrameBufferFrameBufferUpdateMessageRectangle {
+  const factory _RemoteFrameBufferFrameBufferUpdateMessageRectangle(
+          {required final RemoteFrameBufferEncodingType encodingType,
+          required final int height,
+          required final ByteData pixelData,
+          required final int width,
+          required final int x,
+          required final int y}) =
+      _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle;
+
+  @override
+  RemoteFrameBufferEncodingType get encodingType;
+  @override
+  int get height;
+  @override
+  ByteData get pixelData;
+  @override
+  int get width;
+  @override
+  int get x;
+  @override
+  int get y;
+  @override
+  @JsonKey(ignore: true)
+  _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<
+          _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader {
+  RemoteFrameBufferEncodingType get encodingType =>
+      throw _privateConstructorUsedError;
+  int get height => throw _privateConstructorUsedError;
+  int get width => throw _privateConstructorUsedError;
+  int get x => throw _privateConstructorUsedError;
+  int get y => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith<
+          RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith<
+    $Res> {
+  factory $RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith(
+          RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader value,
+          $Res Function(
+                  RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader)
+              then) =
+      _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl<
+          $Res, RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader>;
+  @useResult
+  $Res call(
+      {RemoteFrameBufferEncodingType encodingType,
+      int height,
+      int width,
+      int x,
+      int y});
+
+  $RemoteFrameBufferEncodingTypeCopyWith<$Res> get encodingType;
+}
+
+/// @nodoc
+class _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl<
+        $Res,
+        $Val extends RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader>
+    implements
+        $RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith<
+            $Res> {
+  _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl(
       this._value, this._then);
 
   // ignore: unused_field
@@ -249,15 +515,18 @@ class _$RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<
+abstract class _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith<
         $Res>
     implements
-        $RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith(
-          _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle value,
-          $Res Function(_$_RemoteFrameBufferFrameBufferUpdateMessageRectangle)
+        $RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith<
+            $Res> {
+  factory _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith(
+          _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader value,
+          $Res Function(
+                  _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader)
               then) =
-      __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<$Res>;
+      __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl<
+          $Res>;
   @override
   @useResult
   $Res call(
@@ -272,14 +541,16 @@ abstract class _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<$Res>
-    extends _$RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<
-        $Res, _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle>
+class __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl<
+        $Res>
+    extends _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl<
+        $Res, _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader>
     implements
-        _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<$Res> {
-  __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl(
-      _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle _value,
-      $Res Function(_$_RemoteFrameBufferFrameBufferUpdateMessageRectangle)
+        _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith<
+            $Res> {
+  __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl(
+      _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader _value,
+      $Res Function(_$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader)
           _then)
       : super(_value, _then);
 
@@ -292,7 +563,7 @@ class __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<$Res>
     Object? x = null,
     Object? y = null,
   }) {
-    return _then(_$_RemoteFrameBufferFrameBufferUpdateMessageRectangle(
+    return _then(_$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader(
       encodingType: null == encodingType
           ? _value.encodingType
           : encodingType // ignore: cast_nullable_to_non_nullable
@@ -319,9 +590,9 @@ class __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle
-    extends _RemoteFrameBufferFrameBufferUpdateMessageRectangle {
-  const _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle(
+class _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader
+    extends _RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader {
+  const _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader(
       {required this.encodingType,
       required this.height,
       required this.width,
@@ -342,14 +613,15 @@ class _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle
 
   @override
   String toString() {
-    return 'RemoteFrameBufferFrameBufferUpdateMessageRectangle(encodingType: $encodingType, height: $height, width: $width, x: $x, y: $y)';
+    return 'RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader(encodingType: $encodingType, height: $height, width: $width, x: $x, y: $y)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle &&
+            other
+                is _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader &&
             (identical(other.encodingType, encodingType) ||
                 other.encodingType == encodingType) &&
             (identical(other.height, height) || other.height == height) &&
@@ -365,24 +637,25 @@ class _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<
-          _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle>
+  _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith<
+          _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader>
       get copyWith =>
-          __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<
-                  _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle>(
+          __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl<
+                  _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader>(
               this, _$identity);
 }
 
-abstract class _RemoteFrameBufferFrameBufferUpdateMessageRectangle
-    extends RemoteFrameBufferFrameBufferUpdateMessageRectangle {
-  const factory _RemoteFrameBufferFrameBufferUpdateMessageRectangle(
+abstract class _RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader
+    extends RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader {
+  const factory _RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader(
           {required final RemoteFrameBufferEncodingType encodingType,
           required final int height,
           required final int width,
           required final int x,
           required final int y}) =
-      _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle;
-  const _RemoteFrameBufferFrameBufferUpdateMessageRectangle._() : super._();
+      _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader;
+  const _RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader._()
+      : super._();
 
   @override
   RemoteFrameBufferEncodingType get encodingType;
@@ -396,7 +669,7 @@ abstract class _RemoteFrameBufferFrameBufferUpdateMessageRectangle
   int get y;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<
-          _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle>
+  _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith<
+          _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader>
       get copyWith => throw _privateConstructorUsedError;
 }

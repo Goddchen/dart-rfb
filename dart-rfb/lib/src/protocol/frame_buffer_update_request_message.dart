@@ -15,12 +15,13 @@ class RemoteFrameBufferFrameBufferUpdateRequestMessage
     required final int y,
   }) = _RemoteFrameBufferFrameBufferUpdateRequestMessage;
 
-  ByteBuffer toBytes() => (ByteData(10)
-        ..setUint8(0, 0x03)
-        ..setUint8(1, incremental ? 1 : 0)
-        ..setUint16(2, x)
-        ..setUint16(4, y)
-        ..setUint16(6, width)
-        ..setUint16(8, height))
-      .buffer;
+  const RemoteFrameBufferFrameBufferUpdateRequestMessage._();
+
+  ByteData toBytes() => ByteData(10)
+    ..setUint8(0, 0x03)
+    ..setUint8(1, incremental ? 1 : 0)
+    ..setUint16(2, x)
+    ..setUint16(4, y)
+    ..setUint16(6, width)
+    ..setUint16(8, height);
 }

@@ -148,13 +148,14 @@ class __$$_RemoteFrameBufferFrameBufferUpdateRequestMessageCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_RemoteFrameBufferFrameBufferUpdateRequestMessage
-    implements _RemoteFrameBufferFrameBufferUpdateRequestMessage {
+    extends _RemoteFrameBufferFrameBufferUpdateRequestMessage {
   const _$_RemoteFrameBufferFrameBufferUpdateRequestMessage(
       {required this.height,
       required this.incremental,
       required this.width,
       required this.x,
-      required this.y});
+      required this.y})
+      : super._();
 
   @override
   final int height;
@@ -201,7 +202,7 @@ class _$_RemoteFrameBufferFrameBufferUpdateRequestMessage
 }
 
 abstract class _RemoteFrameBufferFrameBufferUpdateRequestMessage
-    implements RemoteFrameBufferFrameBufferUpdateRequestMessage {
+    extends RemoteFrameBufferFrameBufferUpdateRequestMessage {
   const factory _RemoteFrameBufferFrameBufferUpdateRequestMessage(
           {required final int height,
           required final bool incremental,
@@ -209,6 +210,7 @@ abstract class _RemoteFrameBufferFrameBufferUpdateRequestMessage
           required final int x,
           required final int y}) =
       _$_RemoteFrameBufferFrameBufferUpdateRequestMessage;
+  const _RemoteFrameBufferFrameBufferUpdateRequestMessage._() : super._();
 
   @override
   int get height;

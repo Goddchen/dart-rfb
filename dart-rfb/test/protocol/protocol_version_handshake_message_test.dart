@@ -8,7 +8,7 @@ void main() {
     expect(
       () {
         RemoteFrameBufferProtocolVersionHandshakeMessage.fromBytes(
-          bytes: Uint8List(0).buffer,
+          bytes: ByteData.sublistView(Uint8List(0)),
         );
       },
       throwsA(isA<AssertionError>()),
@@ -32,7 +32,7 @@ void main() {
     );
     expect(
       RemoteFrameBufferProtocolVersionHandshakeMessage.fromBytes(
-        bytes: bytes.buffer,
+        bytes: ByteData.sublistView(bytes),
       ),
       equals(
         const RemoteFrameBufferProtocolVersionHandshakeMessage(
@@ -59,7 +59,7 @@ void main() {
     );
     expect(
       RemoteFrameBufferProtocolVersionHandshakeMessage.fromBytes(
-        bytes: bytes.buffer,
+        bytes: ByteData.sublistView(bytes),
       ),
       equals(
         const RemoteFrameBufferProtocolVersionHandshakeMessage(
@@ -86,7 +86,7 @@ void main() {
     );
     expect(
       RemoteFrameBufferProtocolVersionHandshakeMessage.fromBytes(
-        bytes: bytes.buffer,
+        bytes: ByteData.sublistView(bytes),
       ),
       equals(
         const RemoteFrameBufferProtocolVersionHandshakeMessage(

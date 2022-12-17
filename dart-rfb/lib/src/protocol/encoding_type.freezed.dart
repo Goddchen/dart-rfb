@@ -19,19 +19,19 @@ mixin _$RemoteFrameBufferEncodingType {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() raw,
-    required TResult Function(ByteBuffer bytes) unsupported,
+    required TResult Function(ByteData bytes) unsupported,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? raw,
-    TResult? Function(ByteBuffer bytes)? unsupported,
+    TResult? Function(ByteData bytes)? unsupported,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? raw,
-    TResult Function(ByteBuffer bytes)? unsupported,
+    TResult Function(ByteData bytes)? unsupported,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -124,7 +124,7 @@ class _$RemoteFrameBufferEncodingTypeRaw
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() raw,
-    required TResult Function(ByteBuffer bytes) unsupported,
+    required TResult Function(ByteData bytes) unsupported,
   }) {
     return raw();
   }
@@ -133,7 +133,7 @@ class _$RemoteFrameBufferEncodingTypeRaw
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? raw,
-    TResult? Function(ByteBuffer bytes)? unsupported,
+    TResult? Function(ByteData bytes)? unsupported,
   }) {
     return raw?.call();
   }
@@ -142,7 +142,7 @@ class _$RemoteFrameBufferEncodingTypeRaw
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? raw,
-    TResult Function(ByteBuffer bytes)? unsupported,
+    TResult Function(ByteData bytes)? unsupported,
     required TResult orElse(),
   }) {
     if (raw != null) {
@@ -200,7 +200,7 @@ abstract class _$$RemoteFrameBufferEncodingTypeUnsupportedCopyWith<$Res> {
           $Res Function(_$RemoteFrameBufferEncodingTypeUnsupported) then) =
       __$$RemoteFrameBufferEncodingTypeUnsupportedCopyWithImpl<$Res>;
   @useResult
-  $Res call({ByteBuffer bytes});
+  $Res call({ByteData bytes});
 }
 
 /// @nodoc
@@ -222,7 +222,7 @@ class __$$RemoteFrameBufferEncodingTypeUnsupportedCopyWithImpl<$Res>
       bytes: null == bytes
           ? _value.bytes
           : bytes // ignore: cast_nullable_to_non_nullable
-              as ByteBuffer,
+              as ByteData,
     ));
   }
 }
@@ -235,7 +235,7 @@ class _$RemoteFrameBufferEncodingTypeUnsupported
       : super._();
 
   @override
-  final ByteBuffer bytes;
+  final ByteData bytes;
 
   @override
   String toString() {
@@ -265,7 +265,7 @@ class _$RemoteFrameBufferEncodingTypeUnsupported
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() raw,
-    required TResult Function(ByteBuffer bytes) unsupported,
+    required TResult Function(ByteData bytes) unsupported,
   }) {
     return unsupported(bytes);
   }
@@ -274,7 +274,7 @@ class _$RemoteFrameBufferEncodingTypeUnsupported
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? raw,
-    TResult? Function(ByteBuffer bytes)? unsupported,
+    TResult? Function(ByteData bytes)? unsupported,
   }) {
     return unsupported?.call(bytes);
   }
@@ -283,7 +283,7 @@ class _$RemoteFrameBufferEncodingTypeUnsupported
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? raw,
-    TResult Function(ByteBuffer bytes)? unsupported,
+    TResult Function(ByteData bytes)? unsupported,
     required TResult orElse(),
   }) {
     if (unsupported != null) {
@@ -330,11 +330,11 @@ class _$RemoteFrameBufferEncodingTypeUnsupported
 abstract class RemoteFrameBufferEncodingTypeUnsupported
     extends RemoteFrameBufferEncodingType {
   const factory RemoteFrameBufferEncodingTypeUnsupported(
-          {required final ByteBuffer bytes}) =
+          {required final ByteData bytes}) =
       _$RemoteFrameBufferEncodingTypeUnsupported;
   const RemoteFrameBufferEncodingTypeUnsupported._() : super._();
 
-  ByteBuffer get bytes;
+  ByteData get bytes;
   @JsonKey(ignore: true)
   _$$RemoteFrameBufferEncodingTypeUnsupportedCopyWith<
           _$RemoteFrameBufferEncodingTypeUnsupported>

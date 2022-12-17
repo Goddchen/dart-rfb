@@ -9,13 +9,13 @@ class RemoteFrameBufferEncodingType with _$RemoteFrameBufferEncodingType {
   const factory RemoteFrameBufferEncodingType.raw() =
       RemoteFrameBufferEncodingTypeRaw;
   const factory RemoteFrameBufferEncodingType.unsupported({
-    required final ByteBuffer bytes,
+    required final ByteData bytes,
   }) = RemoteFrameBufferEncodingTypeUnsupported;
 
   factory RemoteFrameBufferEncodingType.fromBytes({
-    required final ByteBuffer bytes,
+    required final ByteData bytes,
   }) {
-    switch (bytes.asInt32List()[0]) {
+    switch (bytes.getInt32(0)) {
       case 0:
         return const RemoteFrameBufferEncodingType.raw();
       default:

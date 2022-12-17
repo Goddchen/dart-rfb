@@ -20,19 +20,19 @@ class RemoteFrameBufferPixelFormat with _$RemoteFrameBufferPixelFormat {
   }) = _RemoteFrameBufferPixelFormat;
 
   factory RemoteFrameBufferPixelFormat.fromBytes({
-    required final ByteBuffer bytes,
+    required final ByteData bytes,
   }) =>
       RemoteFrameBufferPixelFormat(
-        bitsPerPixel: bytes.asUint8List()[0],
-        depth: bytes.asUint8List()[1],
-        bigEndian: bytes.asUint8List()[2] != 0,
-        trueColor: bytes.asUint8List()[3] != 0,
-        redMax: bytes.asUint16List(4)[0],
-        greenMax: bytes.asUint16List(4)[1],
-        blueMax: bytes.asUint16List(4)[2],
-        redShift: bytes.asUint8List(10)[0],
-        greenShift: bytes.asUint8List(10)[1],
-        blueShift: bytes.asUint8List(10)[2],
+        bitsPerPixel: bytes.getUint8(0),
+        depth: bytes.getUint8(1),
+        bigEndian: bytes.getUint8(2) != 0,
+        trueColor: bytes.getUint8(3) != 0,
+        redMax: bytes.getUint16(4),
+        greenMax: bytes.getUint16(6),
+        blueMax: bytes.getUint16(8),
+        redShift: bytes.getUint8(10),
+        greenShift: bytes.getUint8(11),
+        blueShift: bytes.getUint8(12),
       );
 
   const RemoteFrameBufferPixelFormat._();

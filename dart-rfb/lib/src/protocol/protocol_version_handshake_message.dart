@@ -8,7 +8,7 @@ part 'protocol_version_handshake_message.freezed.dart';
 @freezed
 class RemoteFrameBufferProtocolVersion with _$RemoteFrameBufferProtocolVersion {
   const factory RemoteFrameBufferProtocolVersion.unknown({
-    required final ByteBuffer bytes,
+    required final ByteData bytes,
   }) = RemoteFrameBufferProtocolVersionUnknown;
   const factory RemoteFrameBufferProtocolVersion.v3_3() =
       RemoteFrameBufferProtocolVersion_3_3;
@@ -28,10 +28,11 @@ class RemoteFrameBufferProtocolVersionHandshakeMessage
   }) = _RemoteFrameBufferProtocolVersionHandshakeMessage;
 
   factory RemoteFrameBufferProtocolVersionHandshakeMessage.fromBytes({
-    required final ByteBuffer bytes,
+    required final ByteData bytes,
   }) {
     assert(bytes.lengthInBytes == 12);
-    final String versionString = String.fromCharCodes(bytes.asUint8List());
+    final String versionString =
+        String.fromCharCodes(bytes.buffer.asUint8List(bytes.offsetInBytes));
     switch (versionString[6]) {
       case '3':
         switch (versionString[10]) {
@@ -61,13 +62,11 @@ class RemoteFrameBufferProtocolVersionHandshakeMessage
 
   const RemoteFrameBufferProtocolVersionHandshakeMessage._();
 
-  ByteBuffer toBytes() => Uint8List.fromList(
-        version.map(
-          unknown: (final _) =>
-              throw Exception('Cannot send an unknown protocol version'),
-          v3_3: (final _) => ascii.encode('RFB 003.003\n'),
-          v3_7: (final _) => ascii.encode('RFB 003.007\n'),
-          v3_8: (final _) => ascii.encode('RFB 003.008\n'),
-        ),
-      ).buffer;
+  ByteData toBytes() => version.map(
+        unknown: (final _) =>
+            throw Exception('Cannot send an unknown protocol version'),
+        v3_3: (final _) => ByteData.sublistView(ascii.encode('RFB 003.003\n')),
+        v3_7: (final _) => ByteData.sublistView(ascii.encode('RFB 003.007\n')),
+        v3_8: (final _) => ByteData.sublistView(ascii.encode('RFB 003.008\n')),
+      );
 }

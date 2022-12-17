@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 import 'package:collection/collection.dart';
 import 'package:dart_rfb/src/config.dart';
+import 'package:dart_rfb/src/extensions/byte_data_extensions.dart';
 import 'package:dart_rfb/src/protocol/client_init_message.dart';
 import 'package:dart_rfb/src/protocol/frame_buffer_update_message.dart';
 import 'package:dart_rfb/src/protocol/frame_buffer_update_request_message.dart';
@@ -30,7 +31,7 @@ class RemoteFrameBufferClient {
 
   Future<void> connect() async => (await TaskEither<Object, void>.tryCatch(
         () async {
-          _socket = some(await RawSocket.connect('localhost', 5900));
+          _socket = some(await RawSocket.connect('127.0.0.1', 5900));
         },
         (
           final Object error,
@@ -61,7 +62,7 @@ class RemoteFrameBufferClient {
               );
               while (true) {
                 while (socket.available() < 1) {
-                  await null;
+                  await Future<void>.delayed(const Duration(seconds: 1));
                 }
                 final int messageType = optionOf(socket.read(1))
                     .map((final Uint8List bytes) => bytes[0])
@@ -72,51 +73,86 @@ class RemoteFrameBufferClient {
                     );
                 switch (messageType) {
                   case 0:
-                    while (socket.available() < 3) {
-                      await null;
+                    while (socket.available() < 1) {
+                      await Future<void>.delayed(const Duration(seconds: 1));
                     }
-                    final int numberOfRectangles = optionOf(socket.read(3))
-                        .map(
-                          (final Uint8List bytes) =>
-                              bytes.buffer.asUint16List(1)[0],
-                        )
-                        .getOrElse(
-                          () => throw Exception(
-                            'Error reading number of rectangles',
-                          ),
-                        );
-                    while (socket.available() < 12 * numberOfRectangles) {
-                      await null;
-                    }
-                    final Uint8List bytes =
-                        optionOf(socket.read(12 * numberOfRectangles))
-                            .getOrElse(
-                      () => throw Exception('Error reading rectangles'),
+                    // read and ignore padding
+                    optionOf(socket.read(1)).getOrElse(
+                      () => throw Exception('Error reading padding'),
                     );
-                    final RemoteFrameBufferFrameBufferUpdateMessage
-                        frameBufferUpdateMessage =
-                        RemoteFrameBufferFrameBufferUpdateMessage.fromBytes(
-                      bytes: Uint8List.fromList(<int>[
-                        ...(ByteData(4 + numberOfRectangles * 12)
-                              ..setUint8(0, 0x00)
-                              ..setUint8(1, 0x00)
-                              ..setUint16(2, numberOfRectangles))
-                            .buffer
-                            .asUint8List(),
-                        ...bytes,
-                      ]).buffer,
-                    );
-                    (await _handleFrameBufferUpdateMessage(
-                      config: config,
-                      message: frameBufferUpdateMessage,
-                      socket: socket,
-                    ).run())
+                    (await RemoteFrameBufferFrameBufferUpdateMessage
+                                .readFromSocket(config: config, socket: socket)
+                            .flatMap(
+                              (
+                                final RemoteFrameBufferFrameBufferUpdateMessage
+                                    message,
+                              ) =>
+                                  _handleFrameBufferUpdateMessage(
+                                config: config,
+                                message: message,
+                                socket: socket,
+                              ),
+                            )
+                            .run())
                         .match(
-                      // ignore: avoid_print
-                      (final Object error) => print(
-                        'Error handling frame buffer update: $error',
+                      (final Object error) =>
+                          // ignore: avoid_print
+                          print(
+                        'Error reading and handling update message: $error',
                       ),
                       (final _) {},
+                    );
+                    await Future<void>.delayed(const Duration(seconds: 1));
+                    socket.write(
+                      RemoteFrameBufferFrameBufferUpdateRequestMessage(
+                        height: config.frameBufferHeight,
+                        incremental: true,
+                        width: config.frameBufferWidth,
+                        x: 0,
+                        y: 0,
+                      ).toBytes().asUint8List(),
+                    );
+                    break;
+                  case 1: // SetColorMapEntries
+                    while (socket.available() < 5) {
+                      await Future<void>.delayed(const Duration(seconds: 1));
+                    }
+                    final int numberOfColors = optionOf(socket.read(5))
+                        .map(
+                          (final Uint8List bytes) =>
+                              ByteData.sublistView(bytes).getUint16(3),
+                        )
+                        .getOrElse(
+                          () =>
+                              throw Exception('Error reading number of colors'),
+                        );
+                    while (socket.available() < numberOfColors * 6) {
+                      await Future<void>.delayed(const Duration(seconds: 1));
+                    }
+                    optionOf(socket.read(numberOfColors * 6)).getOrElse(
+                      () => throw Exception('Error reading colors'),
+                    );
+                    break;
+                  case 2: // Bell
+                    // no data, just ignore for now
+                    break;
+                  case 3: // ServerCutText
+                    while (socket.available() < 7) {
+                      await Future<void>.delayed(const Duration(seconds: 1));
+                    }
+                    final int length = optionOf(socket.read(7))
+                        .map(
+                          (final Uint8List bytes) =>
+                              ByteData.sublistView(bytes).getUint32(3),
+                        )
+                        .getOrElse(
+                          () => throw Exception('Error reading length'),
+                        );
+                    while (socket.available() < length) {
+                      await Future<void>.delayed(const Duration(seconds: 1));
+                    }
+                    optionOf(socket.read(length)).getOrElse(
+                      () => throw Exception('Error reading content'),
                     );
                     break;
                   default:
@@ -157,23 +193,25 @@ class RemoteFrameBufferClient {
         () async {
           while (socket.available() <
               RemoteFrameBufferProtocolVersionHandshakeMessage.length) {
-            await null;
+            await Future<void>.delayed(const Duration(seconds: 1));
           }
           final RemoteFrameBufferProtocolVersionHandshakeMessage
               protocolVersionHandshakeMessage =
               RemoteFrameBufferProtocolVersionHandshakeMessage.fromBytes(
-            bytes: optionOf(
-              socket.read(
-                RemoteFrameBufferProtocolVersionHandshakeMessage.length,
+            bytes: ByteData.sublistView(
+              optionOf(
+                socket.read(
+                  RemoteFrameBufferProtocolVersionHandshakeMessage.length,
+                ),
+              ).getOrElse(
+                () => throw Exception(
+                  'Error reading protocol version handshake message',
+                ),
               ),
-            )
-                .getOrElse(
-                  () => throw Exception(
-                    'Error reading protocol version handshake message',
-                  ),
-                )
-                .buffer,
+            ),
           );
+          // ignore: avoid_print
+          print('< $protocolVersionHandshakeMessage');
           if (protocolVersionHandshakeMessage.version !=
               const RemoteFrameBufferProtocolVersion.v3_8()) {
             throw Exception(
@@ -189,6 +227,10 @@ class RemoteFrameBufferClient {
   }) =>
       TaskEither<Object, void>.tryCatch(
         () async {
+          // ignore: avoid_print
+          print('> ${const RemoteFrameBufferProtocolVersionHandshakeMessage(
+            version: RemoteFrameBufferProtocolVersion.v3_8(),
+          )}');
           socket.write(
             const RemoteFrameBufferProtocolVersionHandshakeMessage(
               version: RemoteFrameBufferProtocolVersion.v3_8(),
@@ -204,22 +246,25 @@ class RemoteFrameBufferClient {
       TaskEither<Object, void>.tryCatch(
         () async {
           while (socket.available() < 1) {
-            await null;
+            await Future<void>.delayed(const Duration(seconds: 1));
           }
           final int numberOfSecurityTypes = optionOf(socket.read(1)).getOrElse(
             () => throw Exception('Error reading number of security types'),
           )[0];
+          // ignore: avoid_print
+          print('< numberOfSecurityTypes=$numberOfSecurityTypes');
           if (numberOfSecurityTypes == 0) {
             // Error, next 4 bytes is reason-length, then reason-string
             while (socket.available() < 4) {
-              await null;
+              await Future<void>.delayed(const Duration(seconds: 1));
             }
-            final int reasonLength = optionOf(socket.read(4))
-                .getOrElse(() => throw Exception('Error getting reason length'))
-                .buffer
-                .asUint32List()[0];
+            final int reasonLength = ByteData.sublistView(
+              optionOf(socket.read(4)).getOrElse(
+                () => throw Exception('Error getting reason length'),
+              ),
+            ).getUint32(0);
             while (socket.available() < reasonLength) {
-              await null;
+              await Future<void>.delayed(const Duration(seconds: 1));
             }
             final String reason = optionOf(socket.read(reasonLength))
                 .map((final Uint8List bytes) => ascii.decode(bytes))
@@ -229,18 +274,24 @@ class RemoteFrameBufferClient {
             );
           } else {
             while (socket.available() < numberOfSecurityTypes) {
-              await null;
+              await Future<void>.delayed(const Duration(seconds: 1));
             }
             final RemoteFrameBufferSecurityHandshakeMessage
                 securityResultHandshakeMessage =
                 RemoteFrameBufferSecurityHandshakeMessage.fromBytes(
-              bytes: Uint8List.fromList(<int>[
-                numberOfSecurityTypes,
-                ...optionOf(socket.read(numberOfSecurityTypes)).getOrElse(
-                  () => throw Exception('Error reading security types'),
-                )
-              ]).buffer,
+              bytes: ByteData.sublistView(
+                Uint8List.fromList(
+                  <int>[
+                    numberOfSecurityTypes,
+                    ...optionOf(socket.read(numberOfSecurityTypes)).getOrElse(
+                      () => throw Exception('Error reading security types'),
+                    )
+                  ],
+                ),
+              ),
             );
+            // ignore: avoid_print
+            print('< $securityResultHandshakeMessage');
             if (securityResultHandshakeMessage.securityTypes.notElem(
               const RemoteFrameBufferSecurityType.none(),
             )) {
@@ -256,6 +307,8 @@ class RemoteFrameBufferClient {
   }) =>
       TaskEither<Object, void>.tryCatch(
         () async {
+          // ignore: avoid_print
+          print('> ${const RemoteFrameBufferSecurityType.none()}');
           socket.write(
             const RemoteFrameBufferSecurityType.none().toBytes().asUint8List(),
           );
@@ -269,30 +322,35 @@ class RemoteFrameBufferClient {
       TaskEither<Object, void>.tryCatch(
         () async {
           while (socket.available() < 4) {
-            await null;
+            await Future<void>.delayed(const Duration(seconds: 1));
           }
           final RemoteFrameBufferSecurityResultHandshakeMessage
               securityResultHandshakeMessage =
               RemoteFrameBufferSecurityResultHandshakeMessage.fromBytes(
-            bytes: optionOf(socket.read(4))
-                .getOrElse(
-                  () => throw Exception(
-                    'Error reading security result message',
-                  ),
-                )
-                .buffer,
+            bytes: ByteData.sublistView(
+              optionOf(socket.read(4)).getOrElse(
+                () => throw Exception(
+                  'Error reading security result message',
+                ),
+              ),
+            ),
           );
+          // ignore: avoid_print
+          print('< $securityResultHandshakeMessage');
           if (!securityResultHandshakeMessage.success) {
             while (socket.available() < 4) {
-              await null;
+              await Future<void>.delayed(const Duration(seconds: 1));
             }
             final int reasonLength = optionOf(socket.read(4))
-                .map((final Uint8List bytes) => bytes.buffer.asUint32List()[0])
+                .map(
+                  (final Uint8List bytes) =>
+                      ByteData.sublistView(bytes).getUint32(0),
+                )
                 .getOrElse(
                   () => throw Exception('Error reading reason length'),
                 );
             while (socket.available() < reasonLength) {
-              await null;
+              await Future<void>.delayed(const Duration(seconds: 1));
             }
             final String reason = optionOf(socket.read(reasonLength))
                 .map((final Uint8List bytes) => ascii.decode(bytes))
@@ -308,6 +366,10 @@ class RemoteFrameBufferClient {
   }) =>
       TaskEither<Object, void>.tryCatch(
         () async {
+          // ignore: avoid_print
+          print(
+            '> ${const RemoteFrameBufferClientInitMessage(sharedFlag: true)}',
+          );
           socket.write(
             const RemoteFrameBufferClientInitMessage(sharedFlag: true)
                 .toBytes()
@@ -320,56 +382,40 @@ class RemoteFrameBufferClient {
   TaskEither<Object, void> _readServerInitMessage({
     required final RawSocket socket,
   }) =>
-      TaskEither<Object, void>.tryCatch(
-        () async {
-          while (socket.available() < 20) {
-            await null;
-          }
-          final Uint8List bytes = optionOf(socket.read(20)).getOrElse(
-            () => throw Exception('Error reading server init message'),
-          );
-          while (socket.available() < 4) {
-            await null;
-          }
-          final int nameLength = optionOf(socket.read(4))
-              .map((final Uint8List bytes) => bytes.buffer.asUint32List()[0])
-              .getOrElse(() => throw Exception('Error reading name length'));
-          while (socket.available() < nameLength) {
-            await null;
-          }
-          final Uint8List nameBytes = optionOf(socket.read(nameLength))
-              .getOrElse(() => throw Exception('Error reading name'));
-          final RemoteFrameBufferServerInitMessage serverInitMessage =
-              RemoteFrameBufferServerInitMessage.fromBytes(
-            bytes: Uint8List.fromList(
-              <int>[
-                ...bytes,
-                nameLength,
-                ...nameBytes,
-              ],
-            ).buffer,
-          );
-          _config = some(
-            Config(
-              frameBufferHeight: serverInitMessage.frameBufferHeightInPixels,
-              frameBufferWidth: serverInitMessage.frameBufferWidthInPixels,
-              pixelFormat: serverInitMessage.serverPixelFormat,
-            ),
-          );
-        },
-        (final Object error, final _) => error,
-      );
+      RemoteFrameBufferServerInitMessage.readFromSocket(socket: socket)
+          .map((final RemoteFrameBufferServerInitMessage serverInitMessage) {
+        _config = some(
+          Config(
+            frameBufferHeight: serverInitMessage.frameBufferHeightInPixels,
+            frameBufferWidth: serverInitMessage.frameBufferWidthInPixels,
+            pixelFormat: serverInitMessage.serverPixelFormat,
+          ),
+        );
+      });
 
   TaskEither<Object, void> _handleFrameBufferUpdateMessage({
     required final Config config,
     required final RemoteFrameBufferFrameBufferUpdateMessage message,
     required final RawSocket socket,
   }) =>
-      TaskEither<Object, void>.flatten(message.rectangles.map(
-          (final RemoteFrameBufferFrameBufferUpdateMessageRectangle
-                  rectangle) =>
-              _handleFrameBufferUpdateRectangle(
-                  config: config, rectangle: rectangle, socket: socket)));
+      TaskEither<Object, void>.tryCatch(
+        () async {
+          for (final RemoteFrameBufferFrameBufferUpdateMessageRectangle rectangle
+              in message.rectangles) {
+            (await _handleFrameBufferUpdateRectangle(
+              config: config,
+              rectangle: rectangle,
+              socket: socket,
+            ).run())
+                .match(
+              // ignore: avoid_print
+              (final Object error) => print('Error handling rectangle: $error'),
+              (final _) {},
+            );
+          }
+        },
+        (final Object error, final _) => error,
+      );
 
   TaskEither<Object, void> _handleFrameBufferUpdateRectangle({
     required final Config config,
@@ -378,21 +424,10 @@ class RemoteFrameBufferClient {
   }) =>
       TaskEither<Object, void>.tryCatch(
         () async {
-          final int numberOfPixels = (rectangle.width *
-                  rectangle.height *
-                  (config.pixelFormat.bitsPerPixel / 8))
-              .toInt();
-          while (socket.available() < numberOfPixels) {
-            await null;
-          }
-          final List<int> pixelData =
-              optionOf(socket.read(numberOfPixels)).getOrElse(
-            () => throw Exception(
-              'Error getting frame buffer update pixel data',
-            ),
-          );
+          // ignore: avoid_print
+          print('< $rectangle');
           final FrameBuffer frameBuffer =
-              pixelData.slices(config.frameBufferWidth);
+              rectangle.pixelData.asUint8List().slices(config.frameBufferWidth);
           _frameBufferUpdateStreamController.add(frameBuffer);
         },
         (final Object error, final _) => error,

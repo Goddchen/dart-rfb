@@ -1,6 +1,9 @@
+import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:dart_rfb/src/config.dart';
 import 'package:dart_rfb/src/protocol/encoding_type.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'frame_buffer_update_message.freezed.dart';
@@ -13,18 +16,67 @@ class RemoteFrameBufferFrameBufferUpdateMessage
         rectangles,
   }) = _RemoteFrameBufferFrameBufferUpdateMessage;
 
-  factory RemoteFrameBufferFrameBufferUpdateMessage.fromBytes({
-    required final ByteBuffer bytes,
+  static TaskEither<Object,
+      RemoteFrameBufferFrameBufferUpdateMessage> readFromSocket({
+    required final Config config,
+    required final RawSocket socket,
   }) =>
-      RemoteFrameBufferFrameBufferUpdateMessage(
-        rectangles:
-            List<RemoteFrameBufferFrameBufferUpdateMessageRectangle>.generate(
-          bytes.asUint16List(2)[0],
-          (final int index) =>
-              RemoteFrameBufferFrameBufferUpdateMessageRectangle.fromBytes(
-            bytes: bytes.asUint8List(2 + index * 12).buffer,
-          ),
-        ),
+      TaskEither<Object, RemoteFrameBufferFrameBufferUpdateMessage>.tryCatch(
+        () async {
+          while (socket.available() < 2) {
+            await Future<void>.delayed(const Duration(seconds: 1));
+          }
+          final int numberOfRectangles = optionOf(socket.read(2))
+              .map(
+                (final Uint8List bytes) =>
+                    ByteData.sublistView(bytes).getUint16(0),
+              )
+              .getOrElse(
+                () => throw Exception('Error reading number of rectangles'),
+              );
+          final List<RemoteFrameBufferFrameBufferUpdateMessageRectangle>
+              rectangles =
+              List<RemoteFrameBufferFrameBufferUpdateMessageRectangle>.empty(
+            growable: true,
+          );
+          for (int i = 0; i < numberOfRectangles; i++) {
+            while (socket.available() < 12) {
+              await Future<void>.delayed(const Duration(seconds: 1));
+            }
+            final ByteData headerBytes = optionOf(socket.read(12))
+                .map(ByteData.sublistView)
+                .getOrElse(() => throw Exception('Error reading header bytes'));
+            final RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader
+                rectangleHeader =
+                RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader
+                    .fromBytes(bytes: headerBytes);
+            final int numberOfDataBytes = (rectangleHeader.width *
+                    rectangleHeader.height *
+                    (config.pixelFormat.bitsPerPixel / 8))
+                .toInt();
+            final BytesBuilder bytesBuilder = BytesBuilder();
+            while (bytesBuilder.length < numberOfDataBytes) {
+              optionOf(socket.read(1024)).match(
+                () {},
+                bytesBuilder.add,
+              );
+            }
+            rectangles.add(
+              RemoteFrameBufferFrameBufferUpdateMessageRectangle(
+                encodingType: rectangleHeader.encodingType,
+                height: rectangleHeader.height,
+                pixelData: ByteData.sublistView(bytesBuilder.toBytes()),
+                width: rectangleHeader.width,
+                x: rectangleHeader.x,
+                y: rectangleHeader.y,
+              ),
+            );
+          }
+          return RemoteFrameBufferFrameBufferUpdateMessage(
+            rectangles: rectangles,
+          );
+        },
+        (final Object error, final _) => error,
       );
 
   const RemoteFrameBufferFrameBufferUpdateMessage._();
@@ -36,23 +88,36 @@ class RemoteFrameBufferFrameBufferUpdateMessageRectangle
   const factory RemoteFrameBufferFrameBufferUpdateMessageRectangle({
     required final RemoteFrameBufferEncodingType encodingType,
     required final int height,
+    required final ByteData pixelData,
     required final int width,
     required final int x,
     required final int y,
   }) = _RemoteFrameBufferFrameBufferUpdateMessageRectangle;
+}
 
-  factory RemoteFrameBufferFrameBufferUpdateMessageRectangle.fromBytes({
-    required final ByteBuffer bytes,
+@freezed
+class RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader
+    with _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader {
+  const factory RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader({
+    required final RemoteFrameBufferEncodingType encodingType,
+    required final int height,
+    required final int width,
+    required final int x,
+    required final int y,
+  }) = _RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader;
+
+  factory RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader.fromBytes({
+    required final ByteData bytes,
   }) =>
-      RemoteFrameBufferFrameBufferUpdateMessageRectangle(
+      RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader(
         encodingType: RemoteFrameBufferEncodingType.fromBytes(
-          bytes: bytes.asInt32List(8, 4).buffer,
+          bytes: ByteData.sublistView(bytes, 8, 12),
         ),
-        height: bytes.asUint16List()[3],
-        width: bytes.asUint16List()[2],
-        x: bytes.asUint16List()[0],
-        y: bytes.asUint16List()[1],
+        height: bytes.getUint16(6),
+        width: bytes.getUint16(4),
+        x: bytes.getUint16(0),
+        y: bytes.getUint16(2),
       );
 
-  const RemoteFrameBufferFrameBufferUpdateMessageRectangle._();
+  const RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader._();
 }

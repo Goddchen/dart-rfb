@@ -13,11 +13,14 @@ class RemoteFrameBufferSecurityHandshakeMessage
   }) = _RemoteFrameBufferSecurityHandshakeMessage;
 
   factory RemoteFrameBufferSecurityHandshakeMessage.fromBytes({
-    required final ByteBuffer bytes,
+    required final ByteData bytes,
   }) {
     assert(bytes.lengthInBytes > 0);
     return RemoteFrameBufferSecurityHandshakeMessage(
-      securityTypes: bytes.asUint8List().skip(1).map((final int byte) {
+      securityTypes: bytes.buffer
+          .asUint8List(bytes.offsetInBytes, bytes.lengthInBytes)
+          .skip(1)
+          .map((final int byte) {
         switch (byte) {
           case 0:
             return const RemoteFrameBufferSecurityType.invalid();

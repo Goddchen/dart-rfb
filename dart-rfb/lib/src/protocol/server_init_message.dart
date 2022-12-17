@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dart_rfb/src/protocol/pixel_format.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'server_init_message.freezed.dart';
@@ -16,16 +18,41 @@ class RemoteFrameBufferServerInitMessage
     required final RemoteFrameBufferPixelFormat serverPixelFormat,
   }) = _RemoteFrameBufferServerInitMessage;
 
-  factory RemoteFrameBufferServerInitMessage.fromBytes({
-    required final ByteBuffer bytes,
+  static TaskEither<Object, RemoteFrameBufferServerInitMessage> readFromSocket({
+    required final RawSocket socket,
   }) =>
-      RemoteFrameBufferServerInitMessage(
-        frameBufferHeightInPixels: bytes.asUint16List()[0],
-        frameBufferWidthInPixels: bytes.asUint16List()[1],
-        serverPixelFormat: RemoteFrameBufferPixelFormat.fromBytes(
-          bytes: bytes.asInt16List(4, 1).buffer,
-        ),
-        name: utf8.decode(bytes.asUint8List(24)),
+      TaskEither<Object, RemoteFrameBufferServerInitMessage>.tryCatch(
+        () async {
+          final BytesBuilder bytesBuilder = BytesBuilder();
+          while (bytesBuilder.length < 24) {
+            await Future<void>.delayed(const Duration(milliseconds: 10));
+
+            optionOf(socket.read(1)).match(
+              () {},
+              bytesBuilder.add,
+            );
+          }
+          final Uint8List bytes = bytesBuilder.toBytes();
+          final int nameLength = ByteData.sublistView(bytes).getUint32(20);
+          while (socket.available() < nameLength) {
+            await Future<void>.delayed(const Duration(seconds: 1));
+          }
+          final Uint8List nameBytes = optionOf(socket.read(nameLength))
+              .getOrElse(() => throw Exception('Error reading name'));
+          final RemoteFrameBufferServerInitMessage serverInitMessage =
+              RemoteFrameBufferServerInitMessage(
+            frameBufferHeightInPixels: ByteData.sublistView(bytes).getUint16(2),
+            frameBufferWidthInPixels: ByteData.sublistView(bytes).getUint16(0),
+            name: utf8.decode(nameBytes),
+            serverPixelFormat: RemoteFrameBufferPixelFormat.fromBytes(
+              bytes: ByteData.sublistView(bytes, 4, 20),
+            ),
+          );
+          // ignore: avoid_print
+          print('< $serverInitMessage');
+          return serverInitMessage;
+        },
+        (final Object error, final _) => error,
       );
 
   const RemoteFrameBufferServerInitMessage._();

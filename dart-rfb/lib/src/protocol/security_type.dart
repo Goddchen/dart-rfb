@@ -9,14 +9,14 @@ class RemoteFrameBufferSecurityType with _$RemoteFrameBufferSecurityType {
   const factory RemoteFrameBufferSecurityType.invalid() =
       RemoteFrameBufferSecurityTypeInvalid;
   const factory RemoteFrameBufferSecurityType.none() =
-      RemoteFrameBufferSecurityTypeInvalid;
+      RemoteFrameBufferSecurityTypeNone;
   const factory RemoteFrameBufferSecurityType.vncAuthentication() =
-      RemoteFrameBufferSecurityTypeInvalid;
+      RemoteFrameBufferSecurityVncAuthentication;
 
-  ByteBuffer toBytes() => map(
-        invalid: (final _) => Uint8List.fromList(<int>[0]).buffer,
-        none: (final _) => Uint8List.fromList(<int>[1]).buffer,
-        vncAuthentication: (final _) => Uint8List.fromList(<int>[2]).buffer,
+  ByteData toBytes() => map(
+        invalid: (final _) => ByteData(1)..setUint8(0, 0),
+        none: (final _) => ByteData(1)..setUint8(0, 1),
+        vncAuthentication: (final _) => ByteData(1)..setUint8(0, 2),
       );
 
   const RemoteFrameBufferSecurityType._();
