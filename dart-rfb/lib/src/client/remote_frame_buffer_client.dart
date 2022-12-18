@@ -426,8 +426,12 @@ class RemoteFrameBufferClient {
         () async {
           // ignore: avoid_print
           print('< $rectangle');
-          final FrameBuffer frameBuffer =
-              rectangle.pixelData.asUint8List().slices(config.frameBufferWidth);
+          List<List<int>> frameBuffer = List.generate(
+              config.frameBufferHeight,
+              (final int row) => List.generate(
+                  config.frameBufferWidth,
+                  (final int column) => rectangle.pixelData
+                      .getUint32(row * config.frameBufferWidth + column)));
           _frameBufferUpdateStreamController.add(frameBuffer);
         },
         (final Object error, final _) => error,
