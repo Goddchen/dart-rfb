@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:dart_rfb/src/client/config.dart';
@@ -56,7 +57,9 @@ class RemoteFrameBufferFrameBufferUpdateMessage
                 .toInt();
             final BytesBuilder bytesBuilder = BytesBuilder();
             while (bytesBuilder.length < numberOfDataBytes) {
-              optionOf(socket.read(1024)).match(
+              optionOf(
+                socket.read(min(1024, numberOfDataBytes - bytesBuilder.length)),
+              ).match(
                 () {},
                 bytesBuilder.add,
               );

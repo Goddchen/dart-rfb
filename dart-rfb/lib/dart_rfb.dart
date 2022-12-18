@@ -1,6 +1,8 @@
 library dart_rfb;
 
+export 'src/client/config.dart';
 export 'src/client/remote_frame_buffer_client.dart';
+export 'src/client/remote_frame_buffer_client_update.dart';
 export 'src/protocol/client_init_message.dart';
 export 'src/protocol/encoding_type.dart';
 export 'src/protocol/frame_buffer_update_message.dart';

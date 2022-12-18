@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:collection/collection.dart';
 import 'package:dart_rfb/src/client/config.dart';
+import 'package:dart_rfb/src/client/remote_frame_buffer_client_update.dart';
 import 'package:dart_rfb/src/extensions/byte_data_extensions.dart';
 import 'package:dart_rfb/src/protocol/client_init_message.dart';
 import 'package:dart_rfb/src/protocol/frame_buffer_update_message.dart';
@@ -16,18 +16,23 @@ import 'package:dart_rfb/src/protocol/security_type.dart';
 import 'package:dart_rfb/src/protocol/server_init_message.dart';
 import 'package:fpdart/fpdart.dart';
 
-typedef FrameBuffer = Iterable<Iterable<int>>;
-
 class RemoteFrameBufferClient {
-  final StreamController<FrameBuffer> _frameBufferUpdateStreamController =
-      StreamController<FrameBuffer>.broadcast();
-
-  Stream<FrameBuffer> get frameBufferUpdateStream =>
-      _frameBufferUpdateStreamController.stream;
+  final StreamController<RemoteFrameBufferClientUpdate>
+      _updateStreamController =
+      StreamController<RemoteFrameBufferClientUpdate>.broadcast();
 
   Option<Config> _config = none();
 
   Option<RawSocket> _socket = none();
+
+  Option<Config> get config => _config;
+
+  Stream<RemoteFrameBufferClientUpdate> get updateStream =>
+      _updateStreamController.stream;
+
+  Future<void> close() async {
+    await _updateStreamController.close();
+  }
 
   Future<void> connect() async => (await TaskEither<Object, void>.tryCatch(
         () async {
@@ -65,12 +70,17 @@ class RemoteFrameBufferClient {
                   await Future<void>.delayed(const Duration(seconds: 1));
                 }
                 final int messageType = optionOf(socket.read(1))
-                    .map((final Uint8List bytes) => bytes[0])
+                    .map(
+                      (final Uint8List bytes) =>
+                          ByteData.sublistView(bytes).getUint8(0),
+                    )
                     .getOrElse(
                       () => throw Exception(
                         'Error reading incoming message type',
                       ),
                     );
+                // ignore: avoid_print
+                print('< messageType: $messageType');
                 switch (messageType) {
                   case 0:
                     while (socket.available() < 1) {
@@ -82,17 +92,17 @@ class RemoteFrameBufferClient {
                     );
                     (await RemoteFrameBufferFrameBufferUpdateMessage
                                 .readFromSocket(config: config, socket: socket)
-                            .flatMap(
-                              (
-                                final RemoteFrameBufferFrameBufferUpdateMessage
-                                    message,
-                              ) =>
-                                  _handleFrameBufferUpdateMessage(
-                                config: config,
-                                message: message,
-                                socket: socket,
-                              ),
-                            )
+                            // .flatMap(
+                            //   (
+                            //     final RemoteFrameBufferFrameBufferUpdateMessage
+                            //         message,
+                            //   ) =>
+                            //       _handleFrameBufferUpdateMessage(
+                            //     config: config,
+                            //     message: message,
+                            //     socket: socket,
+                            //   ),
+                            // )
                             .run())
                         .match(
                       (final Object error) =>
@@ -100,17 +110,47 @@ class RemoteFrameBufferClient {
                           print(
                         'Error reading and handling update message: $error',
                       ),
-                      (final _) {},
+                      (
+                        final RemoteFrameBufferFrameBufferUpdateMessage
+                            updateMessage,
+                      ) {
+                        // ignore: avoid_print
+                        print(
+                          '< ${updateMessage.rectangles.length} update rectangles',
+                        );
+                        _updateStreamController.add(
+                          RemoteFrameBufferClientUpdate(
+                            rectangles: updateMessage.rectangles.map(
+                              (
+                                final RemoteFrameBufferFrameBufferUpdateMessageRectangle
+                                    rectangle,
+                              ) =>
+                                  RemoteFrameBufferClientUpdateRectangle(
+                                byteData: rectangle.pixelData,
+                                height: rectangle.height,
+                                width: rectangle.width,
+                                x: rectangle.x,
+                                y: rectangle.y,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     );
-                    await Future<void>.delayed(const Duration(seconds: 1));
+                    await Future<void>.delayed(const Duration(seconds: 10));
+                    final RemoteFrameBufferFrameBufferUpdateRequestMessage
+                        requestMessage =
+                        RemoteFrameBufferFrameBufferUpdateRequestMessage(
+                      height: config.frameBufferHeight,
+                      incremental: true,
+                      width: config.frameBufferWidth,
+                      x: 0,
+                      y: 0,
+                    );
+                    // ignore: avoid_print
+                    print('> $requestMessage');
                     socket.write(
-                      RemoteFrameBufferFrameBufferUpdateRequestMessage(
-                        height: config.frameBufferHeight,
-                        incremental: true,
-                        width: config.frameBufferWidth,
-                        x: 0,
-                        y: 0,
-                      ).toBytes().asUint8List(),
+                      requestMessage.toBytes().asUint8List(),
                     );
                     break;
                   case 1: // SetColorMapEntries
@@ -171,10 +211,6 @@ class RemoteFrameBufferClient {
         },
       );
 
-  Future<void> close() async {
-    await _frameBufferUpdateStreamController.close();
-  }
-
   TaskEither<Object, void> _performHandshake() => _socket.match(
         () => TaskEither<Object, void>.left('Error using socket'),
         (final RawSocket socket) => _readProtocolVersionMessage(socket: socket)
@@ -218,24 +254,6 @@ class RemoteFrameBufferClient {
               'Unsupported server protocol version (${protocolVersionHandshakeMessage.version})',
             );
           }
-        },
-        (final Object error, final _) => error,
-      );
-
-  TaskEither<Object, void> _sendProtocolVersionMessage({
-    required final RawSocket socket,
-  }) =>
-      TaskEither<Object, void>.tryCatch(
-        () async {
-          // ignore: avoid_print
-          print('> ${const RemoteFrameBufferProtocolVersionHandshakeMessage(
-            version: RemoteFrameBufferProtocolVersion.v3_8(),
-          )}');
-          socket.write(
-            const RemoteFrameBufferProtocolVersionHandshakeMessage(
-              version: RemoteFrameBufferProtocolVersion.v3_8(),
-            ).toBytes().asUint8List(),
-          );
         },
         (final Object error, final _) => error,
       );
@@ -302,20 +320,6 @@ class RemoteFrameBufferClient {
         (final Object error, final _) => error,
       );
 
-  TaskEither<Object, void> _sendSecurityType({
-    required final RawSocket socket,
-  }) =>
-      TaskEither<Object, void>.tryCatch(
-        () async {
-          // ignore: avoid_print
-          print('> ${const RemoteFrameBufferSecurityType.none()}');
-          socket.write(
-            const RemoteFrameBufferSecurityType.none().toBytes().asUint8List(),
-          );
-        },
-        (final Object error, final _) => error,
-      );
-
   TaskEither<Object, void> _readSecurityResultMessage({
     required final RawSocket socket,
   }) =>
@@ -361,6 +365,20 @@ class RemoteFrameBufferClient {
         (final Object error, final _) => error,
       );
 
+  TaskEither<Object, void> _readServerInitMessage({
+    required final RawSocket socket,
+  }) =>
+      RemoteFrameBufferServerInitMessage.readFromSocket(socket: socket)
+          .map((final RemoteFrameBufferServerInitMessage serverInitMessage) {
+        _config = some(
+          Config(
+            frameBufferHeight: serverInitMessage.frameBufferHeightInPixels,
+            frameBufferWidth: serverInitMessage.frameBufferWidthInPixels,
+            pixelFormat: serverInitMessage.serverPixelFormat,
+          ),
+        );
+      });
+
   TaskEither<Object, void> _sendClientInitMessage({
     required final RawSocket socket,
   }) =>
@@ -379,61 +397,85 @@ class RemoteFrameBufferClient {
         (final Object error, final _) => error,
       );
 
-  TaskEither<Object, void> _readServerInitMessage({
-    required final RawSocket socket,
-  }) =>
-      RemoteFrameBufferServerInitMessage.readFromSocket(socket: socket)
-          .map((final RemoteFrameBufferServerInitMessage serverInitMessage) {
-        _config = some(
-          Config(
-            frameBufferHeight: serverInitMessage.frameBufferHeightInPixels,
-            frameBufferWidth: serverInitMessage.frameBufferWidthInPixels,
-            pixelFormat: serverInitMessage.serverPixelFormat,
-          ),
-        );
-      });
-
-  TaskEither<Object, void> _handleFrameBufferUpdateMessage({
-    required final Config config,
-    required final RemoteFrameBufferFrameBufferUpdateMessage message,
-    required final RawSocket socket,
-  }) =>
-      TaskEither<Object, void>.tryCatch(
-        () async {
-          for (final RemoteFrameBufferFrameBufferUpdateMessageRectangle rectangle
-              in message.rectangles) {
-            (await _handleFrameBufferUpdateRectangle(
-              config: config,
-              rectangle: rectangle,
-              socket: socket,
-            ).run())
-                .match(
-              // ignore: avoid_print
-              (final Object error) => print('Error handling rectangle: $error'),
-              (final _) {},
-            );
-          }
-        },
-        (final Object error, final _) => error,
-      );
-
-  TaskEither<Object, void> _handleFrameBufferUpdateRectangle({
-    required final Config config,
-    required final RemoteFrameBufferFrameBufferUpdateMessageRectangle rectangle,
+  TaskEither<Object, void> _sendProtocolVersionMessage({
     required final RawSocket socket,
   }) =>
       TaskEither<Object, void>.tryCatch(
         () async {
           // ignore: avoid_print
-          print('< $rectangle');
-          List<List<int>> frameBuffer = List.generate(
-              config.frameBufferHeight,
-              (final int row) => List.generate(
-                  config.frameBufferWidth,
-                  (final int column) => rectangle.pixelData
-                      .getUint32(row * config.frameBufferWidth + column)));
-          _frameBufferUpdateStreamController.add(frameBuffer);
+          print('> ${const RemoteFrameBufferProtocolVersionHandshakeMessage(
+            version: RemoteFrameBufferProtocolVersion.v3_8(),
+          )}');
+          socket.write(
+            const RemoteFrameBufferProtocolVersionHandshakeMessage(
+              version: RemoteFrameBufferProtocolVersion.v3_8(),
+            ).toBytes().asUint8List(),
+          );
         },
         (final Object error, final _) => error,
       );
+
+  TaskEither<Object, void> _sendSecurityType({
+    required final RawSocket socket,
+  }) =>
+      TaskEither<Object, void>.tryCatch(
+        () async {
+          // ignore: avoid_print
+          print('> ${const RemoteFrameBufferSecurityType.none()}');
+          socket.write(
+            const RemoteFrameBufferSecurityType.none().toBytes().asUint8List(),
+          );
+        },
+        (final Object error, final _) => error,
+      );
+
+  // TaskEither<Object, void> _handleFrameBufferUpdateMessage({
+  //   required final Config config,
+  //   required final RemoteFrameBufferFrameBufferUpdateMessage message,
+  //   required final RawSocket socket,
+  // }) =>
+  //     TaskEither<Object, void>.tryCatch(
+  //       () async {
+  //         for (final RemoteFrameBufferFrameBufferUpdateMessageRectangle rectangle
+  //             in message.rectangles) {
+  //           (await _handleFrameBufferUpdateRectangle(
+  //             config: config,
+  //             rectangle: rectangle,
+  //             socket: socket,
+  //           ).run())
+  //               .match(
+  //             // ignore: avoid_print
+  //             (final Object error) => print('Error handling rectangle: $error'),
+  //             (final _) {},
+  //           );
+  //         }
+  //       },
+  //       (final Object error, final _) => error,
+  //     );
+
+  // TaskEither<Object, void> _handleFrameBufferUpdateRectangle({
+  //   required final Config config,
+  //   required final RemoteFrameBufferFrameBufferUpdateMessageRectangle rectangle,
+  //   required final RawSocket socket,
+  // }) =>
+  //     TaskEither<Object, void>.tryCatch(
+  //       () async {
+  //         // ignore: avoid_print
+  //         print('< $rectangle');
+  //         // List<List<int>> frameBuffer = List.generate(
+  //         //     config.frameBufferHeight,
+  //         //     (final int row) => List.generate(
+  //         //         config.frameBufferWidth,
+  //         //         (final int column) => rectangle.pixelData
+  //         //             .getUint32(row * config.frameBufferWidth + column)));
+  //         _updateStreamController.add(
+  //           RemoteFrameBufferClientUpdate(
+  //             byteData: rectangle.pixelData,
+  //             height: config.frameBufferHeight,
+  //             width: config.frameBufferWidth,
+  //           ),
+  //         );
+  //       },
+  //       (final Object error, final _) => error,
+  //     );
 }
