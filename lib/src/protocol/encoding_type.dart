@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'encoding_type.freezed.dart';
 
 /// Encoding types as defined by RFC 6143.
-/// 
+///
 /// See: https://www.rfc-editor.org/rfc/rfc6143.html#section-7.7
 @freezed
 class RemoteFrameBufferEncodingType with _$RemoteFrameBufferEncodingType {

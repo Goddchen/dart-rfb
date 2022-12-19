@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'security_result_handshake_message.freezed.dart';
 
 /// Security result handshake message.
-/// 
+///
 /// See: https://www.rfc-editor.org/rfc/rfc6143.html#section-7.1.3
 @freezed
 class RemoteFrameBufferSecurityResultHandshakeMessage
