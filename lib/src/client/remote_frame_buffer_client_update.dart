@@ -18,6 +18,7 @@ class RemoteFrameBufferClientFrameBufferConfig
 @freezed
 class RemoteFrameBufferClientUpdate with _$RemoteFrameBufferClientUpdate {
   const factory RemoteFrameBufferClientUpdate({
+    /// The list of [RemoteFrameBufferClientUpdateRectangle]s that make this update.
     required final Iterable<RemoteFrameBufferClientUpdateRectangle> rectangles,
   }) = _RemoteFrameBufferClientUpdate;
 }
@@ -27,10 +28,19 @@ class RemoteFrameBufferClientUpdate with _$RemoteFrameBufferClientUpdate {
 class RemoteFrameBufferClientUpdateRectangle
     with _$RemoteFrameBufferClientUpdateRectangle {
   const factory RemoteFrameBufferClientUpdateRectangle({
+    /// The [ByteData] that holds the pixel data of this rectangle.
     required final ByteData byteData,
+
+    /// The height in pixels.
     required final int height,
+
+    /// The width in pixels.
     required final int width,
+
+    /// The starting x offset of this rectangle.
     required final int x,
+
+    /// The starting y offset of this rectangle.
     required final int y,
   }) = _RemoteFrameBufferClientUpdateRectangle;
 }

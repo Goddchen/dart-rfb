@@ -14,6 +14,7 @@ class RemoteFrameBufferSecurityResultHandshakeMessage
     required final bool success,
   }) = _RemoteFrameBufferSecurityResultHandshakeMessage;
 
+  /// Parse [bytes].
   factory RemoteFrameBufferSecurityResultHandshakeMessage.fromBytes({
     required final ByteData bytes,
   }) =>

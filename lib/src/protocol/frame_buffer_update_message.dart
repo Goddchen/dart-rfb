@@ -20,6 +20,7 @@ class RemoteFrameBufferFrameBufferUpdateMessage
         rectangles,
   }) = _RemoteFrameBufferFrameBufferUpdateMessage;
 
+  /// Read and parse incoming message from [socket].
   static TaskEither<Object,
       RemoteFrameBufferFrameBufferUpdateMessage> readFromSocket({
     required final Config config,

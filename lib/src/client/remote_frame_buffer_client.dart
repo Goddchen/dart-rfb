@@ -34,6 +34,8 @@ class RemoteFrameBufferClient {
 
   bool _readLoopRunning = false;
 
+  /// A client that implements communication according to
+  /// The Remote Framebuffer Protocol, aka RFC 6143, aka VNC).
   RemoteFrameBufferClient() {
     loggingEnabled = false;
     _loggingSubscription = some(
@@ -46,8 +48,10 @@ class RemoteFrameBufferClient {
     );
   }
 
+  /// The config used by the underlying session.
   Option<Config> get config => _config;
 
+  /// Wether logging messages should be printed.
   bool get loggingEnabled => _loggingEnabled;
 
   set loggingEnabled(final bool enabled) {
@@ -59,9 +63,11 @@ class RemoteFrameBufferClient {
     }
   }
 
+  /// A [Stream] that will give access to all incoming framebuffer updates.
   Stream<RemoteFrameBufferClientUpdate> get updateStream =>
       _updateStreamController.stream;
 
+  /// Dispose the currently active session and all used resources.
   Future<void> close() async {
     _readLoopRunning = false;
     await _updateStreamController.close();
@@ -72,9 +78,19 @@ class RemoteFrameBufferClient {
     );
   }
 
-  Future<void> connect() async => (await TaskEither<Object, void>.tryCatch(
+  /// Connect to [hostname] on [port] and perform the protocol handshake.
+  Future<void> connect({
+    required final String hostname,
+    final int port = 5900,
+  }) async =>
+      (await TaskEither<Object, void>.tryCatch(
         () async {
-          _socket = some(await RawSocket.connect('127.0.0.1', 5900));
+          _socket = some(
+            await RawSocket.connect(
+              hostname,
+              port,
+            ),
+          );
         },
         (
           final Object error,
@@ -87,6 +103,8 @@ class RemoteFrameBufferClient {
         (final _) {},
       );
 
+  /// Request a framebuffer update from the server.
+  /// Call this once you are finished processing any received updates.
   void requestUpdate() => _socket.match(
         () {},
         (final RawSocket socket) => _config.match(
@@ -109,6 +127,7 @@ class RemoteFrameBufferClient {
         ),
       );
 
+  /// Start the reading loop that handles incoming protocol messages.
   Future<void> startReadLoop() async => await _socket.match(
         () => throw Exception('Socket not available'),
         (final RawSocket socket) async {

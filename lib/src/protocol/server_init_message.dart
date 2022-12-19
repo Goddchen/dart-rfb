@@ -26,6 +26,7 @@ class RemoteFrameBufferServerInitMessage
 
   const RemoteFrameBufferServerInitMessage._();
 
+  /// Read and parse incoming message from [socket].
   static TaskEither<Object, RemoteFrameBufferServerInitMessage> readFromSocket({
     required final RawSocket socket,
   }) =>

@@ -20,6 +20,7 @@ class RemoteFrameBufferFrameBufferUpdateRequestMessage
 
   const RemoteFrameBufferFrameBufferUpdateRequestMessage._();
 
+  /// Convert this message to a [ByteData].
   ByteData toBytes() => ByteData(10)
     ..setUint8(0, 0x03)
     ..setUint8(1, incremental ? 1 : 0)

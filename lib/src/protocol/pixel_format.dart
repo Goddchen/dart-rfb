@@ -24,6 +24,7 @@ class RemoteFrameBufferPixelFormat with _$RemoteFrameBufferPixelFormat {
     required final int blueShift,
   }) = _RemoteFrameBufferPixelFormat;
 
+  /// Parse [bytes].
   factory RemoteFrameBufferPixelFormat.fromBytes({
     required final ByteData bytes,
   }) =>

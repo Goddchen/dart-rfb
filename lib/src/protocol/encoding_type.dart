@@ -15,6 +15,7 @@ class RemoteFrameBufferEncodingType with _$RemoteFrameBufferEncodingType {
     required final ByteData bytes,
   }) = RemoteFrameBufferEncodingTypeUnsupported;
 
+  /// Parse [bytes].
   factory RemoteFrameBufferEncodingType.fromBytes({
     required final ByteData bytes,
   }) {

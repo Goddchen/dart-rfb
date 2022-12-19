@@ -16,6 +16,7 @@ class RemoteFrameBufferSecurityType with _$RemoteFrameBufferSecurityType {
   const factory RemoteFrameBufferSecurityType.vncAuthentication() =
       RemoteFrameBufferSecurityVncAuthentication;
 
+  /// Convert this type to a [ByteData].
   ByteData toBytes() => map(
         invalid: (final _) => ByteData(1)..setUint8(0, 0),
         none: (final _) => ByteData(1)..setUint8(0, 1),

@@ -15,6 +15,7 @@ class RemoteFrameBufferSecurityHandshakeMessage
     required final Iterable<RemoteFrameBufferSecurityType> securityTypes,
   }) = _RemoteFrameBufferSecurityHandshakeMessage;
 
+  /// Parse [bytes].
   factory RemoteFrameBufferSecurityHandshakeMessage.fromBytes({
     required final ByteData bytes,
   }) {
