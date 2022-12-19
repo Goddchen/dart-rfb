@@ -4,6 +4,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'security_type.freezed.dart';
 
+/// List of known security types.
+/// 
+/// See: https://www.rfc-editor.org/rfc/rfc6143.html#section-7.2
 @freezed
 class RemoteFrameBufferSecurityType with _$RemoteFrameBufferSecurityType {
   const factory RemoteFrameBufferSecurityType.invalid() =

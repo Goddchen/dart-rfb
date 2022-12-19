@@ -5,6 +5,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'security_handshake_message.freezed.dart';
 
+/// Security handshake message.
+/// 
+/// See: https://www.rfc-editor.org/rfc/rfc6143.html#section-7.1.2
 @freezed
 class RemoteFrameBufferSecurityHandshakeMessage
     with _$RemoteFrameBufferSecurityHandshakeMessage {

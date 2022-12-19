@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'config.freezed.dart';
 
 @freezed
+/// Holds all config parameters of the current session.
 class Config with _$Config {
   const factory Config({
     required final int frameBufferHeight,

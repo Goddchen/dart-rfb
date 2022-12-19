@@ -5,6 +5,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'protocol_version_handshake_message.freezed.dart';
 
+/// List of known protocol versions.
+///
+/// See: https://www.rfc-editor.org/rfc/rfc6143.html#section-6
+/// See: https://www.rfc-editor.org/rfc/rfc6143.html#section-7.1.1
 @freezed
 class RemoteFrameBufferProtocolVersion with _$RemoteFrameBufferProtocolVersion {
   const factory RemoteFrameBufferProtocolVersion.unknown({
@@ -18,6 +22,9 @@ class RemoteFrameBufferProtocolVersion with _$RemoteFrameBufferProtocolVersion {
       RemoteFrameBufferProtocolVersion_3_8;
 }
 
+/// Protocol version handshake message.
+///
+/// See: https://www.rfc-editor.org/rfc/rfc6143.html#section-7.1.1
 @freezed
 class RemoteFrameBufferProtocolVersionHandshakeMessage
     with _$RemoteFrameBufferProtocolVersionHandshakeMessage {

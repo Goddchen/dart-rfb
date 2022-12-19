@@ -4,6 +4,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'pixel_format.freezed.dart';
 
+/// The pixel format used by this session.
+/// 
+/// Server sends the default pixel format during init.
+/// 
+/// See: https://www.rfc-editor.org/rfc/rfc6143.html#section-7.4
 @freezed
 class RemoteFrameBufferPixelFormat with _$RemoteFrameBufferPixelFormat {
   const factory RemoteFrameBufferPixelFormat({

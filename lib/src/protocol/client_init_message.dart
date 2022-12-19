@@ -4,6 +4,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'client_init_message.freezed.dart';
 
+/// Sent to the server to configure client init parameters.
+/// 
+/// See: https://www.rfc-editor.org/rfc/rfc6143.html#section-7.3.1
 @freezed
 class RemoteFrameBufferClientInitMessage
     with _$RemoteFrameBufferClientInitMessage {

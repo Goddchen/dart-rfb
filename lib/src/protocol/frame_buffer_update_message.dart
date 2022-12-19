@@ -9,6 +9,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'frame_buffer_update_message.freezed.dart';
 
+/// A framebuffer update message.
+/// 
+/// See: https://www.rfc-editor.org/rfc/rfc6143.html#section-7.6.1
 @freezed
 class RemoteFrameBufferFrameBufferUpdateMessage
     with _$RemoteFrameBufferFrameBufferUpdateMessage {
