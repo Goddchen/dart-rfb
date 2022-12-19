@@ -165,6 +165,7 @@ abstract class _RemoteFrameBufferClientFrameBufferConfig
 
 /// @nodoc
 mixin _$RemoteFrameBufferClientUpdate {
+  /// The list of [RemoteFrameBufferClientUpdateRectangle]s that make this update.
   Iterable<RemoteFrameBufferClientUpdateRectangle> get rectangles =>
       throw _privateConstructorUsedError;
 
@@ -251,6 +252,7 @@ class _$_RemoteFrameBufferClientUpdate
     implements _RemoteFrameBufferClientUpdate {
   const _$_RemoteFrameBufferClientUpdate({required this.rectangles});
 
+  /// The list of [RemoteFrameBufferClientUpdateRectangle]s that make this update.
   @override
   final Iterable<RemoteFrameBufferClientUpdateRectangle> rectangles;
 
@@ -287,6 +289,8 @@ abstract class _RemoteFrameBufferClientUpdate
           rectangles}) = _$_RemoteFrameBufferClientUpdate;
 
   @override
+
+  /// The list of [RemoteFrameBufferClientUpdateRectangle]s that make this update.
   Iterable<RemoteFrameBufferClientUpdateRectangle> get rectangles;
   @override
   @JsonKey(ignore: true)
@@ -296,10 +300,19 @@ abstract class _RemoteFrameBufferClientUpdate
 
 /// @nodoc
 mixin _$RemoteFrameBufferClientUpdateRectangle {
+  /// The [ByteData] that holds the pixel data of this rectangle.
   ByteData get byteData => throw _privateConstructorUsedError;
+
+  /// The height in pixels.
   int get height => throw _privateConstructorUsedError;
+
+  /// The width in pixels.
   int get width => throw _privateConstructorUsedError;
+
+  /// The starting x offset of this rectangle.
   int get x => throw _privateConstructorUsedError;
+
+  /// The starting y offset of this rectangle.
   int get y => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -431,14 +444,23 @@ class _$_RemoteFrameBufferClientUpdateRectangle
       required this.x,
       required this.y});
 
+  /// The [ByteData] that holds the pixel data of this rectangle.
   @override
   final ByteData byteData;
+
+  /// The height in pixels.
   @override
   final int height;
+
+  /// The width in pixels.
   @override
   final int width;
+
+  /// The starting x offset of this rectangle.
   @override
   final int x;
+
+  /// The starting y offset of this rectangle.
   @override
   final int y;
 
@@ -482,14 +504,24 @@ abstract class _RemoteFrameBufferClientUpdateRectangle
       required final int y}) = _$_RemoteFrameBufferClientUpdateRectangle;
 
   @override
+
+  /// The [ByteData] that holds the pixel data of this rectangle.
   ByteData get byteData;
   @override
+
+  /// The height in pixels.
   int get height;
   @override
+
+  /// The width in pixels.
   int get width;
   @override
+
+  /// The starting x offset of this rectangle.
   int get x;
   @override
+
+  /// The starting y offset of this rectangle.
   int get y;
   @override
   @JsonKey(ignore: true)

@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'frame_buffer_update_request_message.freezed.dart';
 
 /// A framebuffer update request message.
-/// 
+///
 /// See: https://www.rfc-editor.org/rfc/rfc6143.html#section-7.5.3
 @freezed
 class RemoteFrameBufferFrameBufferUpdateRequestMessage
@@ -20,6 +20,7 @@ class RemoteFrameBufferFrameBufferUpdateRequestMessage
 
   const RemoteFrameBufferFrameBufferUpdateRequestMessage._();
 
+  /// Convert this message to a [ByteData].
   ByteData toBytes() => ByteData(10)
     ..setUint8(0, 0x03)
     ..setUint8(1, incremental ? 1 : 0)

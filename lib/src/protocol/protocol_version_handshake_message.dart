@@ -34,6 +34,7 @@ class RemoteFrameBufferProtocolVersionHandshakeMessage
     required final RemoteFrameBufferProtocolVersion version,
   }) = _RemoteFrameBufferProtocolVersionHandshakeMessage;
 
+  /// Parse [bytes].
   factory RemoteFrameBufferProtocolVersionHandshakeMessage.fromBytes({
     required final ByteData bytes,
   }) {
@@ -69,6 +70,7 @@ class RemoteFrameBufferProtocolVersionHandshakeMessage
 
   const RemoteFrameBufferProtocolVersionHandshakeMessage._();
 
+  /// Convert this message to a [ByteData].
   ByteData toBytes() => version.map(
         unknown: (final _) =>
             throw Exception('Cannot send an unknown protocol version'),

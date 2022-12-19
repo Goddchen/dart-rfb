@@ -16,7 +16,7 @@ And here we are, after a weekend, with the first, minimal, protocol implementati
 
 As simple as `dart pub add dart_rfb`.
 
-Or manually add `dart_rfb: ^0.0.1` to your `pubspec.yaml`.
+Or manually add `dart_rfb: ^0.0.2` to your `pubspec.yaml`.
 
 ## Usage
 

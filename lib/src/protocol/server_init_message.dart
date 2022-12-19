@@ -10,7 +10,7 @@ import 'package:logging/logging.dart';
 part 'server_init_message.freezed.dart';
 
 /// Server init message.
-/// 
+///
 /// See: https://www.rfc-editor.org/rfc/rfc6143.html#section-7.3.2
 @freezed
 class RemoteFrameBufferServerInitMessage
@@ -26,6 +26,7 @@ class RemoteFrameBufferServerInitMessage
 
   const RemoteFrameBufferServerInitMessage._();
 
+  /// Read and parse incoming message from [socket].
   static TaskEither<Object, RemoteFrameBufferServerInitMessage> readFromSocket({
     required final RawSocket socket,
   }) =>

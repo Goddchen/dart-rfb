@@ -16,8 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Config {
+  /// The framebuffer height in pixels.
   int get frameBufferHeight => throw _privateConstructorUsedError;
+
+  /// The framebuffer width in pixels.
   int get frameBufferWidth => throw _privateConstructorUsedError;
+
+  /// The pixel format negotiated between client and server.
   RemoteFrameBufferPixelFormat get pixelFormat =>
       throw _privateConstructorUsedError;
 
@@ -135,10 +140,15 @@ class _$_Config implements _Config {
       required this.frameBufferWidth,
       required this.pixelFormat});
 
+  /// The framebuffer height in pixels.
   @override
   final int frameBufferHeight;
+
+  /// The framebuffer width in pixels.
   @override
   final int frameBufferWidth;
+
+  /// The pixel format negotiated between client and server.
   @override
   final RemoteFrameBufferPixelFormat pixelFormat;
 
@@ -178,10 +188,16 @@ abstract class _Config implements Config {
       required final RemoteFrameBufferPixelFormat pixelFormat}) = _$_Config;
 
   @override
+
+  /// The framebuffer height in pixels.
   int get frameBufferHeight;
   @override
+
+  /// The framebuffer width in pixels.
   int get frameBufferWidth;
   @override
+
+  /// The pixel format negotiated between client and server.
   RemoteFrameBufferPixelFormat get pixelFormat;
   @override
   @JsonKey(ignore: true)
