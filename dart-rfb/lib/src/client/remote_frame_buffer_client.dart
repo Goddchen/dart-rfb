@@ -30,6 +30,33 @@ class RemoteFrameBufferClient {
   Stream<RemoteFrameBufferClientUpdate> get updateStream =>
       _updateStreamController.stream;
 
+  void requestUpdate() {
+    _socket.match(
+      () {},
+      (final RawSocket socket) {
+        _config.match(
+          () {},
+          (final Config config) {
+            final RemoteFrameBufferFrameBufferUpdateRequestMessage
+                requestMessage =
+                RemoteFrameBufferFrameBufferUpdateRequestMessage(
+              height: config.frameBufferHeight,
+              incremental: true,
+              width: config.frameBufferWidth,
+              x: 0,
+              y: 0,
+            );
+            // ignore: avoid_print
+            print('> $requestMessage');
+            socket.write(
+              requestMessage.toBytes().asUint8List(),
+            );
+          },
+        );
+      },
+    );
+  }
+
   Future<void> close() async {
     await _updateStreamController.close();
   }
@@ -136,21 +163,6 @@ class RemoteFrameBufferClient {
                           ),
                         );
                       },
-                    );
-                    await Future<void>.delayed(const Duration(seconds: 10));
-                    final RemoteFrameBufferFrameBufferUpdateRequestMessage
-                        requestMessage =
-                        RemoteFrameBufferFrameBufferUpdateRequestMessage(
-                      height: config.frameBufferHeight,
-                      incremental: true,
-                      width: config.frameBufferWidth,
-                      x: 0,
-                      y: 0,
-                    );
-                    // ignore: avoid_print
-                    print('> $requestMessage');
-                    socket.write(
-                      requestMessage.toBytes().asUint8List(),
                     );
                     break;
                   case 1: // SetColorMapEntries
