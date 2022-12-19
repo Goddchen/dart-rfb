@@ -3,7 +3,8 @@ import 'package:test/test.dart';
 
 void main() {
   test('Connect to VNC running on localhost', skip: true, () async {
-    final RemoteFrameBufferClient client = RemoteFrameBufferClient();
+    final RemoteFrameBufferClient client = RemoteFrameBufferClient()
+      ..loggingEnabled = true;
     await client.connect();
     await client.start();
   });

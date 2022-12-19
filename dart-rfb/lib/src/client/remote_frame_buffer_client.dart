@@ -15,8 +15,11 @@ import 'package:dart_rfb/src/protocol/security_result_handshake_message.dart';
 import 'package:dart_rfb/src/protocol/security_type.dart';
 import 'package:dart_rfb/src/protocol/server_init_message.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:logging/logging.dart';
 
 class RemoteFrameBufferClient {
+  static final Logger _logger = Logger('RemoteFrameBufferClient');
+
   final StreamController<RemoteFrameBufferClientUpdate>
       _updateStreamController =
       StreamController<RemoteFrameBufferClientUpdate>.broadcast();
@@ -25,10 +28,61 @@ class RemoteFrameBufferClient {
 
   Option<RawSocket> _socket = none();
 
+  bool _loggingEnabled = false;
+
+  Option<StreamSubscription<LogRecord>> _loggingSubscription = none();
+
+  RemoteFrameBufferClient() {
+    loggingEnabled = false;
+    _loggingSubscription = some(
+      Logger.root.onRecord.listen(
+        (final LogRecord logRecord) {
+          // ignore: avoid_print
+          print('${logRecord.loggerName}: ${logRecord.message}');
+        },
+      ),
+    );
+  }
+
   Option<Config> get config => _config;
+
+  bool get loggingEnabled => _loggingEnabled;
+
+  set loggingEnabled(final bool enabled) {
+    _loggingEnabled = enabled;
+    if (enabled) {
+      Logger.root.level = Level.ALL;
+    } else {
+      Logger.root.level = Level.OFF;
+    }
+  }
 
   Stream<RemoteFrameBufferClientUpdate> get updateStream =>
       _updateStreamController.stream;
+
+  Future<void> close() async {
+    await _updateStreamController.close();
+    await _loggingSubscription.match(
+      () {},
+      (final StreamSubscription<LogRecord> subscription) =>
+          subscription.cancel(),
+    );
+  }
+
+  Future<void> connect() async => (await TaskEither<Object, void>.tryCatch(
+        () async {
+          _socket = some(await RawSocket.connect('127.0.0.1', 5900));
+        },
+        (
+          final Object error,
+          final _,
+        ) =>
+            error,
+      ).andThen(_performHandshake).run())
+          .match(
+        (final Object error) => throw Exception(error),
+        (final _) {},
+      );
 
   void requestUpdate() {
     _socket.match(
@@ -46,8 +100,7 @@ class RemoteFrameBufferClient {
               x: 0,
               y: 0,
             );
-            // ignore: avoid_print
-            print('> $requestMessage');
+            _logger.log(Level.INFO, '> $requestMessage');
             socket.write(
               requestMessage.toBytes().asUint8List(),
             );
@@ -56,25 +109,6 @@ class RemoteFrameBufferClient {
       },
     );
   }
-
-  Future<void> close() async {
-    await _updateStreamController.close();
-  }
-
-  Future<void> connect() async => (await TaskEither<Object, void>.tryCatch(
-        () async {
-          _socket = some(await RawSocket.connect('127.0.0.1', 5900));
-        },
-        (
-          final Object error,
-          final _,
-        ) =>
-            error,
-      ).andThen(_performHandshake).run())
-          .match(
-        (final Object error) => throw Exception(error),
-        (final _) {},
-      );
 
   Future<void> start() async => await _socket.match(
         () => throw Exception('Socket not available'),
@@ -106,8 +140,7 @@ class RemoteFrameBufferClient {
                         'Error reading incoming message type',
                       ),
                     );
-                // ignore: avoid_print
-                print('< messageType: $messageType');
+                _logger.log(Level.INFO, '< messageType: $messageType');
                 switch (messageType) {
                   case 0:
                     while (socket.available() < 1) {
@@ -119,30 +152,18 @@ class RemoteFrameBufferClient {
                     );
                     (await RemoteFrameBufferFrameBufferUpdateMessage
                                 .readFromSocket(config: config, socket: socket)
-                            // .flatMap(
-                            //   (
-                            //     final RemoteFrameBufferFrameBufferUpdateMessage
-                            //         message,
-                            //   ) =>
-                            //       _handleFrameBufferUpdateMessage(
-                            //     config: config,
-                            //     message: message,
-                            //     socket: socket,
-                            //   ),
-                            // )
                             .run())
                         .match(
-                      (final Object error) =>
-                          // ignore: avoid_print
-                          print(
+                      (final Object error) => _logger.log(
+                        Level.INFO,
                         'Error reading and handling update message: $error',
                       ),
                       (
                         final RemoteFrameBufferFrameBufferUpdateMessage
                             updateMessage,
                       ) {
-                        // ignore: avoid_print
-                        print(
+                        _logger.log(
+                          Level.INFO,
                           '< ${updateMessage.rectangles.length} update rectangles',
                         );
                         _updateStreamController.add(
@@ -208,8 +229,10 @@ class RemoteFrameBufferClient {
                     );
                     break;
                   default:
-                    // ignore: avoid_print
-                    print('Receive unsupported message type: $messageType');
+                    _logger.log(
+                      Level.INFO,
+                      'Receive unsupported message type: $messageType',
+                    );
                     break;
                 }
               }
@@ -258,8 +281,7 @@ class RemoteFrameBufferClient {
               ),
             ),
           );
-          // ignore: avoid_print
-          print('< $protocolVersionHandshakeMessage');
+          _logger.log(Level.INFO, '< $protocolVersionHandshakeMessage');
           if (protocolVersionHandshakeMessage.version !=
               const RemoteFrameBufferProtocolVersion.v3_8()) {
             throw Exception(
@@ -281,8 +303,10 @@ class RemoteFrameBufferClient {
           final int numberOfSecurityTypes = optionOf(socket.read(1)).getOrElse(
             () => throw Exception('Error reading number of security types'),
           )[0];
-          // ignore: avoid_print
-          print('< numberOfSecurityTypes=$numberOfSecurityTypes');
+          _logger.log(
+            Level.INFO,
+            '< numberOfSecurityTypes=$numberOfSecurityTypes',
+          );
           if (numberOfSecurityTypes == 0) {
             // Error, next 4 bytes is reason-length, then reason-string
             while (socket.available() < 4) {
@@ -320,8 +344,7 @@ class RemoteFrameBufferClient {
                 ),
               ),
             );
-            // ignore: avoid_print
-            print('< $securityResultHandshakeMessage');
+            _logger.log(Level.INFO, '< $securityResultHandshakeMessage');
             if (securityResultHandshakeMessage.securityTypes.notElem(
               const RemoteFrameBufferSecurityType.none(),
             )) {
@@ -351,8 +374,7 @@ class RemoteFrameBufferClient {
               ),
             ),
           );
-          // ignore: avoid_print
-          print('< $securityResultHandshakeMessage');
+          _logger.log(Level.INFO, '< $securityResultHandshakeMessage');
           if (!securityResultHandshakeMessage.success) {
             while (socket.available() < 4) {
               await Future<void>.delayed(const Duration(seconds: 1));
@@ -396,8 +418,8 @@ class RemoteFrameBufferClient {
   }) =>
       TaskEither<Object, void>.tryCatch(
         () async {
-          // ignore: avoid_print
-          print(
+          _logger.log(
+            Level.INFO,
             '> ${const RemoteFrameBufferClientInitMessage(sharedFlag: true)}',
           );
           socket.write(
@@ -414,10 +436,11 @@ class RemoteFrameBufferClient {
   }) =>
       TaskEither<Object, void>.tryCatch(
         () async {
-          // ignore: avoid_print
-          print('> ${const RemoteFrameBufferProtocolVersionHandshakeMessage(
-            version: RemoteFrameBufferProtocolVersion.v3_8(),
-          )}');
+          _logger.log(
+              Level.INFO,
+              '> ${const RemoteFrameBufferProtocolVersionHandshakeMessage(
+                version: RemoteFrameBufferProtocolVersion.v3_8(),
+              )}');
           socket.write(
             const RemoteFrameBufferProtocolVersionHandshakeMessage(
               version: RemoteFrameBufferProtocolVersion.v3_8(),
@@ -432,62 +455,14 @@ class RemoteFrameBufferClient {
   }) =>
       TaskEither<Object, void>.tryCatch(
         () async {
-          // ignore: avoid_print
-          print('> ${const RemoteFrameBufferSecurityType.none()}');
+          _logger.log(
+            Level.INFO,
+            '> ${const RemoteFrameBufferSecurityType.none()}',
+          );
           socket.write(
             const RemoteFrameBufferSecurityType.none().toBytes().asUint8List(),
           );
         },
         (final Object error, final _) => error,
       );
-
-  // TaskEither<Object, void> _handleFrameBufferUpdateMessage({
-  //   required final Config config,
-  //   required final RemoteFrameBufferFrameBufferUpdateMessage message,
-  //   required final RawSocket socket,
-  // }) =>
-  //     TaskEither<Object, void>.tryCatch(
-  //       () async {
-  //         for (final RemoteFrameBufferFrameBufferUpdateMessageRectangle rectangle
-  //             in message.rectangles) {
-  //           (await _handleFrameBufferUpdateRectangle(
-  //             config: config,
-  //             rectangle: rectangle,
-  //             socket: socket,
-  //           ).run())
-  //               .match(
-  //             // ignore: avoid_print
-  //             (final Object error) => print('Error handling rectangle: $error'),
-  //             (final _) {},
-  //           );
-  //         }
-  //       },
-  //       (final Object error, final _) => error,
-  //     );
-
-  // TaskEither<Object, void> _handleFrameBufferUpdateRectangle({
-  //   required final Config config,
-  //   required final RemoteFrameBufferFrameBufferUpdateMessageRectangle rectangle,
-  //   required final RawSocket socket,
-  // }) =>
-  //     TaskEither<Object, void>.tryCatch(
-  //       () async {
-  //         // ignore: avoid_print
-  //         print('< $rectangle');
-  //         // List<List<int>> frameBuffer = List.generate(
-  //         //     config.frameBufferHeight,
-  //         //     (final int row) => List.generate(
-  //         //         config.frameBufferWidth,
-  //         //         (final int column) => rectangle.pixelData
-  //         //             .getUint32(row * config.frameBufferWidth + column)));
-  //         _updateStreamController.add(
-  //           RemoteFrameBufferClientUpdate(
-  //             byteData: rectangle.pixelData,
-  //             height: config.frameBufferHeight,
-  //             width: config.frameBufferWidth,
-  //           ),
-  //         );
-  //       },
-  //       (final Object error, final _) => error,
-  //     );
 }

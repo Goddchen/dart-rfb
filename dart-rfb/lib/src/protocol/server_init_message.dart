@@ -5,18 +5,23 @@ import 'dart:typed_data';
 import 'package:dart_rfb/src/protocol/pixel_format.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:logging/logging.dart';
 
 part 'server_init_message.freezed.dart';
 
 @freezed
 class RemoteFrameBufferServerInitMessage
     with _$RemoteFrameBufferServerInitMessage {
+  static final Logger _logger = Logger('RemoteFrameBufferServerInitMessage');
+
   const factory RemoteFrameBufferServerInitMessage({
     required final int frameBufferHeightInPixels,
     required final int frameBufferWidthInPixels,
     required final String name,
     required final RemoteFrameBufferPixelFormat serverPixelFormat,
   }) = _RemoteFrameBufferServerInitMessage;
+
+  const RemoteFrameBufferServerInitMessage._();
 
   static TaskEither<Object, RemoteFrameBufferServerInitMessage> readFromSocket({
     required final RawSocket socket,
@@ -48,12 +53,9 @@ class RemoteFrameBufferServerInitMessage
               bytes: ByteData.sublistView(bytes, 4, 20),
             ),
           );
-          // ignore: avoid_print
-          print('< $serverInitMessage');
+          _logger.log(Level.INFO, '< $serverInitMessage');
           return serverInitMessage;
         },
         (final Object error, final _) => error,
       );
-
-  const RemoteFrameBufferServerInitMessage._();
 }

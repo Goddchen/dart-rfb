@@ -20,3 +20,4 @@ dependencies:
   collection: ^1.16.0
   fpdart: ^0.4.0
   freezed_annotation: ^2.2.0
+  logging: ^1.1.0
