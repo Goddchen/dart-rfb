@@ -12,6 +12,54 @@ Then there was a discussion about how complex the protocol is and wether we shou
 Estimations ranged from 5 days to 100 days and we began joking that I'd be able to do it "after the weekend".
 And here we are, after a weekend, with the first, minimal, protocol implementation.
 
+## Supported Features
+
+### Protocol Versions
+
+- [ ] 3.3
+- [ ] 3.7
+- [X] 3.8
+
+### Encodings
+
+- [X] Raw
+- [ ] CopyRect
+- [ ] RRE (obsolescent)
+- [ ] Hextile (obsolescent)
+- [ ] TRLE
+- [ ] ZRLE
+- [ ] Cursor pseudo-encoding
+- [ ] DesktopSize pseudo-encoding
+
+### Security Types
+
+- [X] None
+- [ ] VNC Authentication
+
+### Pixel Formats
+
+- [X] BGRA8888 (https://api.flutter.dev/flutter/dart-ui/PixelFormat.html#bgra8888, 32 bits per pixel, true-color)
+
+### Protocol Messages
+
+- [X] ProtocolVersion handshake
+- [X] Security handshake
+- [X] SecurityResult handshake
+- [X] ClientInit
+- [X] ServerInit
+- Client-to-Server
+  - [ ] SetPixelFormat
+  - [ ] SetEncodings
+  - [X] FramebufferUpdateRequest
+  - [ ] KeyEvent
+  - [ ] PointerEvent
+  - [ ] ClientCutText
+- Server-to-Client
+  - [X] FramebufferUpdate
+  - [ ] SetColorMapEntries
+  - [ ] Bell
+  - [ ] ServerCutText
+
 ## Installation
 
 As simple as `dart pub add dart_rfb`.
@@ -31,3 +79,7 @@ client.updateStream.listen(
 );
 client.requestUpdate();
 ```
+
+## Learn More
+
+https://www.rfc-editor.org/rfc/rfc6143
