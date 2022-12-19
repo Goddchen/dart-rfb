@@ -6,6 +6,6 @@ void main() {
     final RemoteFrameBufferClient client = RemoteFrameBufferClient()
       ..loggingEnabled = true;
     await client.connect();
-    await client.start();
+    await client.startReadLoop();
   });
 }

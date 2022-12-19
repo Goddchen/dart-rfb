@@ -32,6 +32,8 @@ class RemoteFrameBufferClient {
 
   Option<StreamSubscription<LogRecord>> _loggingSubscription = none();
 
+  bool _readLoopRunning = false;
+
   RemoteFrameBufferClient() {
     loggingEnabled = false;
     _loggingSubscription = some(
@@ -61,6 +63,7 @@ class RemoteFrameBufferClient {
       _updateStreamController.stream;
 
   Future<void> close() async {
+    _readLoopRunning = false;
     await _updateStreamController.close();
     await _loggingSubscription.match(
       () {},
@@ -84,11 +87,9 @@ class RemoteFrameBufferClient {
         (final _) {},
       );
 
-  void requestUpdate() {
-    _socket.match(
-      () {},
-      (final RawSocket socket) {
-        _config.match(
+  void requestUpdate() => _socket.match(
+        () {},
+        (final RawSocket socket) => _config.match(
           () {},
           (final Config config) {
             final RemoteFrameBufferFrameBufferUpdateRequestMessage
@@ -105,12 +106,10 @@ class RemoteFrameBufferClient {
               requestMessage.toBytes().asUint8List(),
             );
           },
-        );
-      },
-    );
-  }
+        ),
+      );
 
-  Future<void> start() async => await _socket.match(
+  Future<void> startReadLoop() async => await _socket.match(
         () => throw Exception('Socket not available'),
         (final RawSocket socket) async {
           (await TaskEither<Object, void>.tryCatch(
@@ -126,7 +125,8 @@ class RemoteFrameBufferClient {
                   y: 0,
                 ).toBytes().asUint8List(),
               );
-              while (true) {
+              _readLoopRunning = true;
+              while (_readLoopRunning) {
                 while (socket.available() < 1) {
                   await Future<void>.delayed(const Duration(seconds: 1));
                 }
