@@ -14,7 +14,40 @@ class RemoteFrameBufferSecurityType with _$RemoteFrameBufferSecurityType {
   const factory RemoteFrameBufferSecurityType.none() =
       RemoteFrameBufferSecurityTypeNone;
   const factory RemoteFrameBufferSecurityType.vncAuthentication() =
-      RemoteFrameBufferSecurityVncAuthentication;
+      RemoteFrameBufferSecurityTypeVncAuthentication;
+
+  /// Parse [bytes].
+  factory RemoteFrameBufferSecurityType.fromBytes({
+    required final ByteData bytes,
+  }) {
+    if (bytes.lengthInBytes == 1) {
+      switch (bytes.getUint8(0)) {
+        case 0:
+          return const RemoteFrameBufferSecurityType.invalid();
+        case 1:
+          return const RemoteFrameBufferSecurityType.none();
+        case 2:
+          return const RemoteFrameBufferSecurityType.vncAuthentication();
+        default:
+          return const RemoteFrameBufferSecurityType.invalid();
+      }
+    } else if (bytes.lengthInBytes == 4) {
+      switch (bytes.getUint32(0)) {
+        case 0:
+          return const RemoteFrameBufferSecurityType.invalid();
+        case 1:
+          return const RemoteFrameBufferSecurityType.none();
+        case 2:
+          return const RemoteFrameBufferSecurityType.vncAuthentication();
+        default:
+          return const RemoteFrameBufferSecurityType.invalid();
+      }
+    } else {
+      throw Exception(
+        'Unable to read security type from ${bytes.lengthInBytes} bytes',
+      );
+    }
+  }
 
   /// Convert this type to a [ByteData].
   ByteData toBytes() => map(

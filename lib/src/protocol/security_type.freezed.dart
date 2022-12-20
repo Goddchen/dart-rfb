@@ -43,7 +43,8 @@ mixin _$RemoteFrameBufferSecurityType {
     required TResult Function(RemoteFrameBufferSecurityTypeInvalid value)
         invalid,
     required TResult Function(RemoteFrameBufferSecurityTypeNone value) none,
-    required TResult Function(RemoteFrameBufferSecurityVncAuthentication value)
+    required TResult Function(
+            RemoteFrameBufferSecurityTypeVncAuthentication value)
         vncAuthentication,
   }) =>
       throw _privateConstructorUsedError;
@@ -51,7 +52,7 @@ mixin _$RemoteFrameBufferSecurityType {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(RemoteFrameBufferSecurityTypeInvalid value)? invalid,
     TResult? Function(RemoteFrameBufferSecurityTypeNone value)? none,
-    TResult? Function(RemoteFrameBufferSecurityVncAuthentication value)?
+    TResult? Function(RemoteFrameBufferSecurityTypeVncAuthentication value)?
         vncAuthentication,
   }) =>
       throw _privateConstructorUsedError;
@@ -59,7 +60,7 @@ mixin _$RemoteFrameBufferSecurityType {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(RemoteFrameBufferSecurityTypeInvalid value)? invalid,
     TResult Function(RemoteFrameBufferSecurityTypeNone value)? none,
-    TResult Function(RemoteFrameBufferSecurityVncAuthentication value)?
+    TResult Function(RemoteFrameBufferSecurityTypeVncAuthentication value)?
         vncAuthentication,
     required TResult orElse(),
   }) =>
@@ -167,7 +168,8 @@ class _$RemoteFrameBufferSecurityTypeInvalid
     required TResult Function(RemoteFrameBufferSecurityTypeInvalid value)
         invalid,
     required TResult Function(RemoteFrameBufferSecurityTypeNone value) none,
-    required TResult Function(RemoteFrameBufferSecurityVncAuthentication value)
+    required TResult Function(
+            RemoteFrameBufferSecurityTypeVncAuthentication value)
         vncAuthentication,
   }) {
     return invalid(this);
@@ -178,7 +180,7 @@ class _$RemoteFrameBufferSecurityTypeInvalid
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(RemoteFrameBufferSecurityTypeInvalid value)? invalid,
     TResult? Function(RemoteFrameBufferSecurityTypeNone value)? none,
-    TResult? Function(RemoteFrameBufferSecurityVncAuthentication value)?
+    TResult? Function(RemoteFrameBufferSecurityTypeVncAuthentication value)?
         vncAuthentication,
   }) {
     return invalid?.call(this);
@@ -189,7 +191,7 @@ class _$RemoteFrameBufferSecurityTypeInvalid
   TResult maybeMap<TResult extends Object?>({
     TResult Function(RemoteFrameBufferSecurityTypeInvalid value)? invalid,
     TResult Function(RemoteFrameBufferSecurityTypeNone value)? none,
-    TResult Function(RemoteFrameBufferSecurityVncAuthentication value)?
+    TResult Function(RemoteFrameBufferSecurityTypeVncAuthentication value)?
         vncAuthentication,
     required TResult orElse(),
   }) {
@@ -287,7 +289,8 @@ class _$RemoteFrameBufferSecurityTypeNone
     required TResult Function(RemoteFrameBufferSecurityTypeInvalid value)
         invalid,
     required TResult Function(RemoteFrameBufferSecurityTypeNone value) none,
-    required TResult Function(RemoteFrameBufferSecurityVncAuthentication value)
+    required TResult Function(
+            RemoteFrameBufferSecurityTypeVncAuthentication value)
         vncAuthentication,
   }) {
     return none(this);
@@ -298,7 +301,7 @@ class _$RemoteFrameBufferSecurityTypeNone
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(RemoteFrameBufferSecurityTypeInvalid value)? invalid,
     TResult? Function(RemoteFrameBufferSecurityTypeNone value)? none,
-    TResult? Function(RemoteFrameBufferSecurityVncAuthentication value)?
+    TResult? Function(RemoteFrameBufferSecurityTypeVncAuthentication value)?
         vncAuthentication,
   }) {
     return none?.call(this);
@@ -309,7 +312,7 @@ class _$RemoteFrameBufferSecurityTypeNone
   TResult maybeMap<TResult extends Object?>({
     TResult Function(RemoteFrameBufferSecurityTypeInvalid value)? invalid,
     TResult Function(RemoteFrameBufferSecurityTypeNone value)? none,
-    TResult Function(RemoteFrameBufferSecurityVncAuthentication value)?
+    TResult Function(RemoteFrameBufferSecurityTypeVncAuthentication value)?
         vncAuthentication,
     required TResult orElse(),
   }) {
@@ -328,29 +331,30 @@ abstract class RemoteFrameBufferSecurityTypeNone
 }
 
 /// @nodoc
-abstract class _$$RemoteFrameBufferSecurityVncAuthenticationCopyWith<$Res> {
-  factory _$$RemoteFrameBufferSecurityVncAuthenticationCopyWith(
-          _$RemoteFrameBufferSecurityVncAuthentication value,
-          $Res Function(_$RemoteFrameBufferSecurityVncAuthentication) then) =
-      __$$RemoteFrameBufferSecurityVncAuthenticationCopyWithImpl<$Res>;
+abstract class _$$RemoteFrameBufferSecurityTypeVncAuthenticationCopyWith<$Res> {
+  factory _$$RemoteFrameBufferSecurityTypeVncAuthenticationCopyWith(
+          _$RemoteFrameBufferSecurityTypeVncAuthentication value,
+          $Res Function(_$RemoteFrameBufferSecurityTypeVncAuthentication)
+              then) =
+      __$$RemoteFrameBufferSecurityTypeVncAuthenticationCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RemoteFrameBufferSecurityVncAuthenticationCopyWithImpl<$Res>
+class __$$RemoteFrameBufferSecurityTypeVncAuthenticationCopyWithImpl<$Res>
     extends _$RemoteFrameBufferSecurityTypeCopyWithImpl<$Res,
-        _$RemoteFrameBufferSecurityVncAuthentication>
-    implements _$$RemoteFrameBufferSecurityVncAuthenticationCopyWith<$Res> {
-  __$$RemoteFrameBufferSecurityVncAuthenticationCopyWithImpl(
-      _$RemoteFrameBufferSecurityVncAuthentication _value,
-      $Res Function(_$RemoteFrameBufferSecurityVncAuthentication) _then)
+        _$RemoteFrameBufferSecurityTypeVncAuthentication>
+    implements _$$RemoteFrameBufferSecurityTypeVncAuthenticationCopyWith<$Res> {
+  __$$RemoteFrameBufferSecurityTypeVncAuthenticationCopyWithImpl(
+      _$RemoteFrameBufferSecurityTypeVncAuthentication _value,
+      $Res Function(_$RemoteFrameBufferSecurityTypeVncAuthentication) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RemoteFrameBufferSecurityVncAuthentication
-    extends RemoteFrameBufferSecurityVncAuthentication {
-  const _$RemoteFrameBufferSecurityVncAuthentication() : super._();
+class _$RemoteFrameBufferSecurityTypeVncAuthentication
+    extends RemoteFrameBufferSecurityTypeVncAuthentication {
+  const _$RemoteFrameBufferSecurityTypeVncAuthentication() : super._();
 
   @override
   String toString() {
@@ -361,7 +365,7 @@ class _$RemoteFrameBufferSecurityVncAuthentication
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RemoteFrameBufferSecurityVncAuthentication);
+            other is _$RemoteFrameBufferSecurityTypeVncAuthentication);
   }
 
   @override
@@ -407,7 +411,8 @@ class _$RemoteFrameBufferSecurityVncAuthentication
     required TResult Function(RemoteFrameBufferSecurityTypeInvalid value)
         invalid,
     required TResult Function(RemoteFrameBufferSecurityTypeNone value) none,
-    required TResult Function(RemoteFrameBufferSecurityVncAuthentication value)
+    required TResult Function(
+            RemoteFrameBufferSecurityTypeVncAuthentication value)
         vncAuthentication,
   }) {
     return vncAuthentication(this);
@@ -418,7 +423,7 @@ class _$RemoteFrameBufferSecurityVncAuthentication
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(RemoteFrameBufferSecurityTypeInvalid value)? invalid,
     TResult? Function(RemoteFrameBufferSecurityTypeNone value)? none,
-    TResult? Function(RemoteFrameBufferSecurityVncAuthentication value)?
+    TResult? Function(RemoteFrameBufferSecurityTypeVncAuthentication value)?
         vncAuthentication,
   }) {
     return vncAuthentication?.call(this);
@@ -429,7 +434,7 @@ class _$RemoteFrameBufferSecurityVncAuthentication
   TResult maybeMap<TResult extends Object?>({
     TResult Function(RemoteFrameBufferSecurityTypeInvalid value)? invalid,
     TResult Function(RemoteFrameBufferSecurityTypeNone value)? none,
-    TResult Function(RemoteFrameBufferSecurityVncAuthentication value)?
+    TResult Function(RemoteFrameBufferSecurityTypeVncAuthentication value)?
         vncAuthentication,
     required TResult orElse(),
   }) {
@@ -440,9 +445,9 @@ class _$RemoteFrameBufferSecurityVncAuthentication
   }
 }
 
-abstract class RemoteFrameBufferSecurityVncAuthentication
+abstract class RemoteFrameBufferSecurityTypeVncAuthentication
     extends RemoteFrameBufferSecurityType {
-  const factory RemoteFrameBufferSecurityVncAuthentication() =
-      _$RemoteFrameBufferSecurityVncAuthentication;
-  const RemoteFrameBufferSecurityVncAuthentication._() : super._();
+  const factory RemoteFrameBufferSecurityTypeVncAuthentication() =
+      _$RemoteFrameBufferSecurityTypeVncAuthentication;
+  const RemoteFrameBufferSecurityTypeVncAuthentication._() : super._();
 }
