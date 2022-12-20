@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 import 'package:dart_rfb/src/client/config.dart';
 import 'package:dart_rfb/src/client/remote_frame_buffer_client_update.dart';
+import 'package:dart_rfb/src/constants.dart';
 import 'package:dart_rfb/src/extensions/byte_data_extensions.dart';
 import 'package:dart_rfb/src/protocol/client_init_message.dart';
 import 'package:dart_rfb/src/protocol/frame_buffer_update_message.dart';
@@ -147,7 +148,7 @@ class RemoteFrameBufferClient {
               _readLoopRunning = true;
               while (_readLoopRunning) {
                 while (socket.available() < 1) {
-                  await Future<void>.delayed(const Duration(seconds: 1));
+                  await Future<void>.delayed(Constants.socketReadWaitDuration);
                 }
                 final int messageType = optionOf(socket.read(1))
                     .map(
@@ -163,7 +164,9 @@ class RemoteFrameBufferClient {
                 switch (messageType) {
                   case 0:
                     while (socket.available() < 1) {
-                      await Future<void>.delayed(const Duration(seconds: 1));
+                      await Future<void>.delayed(
+                        Constants.socketReadWaitDuration,
+                      );
                     }
                     // read and ignore padding
                     optionOf(socket.read(1)).getOrElse(
@@ -207,7 +210,9 @@ class RemoteFrameBufferClient {
                     break;
                   case 1: // SetColorMapEntries
                     while (socket.available() < 5) {
-                      await Future<void>.delayed(const Duration(seconds: 1));
+                      await Future<void>.delayed(
+                        Constants.socketReadWaitDuration,
+                      );
                     }
                     final int numberOfColors = optionOf(socket.read(5))
                         .map(
@@ -219,7 +224,9 @@ class RemoteFrameBufferClient {
                               throw Exception('Error reading number of colors'),
                         );
                     while (socket.available() < numberOfColors * 6) {
-                      await Future<void>.delayed(const Duration(seconds: 1));
+                      await Future<void>.delayed(
+                        Constants.socketReadWaitDuration,
+                      );
                     }
                     optionOf(socket.read(numberOfColors * 6)).getOrElse(
                       () => throw Exception('Error reading colors'),
@@ -230,7 +237,9 @@ class RemoteFrameBufferClient {
                     break;
                   case 3: // ServerCutText
                     while (socket.available() < 7) {
-                      await Future<void>.delayed(const Duration(seconds: 1));
+                      await Future<void>.delayed(
+                        Constants.socketReadWaitDuration,
+                      );
                     }
                     final int length = optionOf(socket.read(7))
                         .map(
@@ -241,7 +250,9 @@ class RemoteFrameBufferClient {
                           () => throw Exception('Error reading length'),
                         );
                     while (socket.available() < length) {
-                      await Future<void>.delayed(const Duration(seconds: 1));
+                      await Future<void>.delayed(
+                        Constants.socketReadWaitDuration,
+                      );
                     }
                     optionOf(socket.read(length)).getOrElse(
                       () => throw Exception('Error reading content'),
@@ -283,7 +294,7 @@ class RemoteFrameBufferClient {
         () async {
           while (socket.available() <
               RemoteFrameBufferProtocolVersionHandshakeMessage.length) {
-            await Future<void>.delayed(const Duration(seconds: 1));
+            await Future<void>.delayed(Constants.socketReadWaitDuration);
           }
           final RemoteFrameBufferProtocolVersionHandshakeMessage
               protocolVersionHandshakeMessage =
@@ -317,7 +328,7 @@ class RemoteFrameBufferClient {
       TaskEither<Object, void>.tryCatch(
         () async {
           while (socket.available() < 1) {
-            await Future<void>.delayed(const Duration(seconds: 1));
+            await Future<void>.delayed(Constants.socketReadWaitDuration);
           }
           final int numberOfSecurityTypes = optionOf(socket.read(1)).getOrElse(
             () => throw Exception('Error reading number of security types'),
@@ -329,7 +340,7 @@ class RemoteFrameBufferClient {
           if (numberOfSecurityTypes == 0) {
             // Error, next 4 bytes is reason-length, then reason-string
             while (socket.available() < 4) {
-              await Future<void>.delayed(const Duration(seconds: 1));
+              await Future<void>.delayed(Constants.socketReadWaitDuration);
             }
             final int reasonLength = ByteData.sublistView(
               optionOf(socket.read(4)).getOrElse(
@@ -337,7 +348,7 @@ class RemoteFrameBufferClient {
               ),
             ).getUint32(0);
             while (socket.available() < reasonLength) {
-              await Future<void>.delayed(const Duration(seconds: 1));
+              await Future<void>.delayed(Constants.socketReadWaitDuration);
             }
             final String reason = optionOf(socket.read(reasonLength))
                 .map((final Uint8List bytes) => ascii.decode(bytes))
@@ -347,7 +358,7 @@ class RemoteFrameBufferClient {
             );
           } else {
             while (socket.available() < numberOfSecurityTypes) {
-              await Future<void>.delayed(const Duration(seconds: 1));
+              await Future<void>.delayed(Constants.socketReadWaitDuration);
             }
             final RemoteFrameBufferSecurityHandshakeMessage
                 securityResultHandshakeMessage =
@@ -380,7 +391,7 @@ class RemoteFrameBufferClient {
       TaskEither<Object, void>.tryCatch(
         () async {
           while (socket.available() < 4) {
-            await Future<void>.delayed(const Duration(seconds: 1));
+            await Future<void>.delayed(Constants.socketReadWaitDuration);
           }
           final RemoteFrameBufferSecurityResultHandshakeMessage
               securityResultHandshakeMessage =
@@ -396,7 +407,7 @@ class RemoteFrameBufferClient {
           _logger.log(Level.INFO, '< $securityResultHandshakeMessage');
           if (!securityResultHandshakeMessage.success) {
             while (socket.available() < 4) {
-              await Future<void>.delayed(const Duration(seconds: 1));
+              await Future<void>.delayed(Constants.socketReadWaitDuration);
             }
             final int reasonLength = optionOf(socket.read(4))
                 .map(
@@ -407,7 +418,7 @@ class RemoteFrameBufferClient {
                   () => throw Exception('Error reading reason length'),
                 );
             while (socket.available() < reasonLength) {
-              await Future<void>.delayed(const Duration(seconds: 1));
+              await Future<void>.delayed(Constants.socketReadWaitDuration);
             }
             final String reason = optionOf(socket.read(reasonLength))
                 .map((final Uint8List bytes) => ascii.decode(bytes))
