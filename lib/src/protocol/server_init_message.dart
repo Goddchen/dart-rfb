@@ -35,7 +35,7 @@ class RemoteFrameBufferServerInitMessage
         () async {
           final BytesBuilder bytesBuilder = BytesBuilder();
           while (bytesBuilder.length < 24) {
-            await Future<void>.delayed(const Duration(milliseconds: 10));
+            await Future<void>.delayed(Constants.socketReadWaitDuration);
 
             optionOf(socket.read(1)).match(
               () {},
