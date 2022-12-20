@@ -16,55 +16,55 @@ And here we are, after a weekend, with the first, minimal, protocol implementati
 
 ### Protocol Versions
 
-- [ ] 3.3
-- [ ] 3.7
-- [X] 3.8
+- ⬜ 3.3
+- ⬜ 3.7
+- ✅ 3.8
 
 ### Encodings
 
-- [X] Raw
-- [ ] CopyRect
-- [ ] RRE (obsolescent)
-- [ ] Hextile (obsolescent)
-- [ ] TRLE
-- [ ] ZRLE
-- [ ] Cursor pseudo-encoding
-- [ ] DesktopSize pseudo-encoding
+- ✅ Raw
+- ⬜ CopyRect
+- ⬜ RRE (obsolescent)
+- ⬜ Hextile (obsolescent)
+- ⬜ TRLE
+- ⬜ ZRLE
+- ⬜ Cursor pseudo-encoding
+- ⬜ DesktopSize pseudo-encoding
 
 ### Security Types
 
-- [X] None
-- [ ] VNC Authentication
+- ✅ None
+- ✅ VNC Authentication
 
 ### Pixel Formats
 
-- [X] BGRA8888 (https://api.flutter.dev/flutter/dart-ui/PixelFormat.html#bgra8888, 32 bits per pixel, true-color)
+- ✅ BGRA8888 (https://api.flutter.dev/flutter/dart-ui/PixelFormat.html#bgra8888, 32 bits per pixel, true-color)
 
 ### Protocol Messages
 
-- [X] ProtocolVersion handshake
-- [X] Security handshake
-- [X] SecurityResult handshake
-- [X] ClientInit
-- [X] ServerInit
+- ✅ ProtocolVersion handshake
+- ✅ Security handshake
+- ✅ SecurityResult handshake
+- ✅ ClientInit
+- ✅ ServerInit
 - Client-to-Server
-  - [ ] SetPixelFormat
-  - [ ] SetEncodings
-  - [X] FramebufferUpdateRequest
-  - [ ] KeyEvent
-  - [ ] PointerEvent
-  - [ ] ClientCutText
+  - ⬜ SetPixelFormat
+  - ⬜ SetEncodings
+  - ✅ FramebufferUpdateRequest
+  - ⬜ KeyEvent
+  - ⬜ PointerEvent
+  - ⬜ ClientCutText
 - Server-to-Client
-  - [X] FramebufferUpdate
-  - [ ] SetColorMapEntries
-  - [ ] Bell
-  - [ ] ServerCutText
+  - ✅ FramebufferUpdate
+  - ⬜ SetColorMapEntries
+  - ⬜ Bell
+  - ⬜ ServerCutText
 
 ## Installation
 
 As simple as `dart pub add dart_rfb`.
 
-Or manually add `dart_rfb: ^0.0.2` to your `pubspec.yaml`.
+Or manually add `dart_rfb: ^0.1.0` to your `pubspec.yaml`.
 
 ## Usage
 

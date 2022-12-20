@@ -5,7 +5,10 @@ void main() {
   test('Connect to VNC running on localhost', skip: true, () async {
     final RemoteFrameBufferClient client = RemoteFrameBufferClient()
       ..loggingEnabled = true;
-    await client.connect(hostname: '127.0.0.1');
-    await client.startReadLoop();
+    await client.connect(
+      hostname: '127.0.0.1',
+      password: 'password',
+    );
+    // await client.startReadLoop();
   });
 }

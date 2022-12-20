@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:dart_rfb/src/client/config.dart';
+import 'package:dart_rfb/src/constants.dart';
 import 'package:dart_rfb/src/protocol/encoding_type.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -29,7 +30,7 @@ class RemoteFrameBufferFrameBufferUpdateMessage
       TaskEither<Object, RemoteFrameBufferFrameBufferUpdateMessage>.tryCatch(
         () async {
           while (socket.available() < 2) {
-            await Future<void>.delayed(const Duration(seconds: 1));
+            await Future<void>.delayed(Constants.socketReadWaitDuration);
           }
           final int numberOfRectangles = optionOf(socket.read(2))
               .map(
@@ -46,7 +47,7 @@ class RemoteFrameBufferFrameBufferUpdateMessage
           );
           for (int i = 0; i < numberOfRectangles; i++) {
             while (socket.available() < 12) {
-              await Future<void>.delayed(const Duration(seconds: 1));
+              await Future<void>.delayed(Constants.socketReadWaitDuration);
             }
             final ByteData headerBytes = optionOf(socket.read(12))
                 .map(ByteData.sublistView)

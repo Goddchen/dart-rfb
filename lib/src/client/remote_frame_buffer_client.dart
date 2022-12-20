@@ -3,9 +3,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:dart_des/dart_des.dart';
 import 'package:dart_rfb/src/client/config.dart';
 import 'package:dart_rfb/src/client/remote_frame_buffer_client_update.dart';
+import 'package:dart_rfb/src/constants.dart';
 import 'package:dart_rfb/src/extensions/byte_data_extensions.dart';
+import 'package:dart_rfb/src/extensions/int_extensions.dart';
 import 'package:dart_rfb/src/protocol/client_init_message.dart';
 import 'package:dart_rfb/src/protocol/frame_buffer_update_message.dart';
 import 'package:dart_rfb/src/protocol/frame_buffer_update_request_message.dart';
@@ -33,6 +36,8 @@ class RemoteFrameBufferClient {
   Option<StreamSubscription<LogRecord>> _loggingSubscription = none();
 
   bool _readLoopRunning = false;
+
+  Option<String> _password = none();
 
   /// A client that implements communication according to
   /// The Remote Framebuffer Protocol, aka RFC 6143, aka VNC).
@@ -78,13 +83,16 @@ class RemoteFrameBufferClient {
     );
   }
 
-  /// Connect to [hostname] on [port] and perform the protocol handshake.
+  /// Connect to [hostname] on [port] and perform the protocol handshake,
+  /// optionally using [password].
   Future<void> connect({
     required final String hostname,
+    final String? password,
     final int port = 5900,
   }) async =>
       (await TaskEither<Object, void>.tryCatch(
         () async {
+          _password = optionOf(password);
           _socket = some(
             await RawSocket.connect(
               hostname,
@@ -147,7 +155,7 @@ class RemoteFrameBufferClient {
               _readLoopRunning = true;
               while (_readLoopRunning) {
                 while (socket.available() < 1) {
-                  await Future<void>.delayed(const Duration(seconds: 1));
+                  await Future<void>.delayed(Constants.socketReadWaitDuration);
                 }
                 final int messageType = optionOf(socket.read(1))
                     .map(
@@ -163,7 +171,9 @@ class RemoteFrameBufferClient {
                 switch (messageType) {
                   case 0:
                     while (socket.available() < 1) {
-                      await Future<void>.delayed(const Duration(seconds: 1));
+                      await Future<void>.delayed(
+                        Constants.socketReadWaitDuration,
+                      );
                     }
                     // read and ignore padding
                     optionOf(socket.read(1)).getOrElse(
@@ -207,7 +217,9 @@ class RemoteFrameBufferClient {
                     break;
                   case 1: // SetColorMapEntries
                     while (socket.available() < 5) {
-                      await Future<void>.delayed(const Duration(seconds: 1));
+                      await Future<void>.delayed(
+                        Constants.socketReadWaitDuration,
+                      );
                     }
                     final int numberOfColors = optionOf(socket.read(5))
                         .map(
@@ -219,7 +231,9 @@ class RemoteFrameBufferClient {
                               throw Exception('Error reading number of colors'),
                         );
                     while (socket.available() < numberOfColors * 6) {
-                      await Future<void>.delayed(const Duration(seconds: 1));
+                      await Future<void>.delayed(
+                        Constants.socketReadWaitDuration,
+                      );
                     }
                     optionOf(socket.read(numberOfColors * 6)).getOrElse(
                       () => throw Exception('Error reading colors'),
@@ -230,7 +244,9 @@ class RemoteFrameBufferClient {
                     break;
                   case 3: // ServerCutText
                     while (socket.available() < 7) {
-                      await Future<void>.delayed(const Duration(seconds: 1));
+                      await Future<void>.delayed(
+                        Constants.socketReadWaitDuration,
+                      );
                     }
                     final int length = optionOf(socket.read(7))
                         .map(
@@ -241,7 +257,9 @@ class RemoteFrameBufferClient {
                           () => throw Exception('Error reading length'),
                         );
                     while (socket.available() < length) {
-                      await Future<void>.delayed(const Duration(seconds: 1));
+                      await Future<void>.delayed(
+                        Constants.socketReadWaitDuration,
+                      );
                     }
                     optionOf(socket.read(length)).getOrElse(
                       () => throw Exception('Error reading content'),
@@ -271,9 +289,61 @@ class RemoteFrameBufferClient {
             .andThen(() => _sendProtocolVersionMessage(socket: socket))
             .andThen(() => _readSecurityHandshake(socket: socket))
             .andThen(() => _sendSecurityType(socket: socket))
+            .andThen(() => _handleSecurityType(socket: socket))
             .andThen(() => _readSecurityResultMessage(socket: socket))
             .andThen(() => _sendClientInitMessage(socket: socket))
             .andThen(() => _readServerInitMessage(socket: socket)),
+      );
+
+  TaskEither<Object, void> _handleSecurityType({
+    required final RawSocket socket,
+  }) =>
+      _password.match(
+        () => TaskEither<Object, void>.of(null),
+        (final String password) => TaskEither<Object, void>.tryCatch(
+          () async {
+            while (socket.available() < 16) {
+              await Future<void>.delayed(Constants.socketReadWaitDuration);
+            }
+            final ByteData challenge = ByteData.sublistView(
+              optionOf(socket.read(16)).getOrElse(
+                () => throw Exception('Error reading security challenge'),
+              ),
+            );
+            _logger.info('< Security challenge');
+            final ByteData encodedAndTruncatedPassword = ByteData.sublistView(
+              Uint8List.fromList(ascii.encode(password).take(8).toList()),
+            );
+            final ByteData key = ByteData(8);
+            for (int i = 0; i < 8; i++) {
+              int byte;
+              if (i < encodedAndTruncatedPassword.lengthInBytes) {
+                byte = encodedAndTruncatedPassword.getUint8(i);
+              } else {
+                byte = 0;
+              }
+              byte = byte.reverseBits();
+              key.setUint8(i, byte);
+            }
+            final ByteData response = ByteData.sublistView(
+              Uint8List.fromList(
+                DES(
+                  key: key.asUint8List(),
+                  mode: DESMode.ECB,
+                  paddingType: DESPaddingType.PKCS7,
+                ).encrypt(challenge.asUint8List()),
+              ),
+              0,
+              16,
+            );
+            _logger.info('> Security challenge response');
+            socket.write(
+              response.buffer
+                  .asUint8List(response.offsetInBytes, response.lengthInBytes),
+            );
+          },
+          (final Object error, final _) => error,
+        ),
       );
 
   TaskEither<Object, void> _readProtocolVersionMessage({
@@ -283,7 +353,7 @@ class RemoteFrameBufferClient {
         () async {
           while (socket.available() <
               RemoteFrameBufferProtocolVersionHandshakeMessage.length) {
-            await Future<void>.delayed(const Duration(seconds: 1));
+            await Future<void>.delayed(Constants.socketReadWaitDuration);
           }
           final RemoteFrameBufferProtocolVersionHandshakeMessage
               protocolVersionHandshakeMessage =
@@ -317,7 +387,7 @@ class RemoteFrameBufferClient {
       TaskEither<Object, void>.tryCatch(
         () async {
           while (socket.available() < 1) {
-            await Future<void>.delayed(const Duration(seconds: 1));
+            await Future<void>.delayed(Constants.socketReadWaitDuration);
           }
           final int numberOfSecurityTypes = optionOf(socket.read(1)).getOrElse(
             () => throw Exception('Error reading number of security types'),
@@ -329,7 +399,7 @@ class RemoteFrameBufferClient {
           if (numberOfSecurityTypes == 0) {
             // Error, next 4 bytes is reason-length, then reason-string
             while (socket.available() < 4) {
-              await Future<void>.delayed(const Duration(seconds: 1));
+              await Future<void>.delayed(Constants.socketReadWaitDuration);
             }
             final int reasonLength = ByteData.sublistView(
               optionOf(socket.read(4)).getOrElse(
@@ -337,7 +407,7 @@ class RemoteFrameBufferClient {
               ),
             ).getUint32(0);
             while (socket.available() < reasonLength) {
-              await Future<void>.delayed(const Duration(seconds: 1));
+              await Future<void>.delayed(Constants.socketReadWaitDuration);
             }
             final String reason = optionOf(socket.read(reasonLength))
                 .map((final Uint8List bytes) => ascii.decode(bytes))
@@ -347,7 +417,7 @@ class RemoteFrameBufferClient {
             );
           } else {
             while (socket.available() < numberOfSecurityTypes) {
-              await Future<void>.delayed(const Duration(seconds: 1));
+              await Future<void>.delayed(Constants.socketReadWaitDuration);
             }
             final RemoteFrameBufferSecurityHandshakeMessage
                 securityResultHandshakeMessage =
@@ -364,10 +434,21 @@ class RemoteFrameBufferClient {
               ),
             );
             _logger.log(Level.INFO, '< $securityResultHandshakeMessage');
-            if (securityResultHandshakeMessage.securityTypes.notElem(
-              const RemoteFrameBufferSecurityType.none(),
-            )) {
-              throw Exception('Server does not support security type "none"');
+            if (_password.isNone() &&
+                securityResultHandshakeMessage.securityTypes.notElem(
+                  const RemoteFrameBufferSecurityType.none(),
+                )) {
+              throw Exception(
+                'Server does not support security type "none", but not password was provided',
+              );
+            }
+            if (_password.isSome() &&
+                securityResultHandshakeMessage.securityTypes.notElem(
+                  const RemoteFrameBufferSecurityType.vncAuthentication(),
+                )) {
+              throw Exception(
+                'Server does not support security type "vncAuthentication"',
+              );
             }
           }
         },
@@ -380,7 +461,7 @@ class RemoteFrameBufferClient {
       TaskEither<Object, void>.tryCatch(
         () async {
           while (socket.available() < 4) {
-            await Future<void>.delayed(const Duration(seconds: 1));
+            await Future<void>.delayed(Constants.socketReadWaitDuration);
           }
           final RemoteFrameBufferSecurityResultHandshakeMessage
               securityResultHandshakeMessage =
@@ -396,7 +477,7 @@ class RemoteFrameBufferClient {
           _logger.log(Level.INFO, '< $securityResultHandshakeMessage');
           if (!securityResultHandshakeMessage.success) {
             while (socket.available() < 4) {
-              await Future<void>.delayed(const Duration(seconds: 1));
+              await Future<void>.delayed(Constants.socketReadWaitDuration);
             }
             final int reasonLength = optionOf(socket.read(4))
                 .map(
@@ -407,7 +488,7 @@ class RemoteFrameBufferClient {
                   () => throw Exception('Error reading reason length'),
                 );
             while (socket.available() < reasonLength) {
-              await Future<void>.delayed(const Duration(seconds: 1));
+              await Future<void>.delayed(Constants.socketReadWaitDuration);
             }
             final String reason = optionOf(socket.read(reasonLength))
                 .map((final Uint8List bytes) => ascii.decode(bytes))
@@ -474,13 +555,16 @@ class RemoteFrameBufferClient {
   }) =>
       TaskEither<Object, void>.tryCatch(
         () async {
+          final RemoteFrameBufferSecurityType securityType = _password.match(
+            () => const RemoteFrameBufferSecurityType.none(),
+            (final _) =>
+                const RemoteFrameBufferSecurityType.vncAuthentication(),
+          );
           _logger.log(
             Level.INFO,
-            '> ${const RemoteFrameBufferSecurityType.none()}',
+            '> $securityType',
           );
-          socket.write(
-            const RemoteFrameBufferSecurityType.none().toBytes().asUint8List(),
-          );
+          socket.write(securityType.toBytes().asUint8List());
         },
         (final Object error, final _) => error,
       );

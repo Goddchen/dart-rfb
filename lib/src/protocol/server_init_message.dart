@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:dart_rfb/src/constants.dart';
 import 'package:dart_rfb/src/protocol/pixel_format.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -34,7 +35,7 @@ class RemoteFrameBufferServerInitMessage
         () async {
           final BytesBuilder bytesBuilder = BytesBuilder();
           while (bytesBuilder.length < 24) {
-            await Future<void>.delayed(const Duration(milliseconds: 10));
+            await Future<void>.delayed(Constants.socketReadWaitDuration);
 
             optionOf(socket.read(1)).match(
               () {},
@@ -44,7 +45,7 @@ class RemoteFrameBufferServerInitMessage
           final Uint8List bytes = bytesBuilder.toBytes();
           final int nameLength = ByteData.sublistView(bytes).getUint32(20);
           while (socket.available() < nameLength) {
-            await Future<void>.delayed(const Duration(seconds: 1));
+            await Future<void>.delayed(Constants.socketReadWaitDuration);
           }
           final Uint8List nameBytes = optionOf(socket.read(nameLength))
               .getOrElse(() => throw Exception('Error reading name'));
