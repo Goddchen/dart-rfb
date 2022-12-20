@@ -3,10 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
-import 'dart:io' as _i2;
-import 'dart:typed_data' as _i4;
+import 'dart:async' as _i5;
+import 'dart:io' as _i4;
+import 'dart:typed_data' as _i6;
 
+import 'package:dart_rfb/src/client/config.dart' as _i3;
+import 'package:dart_rfb/src/protocol/pixel_format.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -20,9 +22,9 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeInternetAddress_0 extends _i1.SmartFake
-    implements _i2.InternetAddress {
-  _FakeInternetAddress_0(
+class _FakeRemoteFrameBufferPixelFormat_0 extends _i1.SmartFake
+    implements _i2.RemoteFrameBufferPixelFormat {
+  _FakeRemoteFrameBufferPixelFormat_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -31,9 +33,9 @@ class _FakeInternetAddress_0 extends _i1.SmartFake
         );
 }
 
-class _FakeRawSocketEvent_1 extends _i1.SmartFake
-    implements _i2.RawSocketEvent {
-  _FakeRawSocketEvent_1(
+class _Fake$ConfigCopyWith_1<$Res> extends _i1.SmartFake
+    implements _i3.$ConfigCopyWith<$Res> {
+  _Fake$ConfigCopyWith_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -42,8 +44,9 @@ class _FakeRawSocketEvent_1 extends _i1.SmartFake
         );
 }
 
-class _FakeRawSocket_2 extends _i1.SmartFake implements _i2.RawSocket {
-  _FakeRawSocket_2(
+class _Fake$RemoteFrameBufferPixelFormatCopyWith_2<$Res> extends _i1.SmartFake
+    implements _i2.$RemoteFrameBufferPixelFormatCopyWith<$Res> {
+  _Fake$RemoteFrameBufferPixelFormatCopyWith_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -52,21 +55,161 @@ class _FakeRawSocket_2 extends _i1.SmartFake implements _i2.RawSocket {
         );
 }
 
-class _FakeStreamSubscription_3<T> extends _i1.SmartFake
-    implements _i3.StreamSubscription<T> {
-  _FakeStreamSubscription_3(
+class _FakeInternetAddress_3 extends _i1.SmartFake
+    implements _i4.InternetAddress {
+  _FakeInternetAddress_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
           parent,
           parentInvocation,
         );
+}
+
+class _FakeRawSocketEvent_4 extends _i1.SmartFake
+    implements _i4.RawSocketEvent {
+  _FakeRawSocketEvent_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeRawSocket_5 extends _i1.SmartFake implements _i4.RawSocket {
+  _FakeRawSocket_5(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeStreamSubscription_6<T> extends _i1.SmartFake
+    implements _i5.StreamSubscription<T> {
+  _FakeStreamSubscription_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+/// A class which mocks [Config].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockConfig extends _i1.Mock implements _i3.Config {
+  MockConfig() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  int get frameBufferHeight => (super.noSuchMethod(
+        Invocation.getter(#frameBufferHeight),
+        returnValue: 0,
+      ) as int);
+  @override
+  int get frameBufferWidth => (super.noSuchMethod(
+        Invocation.getter(#frameBufferWidth),
+        returnValue: 0,
+      ) as int);
+  @override
+  _i2.RemoteFrameBufferPixelFormat get pixelFormat => (super.noSuchMethod(
+        Invocation.getter(#pixelFormat),
+        returnValue: _FakeRemoteFrameBufferPixelFormat_0(
+          this,
+          Invocation.getter(#pixelFormat),
+        ),
+      ) as _i2.RemoteFrameBufferPixelFormat);
+  @override
+  _i3.$ConfigCopyWith<_i3.Config> get copyWith => (super.noSuchMethod(
+        Invocation.getter(#copyWith),
+        returnValue: _Fake$ConfigCopyWith_1<_i3.Config>(
+          this,
+          Invocation.getter(#copyWith),
+        ),
+      ) as _i3.$ConfigCopyWith<_i3.Config>);
+}
+
+/// A class which mocks [RemoteFrameBufferPixelFormat].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRemoteFrameBufferPixelFormat extends _i1.Mock
+    implements _i2.RemoteFrameBufferPixelFormat {
+  MockRemoteFrameBufferPixelFormat() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  int get bitsPerPixel => (super.noSuchMethod(
+        Invocation.getter(#bitsPerPixel),
+        returnValue: 0,
+      ) as int);
+  @override
+  int get depth => (super.noSuchMethod(
+        Invocation.getter(#depth),
+        returnValue: 0,
+      ) as int);
+  @override
+  bool get bigEndian => (super.noSuchMethod(
+        Invocation.getter(#bigEndian),
+        returnValue: false,
+      ) as bool);
+  @override
+  bool get trueColor => (super.noSuchMethod(
+        Invocation.getter(#trueColor),
+        returnValue: false,
+      ) as bool);
+  @override
+  int get redMax => (super.noSuchMethod(
+        Invocation.getter(#redMax),
+        returnValue: 0,
+      ) as int);
+  @override
+  int get greenMax => (super.noSuchMethod(
+        Invocation.getter(#greenMax),
+        returnValue: 0,
+      ) as int);
+  @override
+  int get blueMax => (super.noSuchMethod(
+        Invocation.getter(#blueMax),
+        returnValue: 0,
+      ) as int);
+  @override
+  int get redShift => (super.noSuchMethod(
+        Invocation.getter(#redShift),
+        returnValue: 0,
+      ) as int);
+  @override
+  int get greenShift => (super.noSuchMethod(
+        Invocation.getter(#greenShift),
+        returnValue: 0,
+      ) as int);
+  @override
+  int get blueShift => (super.noSuchMethod(
+        Invocation.getter(#blueShift),
+        returnValue: 0,
+      ) as int);
+  @override
+  _i2.$RemoteFrameBufferPixelFormatCopyWith<_i2.RemoteFrameBufferPixelFormat>
+      get copyWith => (super.noSuchMethod(
+            Invocation.getter(#copyWith),
+            returnValue: _Fake$RemoteFrameBufferPixelFormatCopyWith_2<
+                _i2.RemoteFrameBufferPixelFormat>(
+              this,
+              Invocation.getter(#copyWith),
+            ),
+          ) as _i2.$RemoteFrameBufferPixelFormatCopyWith<
+              _i2.RemoteFrameBufferPixelFormat>);
 }
 
 /// A class which mocks [RawSocket].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
+class MockRawSocket extends _i1.Mock implements _i4.RawSocket {
   MockRawSocket() {
     _i1.throwOnMissingStub(this);
   }
@@ -108,60 +251,60 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
         returnValue: 0,
       ) as int);
   @override
-  _i2.InternetAddress get address => (super.noSuchMethod(
+  _i4.InternetAddress get address => (super.noSuchMethod(
         Invocation.getter(#address),
-        returnValue: _FakeInternetAddress_0(
+        returnValue: _FakeInternetAddress_3(
           this,
           Invocation.getter(#address),
         ),
-      ) as _i2.InternetAddress);
+      ) as _i4.InternetAddress);
   @override
-  _i2.InternetAddress get remoteAddress => (super.noSuchMethod(
+  _i4.InternetAddress get remoteAddress => (super.noSuchMethod(
         Invocation.getter(#remoteAddress),
-        returnValue: _FakeInternetAddress_0(
+        returnValue: _FakeInternetAddress_3(
           this,
           Invocation.getter(#remoteAddress),
         ),
-      ) as _i2.InternetAddress);
+      ) as _i4.InternetAddress);
   @override
   bool get isBroadcast => (super.noSuchMethod(
         Invocation.getter(#isBroadcast),
         returnValue: false,
       ) as bool);
   @override
-  _i3.Future<int> get length => (super.noSuchMethod(
+  _i5.Future<int> get length => (super.noSuchMethod(
         Invocation.getter(#length),
-        returnValue: _i3.Future<int>.value(0),
-      ) as _i3.Future<int>);
+        returnValue: _i5.Future<int>.value(0),
+      ) as _i5.Future<int>);
   @override
-  _i3.Future<bool> get isEmpty => (super.noSuchMethod(
+  _i5.Future<bool> get isEmpty => (super.noSuchMethod(
         Invocation.getter(#isEmpty),
-        returnValue: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
   @override
-  _i3.Future<_i2.RawSocketEvent> get first => (super.noSuchMethod(
+  _i5.Future<_i4.RawSocketEvent> get first => (super.noSuchMethod(
         Invocation.getter(#first),
-        returnValue: _i3.Future<_i2.RawSocketEvent>.value(_FakeRawSocketEvent_1(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
           this,
           Invocation.getter(#first),
         )),
-      ) as _i3.Future<_i2.RawSocketEvent>);
+      ) as _i5.Future<_i4.RawSocketEvent>);
   @override
-  _i3.Future<_i2.RawSocketEvent> get last => (super.noSuchMethod(
+  _i5.Future<_i4.RawSocketEvent> get last => (super.noSuchMethod(
         Invocation.getter(#last),
-        returnValue: _i3.Future<_i2.RawSocketEvent>.value(_FakeRawSocketEvent_1(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
           this,
           Invocation.getter(#last),
         )),
-      ) as _i3.Future<_i2.RawSocketEvent>);
+      ) as _i5.Future<_i4.RawSocketEvent>);
   @override
-  _i3.Future<_i2.RawSocketEvent> get single => (super.noSuchMethod(
+  _i5.Future<_i4.RawSocketEvent> get single => (super.noSuchMethod(
         Invocation.getter(#single),
-        returnValue: _i3.Future<_i2.RawSocketEvent>.value(_FakeRawSocketEvent_1(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
           this,
           Invocation.getter(#single),
         )),
-      ) as _i3.Future<_i2.RawSocketEvent>);
+      ) as _i5.Future<_i4.RawSocketEvent>);
   @override
   int available() => (super.noSuchMethod(
         Invocation.method(
@@ -189,7 +332,7 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
       ) as int);
   @override
   int sendMessage(
-    List<_i2.SocketControlMessage>? controlMessages,
+    List<_i4.SocketControlMessage>? controlMessages,
     List<int>? data, [
     int? offset = 0,
     int? count,
@@ -207,21 +350,21 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
         returnValue: 0,
       ) as int);
   @override
-  _i3.Future<_i2.RawSocket> close() => (super.noSuchMethod(
+  _i5.Future<_i4.RawSocket> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i3.Future<_i2.RawSocket>.value(_FakeRawSocket_2(
+        returnValue: _i5.Future<_i4.RawSocket>.value(_FakeRawSocket_5(
           this,
           Invocation.method(
             #close,
             [],
           ),
         )),
-      ) as _i3.Future<_i2.RawSocket>);
+      ) as _i5.Future<_i4.RawSocket>);
   @override
-  void shutdown(_i2.SocketDirection? direction) => super.noSuchMethod(
+  void shutdown(_i4.SocketDirection? direction) => super.noSuchMethod(
         Invocation.method(
           #shutdown,
           [direction],
@@ -230,7 +373,7 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
       );
   @override
   bool setOption(
-    _i2.SocketOption? option,
+    _i4.SocketOption? option,
     bool? enabled,
   ) =>
       (super.noSuchMethod(
@@ -244,16 +387,16 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
         returnValue: false,
       ) as bool);
   @override
-  _i4.Uint8List getRawOption(_i2.RawSocketOption? option) =>
+  _i6.Uint8List getRawOption(_i4.RawSocketOption? option) =>
       (super.noSuchMethod(
         Invocation.method(
           #getRawOption,
           [option],
         ),
-        returnValue: _i4.Uint8List(0),
-      ) as _i4.Uint8List);
+        returnValue: _i6.Uint8List(0),
+      ) as _i6.Uint8List);
   @override
-  void setRawOption(_i2.RawSocketOption? option) => super.noSuchMethod(
+  void setRawOption(_i4.RawSocketOption? option) => super.noSuchMethod(
         Invocation.method(
           #setRawOption,
           [option],
@@ -261,9 +404,9 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
         returnValueForMissingStub: null,
       );
   @override
-  _i3.Stream<_i2.RawSocketEvent> asBroadcastStream({
-    void Function(_i3.StreamSubscription<_i2.RawSocketEvent>)? onListen,
-    void Function(_i3.StreamSubscription<_i2.RawSocketEvent>)? onCancel,
+  _i5.Stream<_i4.RawSocketEvent> asBroadcastStream({
+    void Function(_i5.StreamSubscription<_i4.RawSocketEvent>)? onListen,
+    void Function(_i5.StreamSubscription<_i4.RawSocketEvent>)? onCancel,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -274,11 +417,11 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
             #onCancel: onCancel,
           },
         ),
-        returnValue: _i3.Stream<_i2.RawSocketEvent>.empty(),
-      ) as _i3.Stream<_i2.RawSocketEvent>);
+        returnValue: _i5.Stream<_i4.RawSocketEvent>.empty(),
+      ) as _i5.Stream<_i4.RawSocketEvent>);
   @override
-  _i3.StreamSubscription<_i2.RawSocketEvent> listen(
-    void Function(_i2.RawSocketEvent)? onData, {
+  _i5.StreamSubscription<_i4.RawSocketEvent> listen(
+    void Function(_i4.RawSocketEvent)? onData, {
     Function? onError,
     void Function()? onDone,
     bool? cancelOnError,
@@ -293,7 +436,7 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
             #cancelOnError: cancelOnError,
           },
         ),
-        returnValue: _FakeStreamSubscription_3<_i2.RawSocketEvent>(
+        returnValue: _FakeStreamSubscription_6<_i4.RawSocketEvent>(
           this,
           Invocation.method(
             #listen,
@@ -305,48 +448,48 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
             },
           ),
         ),
-      ) as _i3.StreamSubscription<_i2.RawSocketEvent>);
+      ) as _i5.StreamSubscription<_i4.RawSocketEvent>);
   @override
-  _i3.Stream<_i2.RawSocketEvent> where(
-          bool Function(_i2.RawSocketEvent)? test) =>
+  _i5.Stream<_i4.RawSocketEvent> where(
+          bool Function(_i4.RawSocketEvent)? test) =>
       (super.noSuchMethod(
         Invocation.method(
           #where,
           [test],
         ),
-        returnValue: _i3.Stream<_i2.RawSocketEvent>.empty(),
-      ) as _i3.Stream<_i2.RawSocketEvent>);
+        returnValue: _i5.Stream<_i4.RawSocketEvent>.empty(),
+      ) as _i5.Stream<_i4.RawSocketEvent>);
   @override
-  _i3.Stream<S> map<S>(S Function(_i2.RawSocketEvent)? convert) =>
+  _i5.Stream<S> map<S>(S Function(_i4.RawSocketEvent)? convert) =>
       (super.noSuchMethod(
         Invocation.method(
           #map,
           [convert],
         ),
-        returnValue: _i3.Stream<S>.empty(),
-      ) as _i3.Stream<S>);
+        returnValue: _i5.Stream<S>.empty(),
+      ) as _i5.Stream<S>);
   @override
-  _i3.Stream<E> asyncMap<E>(
-          _i3.FutureOr<E> Function(_i2.RawSocketEvent)? convert) =>
+  _i5.Stream<E> asyncMap<E>(
+          _i5.FutureOr<E> Function(_i4.RawSocketEvent)? convert) =>
       (super.noSuchMethod(
         Invocation.method(
           #asyncMap,
           [convert],
         ),
-        returnValue: _i3.Stream<E>.empty(),
-      ) as _i3.Stream<E>);
+        returnValue: _i5.Stream<E>.empty(),
+      ) as _i5.Stream<E>);
   @override
-  _i3.Stream<E> asyncExpand<E>(
-          _i3.Stream<E>? Function(_i2.RawSocketEvent)? convert) =>
+  _i5.Stream<E> asyncExpand<E>(
+          _i5.Stream<E>? Function(_i4.RawSocketEvent)? convert) =>
       (super.noSuchMethod(
         Invocation.method(
           #asyncExpand,
           [convert],
         ),
-        returnValue: _i3.Stream<E>.empty(),
-      ) as _i3.Stream<E>);
+        returnValue: _i5.Stream<E>.empty(),
+      ) as _i5.Stream<E>);
   @override
-  _i3.Stream<_i2.RawSocketEvent> handleError(
+  _i5.Stream<_i4.RawSocketEvent> handleError(
     Function? onError, {
     bool Function(dynamic)? test,
   }) =>
@@ -356,42 +499,42 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
           [onError],
           {#test: test},
         ),
-        returnValue: _i3.Stream<_i2.RawSocketEvent>.empty(),
-      ) as _i3.Stream<_i2.RawSocketEvent>);
+        returnValue: _i5.Stream<_i4.RawSocketEvent>.empty(),
+      ) as _i5.Stream<_i4.RawSocketEvent>);
   @override
-  _i3.Stream<S> expand<S>(Iterable<S> Function(_i2.RawSocketEvent)? convert) =>
+  _i5.Stream<S> expand<S>(Iterable<S> Function(_i4.RawSocketEvent)? convert) =>
       (super.noSuchMethod(
         Invocation.method(
           #expand,
           [convert],
         ),
-        returnValue: _i3.Stream<S>.empty(),
-      ) as _i3.Stream<S>);
+        returnValue: _i5.Stream<S>.empty(),
+      ) as _i5.Stream<S>);
   @override
-  _i3.Future<dynamic> pipe(
-          _i3.StreamConsumer<_i2.RawSocketEvent>? streamConsumer) =>
+  _i5.Future<dynamic> pipe(
+          _i5.StreamConsumer<_i4.RawSocketEvent>? streamConsumer) =>
       (super.noSuchMethod(
         Invocation.method(
           #pipe,
           [streamConsumer],
         ),
-        returnValue: _i3.Future<dynamic>.value(),
-      ) as _i3.Future<dynamic>);
+        returnValue: _i5.Future<dynamic>.value(),
+      ) as _i5.Future<dynamic>);
   @override
-  _i3.Stream<S> transform<S>(
-          _i3.StreamTransformer<_i2.RawSocketEvent, S>? streamTransformer) =>
+  _i5.Stream<S> transform<S>(
+          _i5.StreamTransformer<_i4.RawSocketEvent, S>? streamTransformer) =>
       (super.noSuchMethod(
         Invocation.method(
           #transform,
           [streamTransformer],
         ),
-        returnValue: _i3.Stream<S>.empty(),
-      ) as _i3.Stream<S>);
+        returnValue: _i5.Stream<S>.empty(),
+      ) as _i5.Stream<S>);
   @override
-  _i3.Future<_i2.RawSocketEvent> reduce(
-          _i2.RawSocketEvent Function(
-    _i2.RawSocketEvent,
-    _i2.RawSocketEvent,
+  _i5.Future<_i4.RawSocketEvent> reduce(
+          _i4.RawSocketEvent Function(
+    _i4.RawSocketEvent,
+    _i4.RawSocketEvent,
   )?
               combine) =>
       (super.noSuchMethod(
@@ -399,20 +542,20 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
           #reduce,
           [combine],
         ),
-        returnValue: _i3.Future<_i2.RawSocketEvent>.value(_FakeRawSocketEvent_1(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
           this,
           Invocation.method(
             #reduce,
             [combine],
           ),
         )),
-      ) as _i3.Future<_i2.RawSocketEvent>);
+      ) as _i5.Future<_i4.RawSocketEvent>);
   @override
-  _i3.Future<S> fold<S>(
+  _i5.Future<S> fold<S>(
     S? initialValue,
     S Function(
       S,
-      _i2.RawSocketEvent,
+      _i4.RawSocketEvent,
     )?
         combine,
   ) =>
@@ -424,126 +567,126 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
             combine,
           ],
         ),
-        returnValue: _i3.Future<S>.value(null),
-      ) as _i3.Future<S>);
+        returnValue: _i5.Future<S>.value(null),
+      ) as _i5.Future<S>);
   @override
-  _i3.Future<String> join([String? separator = r'']) => (super.noSuchMethod(
+  _i5.Future<String> join([String? separator = r'']) => (super.noSuchMethod(
         Invocation.method(
           #join,
           [separator],
         ),
-        returnValue: _i3.Future<String>.value(''),
-      ) as _i3.Future<String>);
+        returnValue: _i5.Future<String>.value(''),
+      ) as _i5.Future<String>);
   @override
-  _i3.Future<bool> contains(Object? needle) => (super.noSuchMethod(
+  _i5.Future<bool> contains(Object? needle) => (super.noSuchMethod(
         Invocation.method(
           #contains,
           [needle],
         ),
-        returnValue: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
   @override
-  _i3.Future<dynamic> forEach(void Function(_i2.RawSocketEvent)? action) =>
+  _i5.Future<dynamic> forEach(void Function(_i4.RawSocketEvent)? action) =>
       (super.noSuchMethod(
         Invocation.method(
           #forEach,
           [action],
         ),
-        returnValue: _i3.Future<dynamic>.value(),
-      ) as _i3.Future<dynamic>);
+        returnValue: _i5.Future<dynamic>.value(),
+      ) as _i5.Future<dynamic>);
   @override
-  _i3.Future<bool> every(bool Function(_i2.RawSocketEvent)? test) =>
+  _i5.Future<bool> every(bool Function(_i4.RawSocketEvent)? test) =>
       (super.noSuchMethod(
         Invocation.method(
           #every,
           [test],
         ),
-        returnValue: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
   @override
-  _i3.Future<bool> any(bool Function(_i2.RawSocketEvent)? test) =>
+  _i5.Future<bool> any(bool Function(_i4.RawSocketEvent)? test) =>
       (super.noSuchMethod(
         Invocation.method(
           #any,
           [test],
         ),
-        returnValue: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
   @override
-  _i3.Stream<R> cast<R>() => (super.noSuchMethod(
+  _i5.Stream<R> cast<R>() => (super.noSuchMethod(
         Invocation.method(
           #cast,
           [],
         ),
-        returnValue: _i3.Stream<R>.empty(),
-      ) as _i3.Stream<R>);
+        returnValue: _i5.Stream<R>.empty(),
+      ) as _i5.Stream<R>);
   @override
-  _i3.Future<List<_i2.RawSocketEvent>> toList() => (super.noSuchMethod(
+  _i5.Future<List<_i4.RawSocketEvent>> toList() => (super.noSuchMethod(
         Invocation.method(
           #toList,
           [],
         ),
         returnValue:
-            _i3.Future<List<_i2.RawSocketEvent>>.value(<_i2.RawSocketEvent>[]),
-      ) as _i3.Future<List<_i2.RawSocketEvent>>);
+            _i5.Future<List<_i4.RawSocketEvent>>.value(<_i4.RawSocketEvent>[]),
+      ) as _i5.Future<List<_i4.RawSocketEvent>>);
   @override
-  _i3.Future<Set<_i2.RawSocketEvent>> toSet() => (super.noSuchMethod(
+  _i5.Future<Set<_i4.RawSocketEvent>> toSet() => (super.noSuchMethod(
         Invocation.method(
           #toSet,
           [],
         ),
         returnValue:
-            _i3.Future<Set<_i2.RawSocketEvent>>.value(<_i2.RawSocketEvent>{}),
-      ) as _i3.Future<Set<_i2.RawSocketEvent>>);
+            _i5.Future<Set<_i4.RawSocketEvent>>.value(<_i4.RawSocketEvent>{}),
+      ) as _i5.Future<Set<_i4.RawSocketEvent>>);
   @override
-  _i3.Future<E> drain<E>([E? futureValue]) => (super.noSuchMethod(
+  _i5.Future<E> drain<E>([E? futureValue]) => (super.noSuchMethod(
         Invocation.method(
           #drain,
           [futureValue],
         ),
-        returnValue: _i3.Future<E>.value(null),
-      ) as _i3.Future<E>);
+        returnValue: _i5.Future<E>.value(null),
+      ) as _i5.Future<E>);
   @override
-  _i3.Stream<_i2.RawSocketEvent> take(int? count) => (super.noSuchMethod(
+  _i5.Stream<_i4.RawSocketEvent> take(int? count) => (super.noSuchMethod(
         Invocation.method(
           #take,
           [count],
         ),
-        returnValue: _i3.Stream<_i2.RawSocketEvent>.empty(),
-      ) as _i3.Stream<_i2.RawSocketEvent>);
+        returnValue: _i5.Stream<_i4.RawSocketEvent>.empty(),
+      ) as _i5.Stream<_i4.RawSocketEvent>);
   @override
-  _i3.Stream<_i2.RawSocketEvent> takeWhile(
-          bool Function(_i2.RawSocketEvent)? test) =>
+  _i5.Stream<_i4.RawSocketEvent> takeWhile(
+          bool Function(_i4.RawSocketEvent)? test) =>
       (super.noSuchMethod(
         Invocation.method(
           #takeWhile,
           [test],
         ),
-        returnValue: _i3.Stream<_i2.RawSocketEvent>.empty(),
-      ) as _i3.Stream<_i2.RawSocketEvent>);
+        returnValue: _i5.Stream<_i4.RawSocketEvent>.empty(),
+      ) as _i5.Stream<_i4.RawSocketEvent>);
   @override
-  _i3.Stream<_i2.RawSocketEvent> skip(int? count) => (super.noSuchMethod(
+  _i5.Stream<_i4.RawSocketEvent> skip(int? count) => (super.noSuchMethod(
         Invocation.method(
           #skip,
           [count],
         ),
-        returnValue: _i3.Stream<_i2.RawSocketEvent>.empty(),
-      ) as _i3.Stream<_i2.RawSocketEvent>);
+        returnValue: _i5.Stream<_i4.RawSocketEvent>.empty(),
+      ) as _i5.Stream<_i4.RawSocketEvent>);
   @override
-  _i3.Stream<_i2.RawSocketEvent> skipWhile(
-          bool Function(_i2.RawSocketEvent)? test) =>
+  _i5.Stream<_i4.RawSocketEvent> skipWhile(
+          bool Function(_i4.RawSocketEvent)? test) =>
       (super.noSuchMethod(
         Invocation.method(
           #skipWhile,
           [test],
         ),
-        returnValue: _i3.Stream<_i2.RawSocketEvent>.empty(),
-      ) as _i3.Stream<_i2.RawSocketEvent>);
+        returnValue: _i5.Stream<_i4.RawSocketEvent>.empty(),
+      ) as _i5.Stream<_i4.RawSocketEvent>);
   @override
-  _i3.Stream<_i2.RawSocketEvent> distinct(
+  _i5.Stream<_i4.RawSocketEvent> distinct(
           [bool Function(
-            _i2.RawSocketEvent,
-            _i2.RawSocketEvent,
+            _i4.RawSocketEvent,
+            _i4.RawSocketEvent,
           )?
               equals]) =>
       (super.noSuchMethod(
@@ -551,12 +694,12 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
           #distinct,
           [equals],
         ),
-        returnValue: _i3.Stream<_i2.RawSocketEvent>.empty(),
-      ) as _i3.Stream<_i2.RawSocketEvent>);
+        returnValue: _i5.Stream<_i4.RawSocketEvent>.empty(),
+      ) as _i5.Stream<_i4.RawSocketEvent>);
   @override
-  _i3.Future<_i2.RawSocketEvent> firstWhere(
-    bool Function(_i2.RawSocketEvent)? test, {
-    _i2.RawSocketEvent Function()? orElse,
+  _i5.Future<_i4.RawSocketEvent> firstWhere(
+    bool Function(_i4.RawSocketEvent)? test, {
+    _i4.RawSocketEvent Function()? orElse,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -564,7 +707,7 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
           [test],
           {#orElse: orElse},
         ),
-        returnValue: _i3.Future<_i2.RawSocketEvent>.value(_FakeRawSocketEvent_1(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
           this,
           Invocation.method(
             #firstWhere,
@@ -572,11 +715,11 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
             {#orElse: orElse},
           ),
         )),
-      ) as _i3.Future<_i2.RawSocketEvent>);
+      ) as _i5.Future<_i4.RawSocketEvent>);
   @override
-  _i3.Future<_i2.RawSocketEvent> lastWhere(
-    bool Function(_i2.RawSocketEvent)? test, {
-    _i2.RawSocketEvent Function()? orElse,
+  _i5.Future<_i4.RawSocketEvent> lastWhere(
+    bool Function(_i4.RawSocketEvent)? test, {
+    _i4.RawSocketEvent Function()? orElse,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -584,7 +727,7 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
           [test],
           {#orElse: orElse},
         ),
-        returnValue: _i3.Future<_i2.RawSocketEvent>.value(_FakeRawSocketEvent_1(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
           this,
           Invocation.method(
             #lastWhere,
@@ -592,11 +735,11 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
             {#orElse: orElse},
           ),
         )),
-      ) as _i3.Future<_i2.RawSocketEvent>);
+      ) as _i5.Future<_i4.RawSocketEvent>);
   @override
-  _i3.Future<_i2.RawSocketEvent> singleWhere(
-    bool Function(_i2.RawSocketEvent)? test, {
-    _i2.RawSocketEvent Function()? orElse,
+  _i5.Future<_i4.RawSocketEvent> singleWhere(
+    bool Function(_i4.RawSocketEvent)? test, {
+    _i4.RawSocketEvent Function()? orElse,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -604,7 +747,7 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
           [test],
           {#orElse: orElse},
         ),
-        returnValue: _i3.Future<_i2.RawSocketEvent>.value(_FakeRawSocketEvent_1(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
           this,
           Invocation.method(
             #singleWhere,
@@ -612,25 +755,25 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
             {#orElse: orElse},
           ),
         )),
-      ) as _i3.Future<_i2.RawSocketEvent>);
+      ) as _i5.Future<_i4.RawSocketEvent>);
   @override
-  _i3.Future<_i2.RawSocketEvent> elementAt(int? index) => (super.noSuchMethod(
+  _i5.Future<_i4.RawSocketEvent> elementAt(int? index) => (super.noSuchMethod(
         Invocation.method(
           #elementAt,
           [index],
         ),
-        returnValue: _i3.Future<_i2.RawSocketEvent>.value(_FakeRawSocketEvent_1(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
           this,
           Invocation.method(
             #elementAt,
             [index],
           ),
         )),
-      ) as _i3.Future<_i2.RawSocketEvent>);
+      ) as _i5.Future<_i4.RawSocketEvent>);
   @override
-  _i3.Stream<_i2.RawSocketEvent> timeout(
+  _i5.Stream<_i4.RawSocketEvent> timeout(
     Duration? timeLimit, {
-    void Function(_i3.EventSink<_i2.RawSocketEvent>)? onTimeout,
+    void Function(_i5.EventSink<_i4.RawSocketEvent>)? onTimeout,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -638,6 +781,6 @@ class MockRawSocket extends _i1.Mock implements _i2.RawSocket {
           [timeLimit],
           {#onTimeout: onTimeout},
         ),
-        returnValue: _i3.Stream<_i2.RawSocketEvent>.empty(),
-      ) as _i3.Stream<_i2.RawSocketEvent>);
+        returnValue: _i5.Stream<_i4.RawSocketEvent>.empty(),
+      ) as _i5.Stream<_i4.RawSocketEvent>);
 }
