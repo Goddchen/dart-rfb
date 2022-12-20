@@ -16,8 +16,8 @@ And here we are, after a weekend, with the first, minimal, protocol implementati
 
 ### Protocol Versions
 
-- ⬜ 3.3
-- ⬜ 3.7
+- ✅ 3.3
+- ✅ 3.7
 - ✅ 3.8
 
 ### Encodings
@@ -64,7 +64,7 @@ And here we are, after a weekend, with the first, minimal, protocol implementati
 
 As simple as `dart pub add dart_rfb`.
 
-Or manually add `dart_rfb: ^0.1.0` to your `pubspec.yaml`.
+Or manually add `dart_rfb: ^0.2.0` to your `pubspec.yaml`.
 
 ## Usage
 

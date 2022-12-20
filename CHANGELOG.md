@@ -9,3 +9,7 @@
 ## 0.1.0
 
 - Implement VncAuthentication security type (aka, using a password)
+
+## 0.2.0
+
+- Add support for protocol versions 3.3 and 3.7
