@@ -70,13 +70,16 @@ Or manually add `dart_rfb: ^0.2.0` to your `pubspec.yaml`.
 
 ```dart
 final RemoteFrameBufferClient client = RemoteFrameBufferClient()
-await client.connect();
-await client.startReadLoop();
+await client.connect(
+  hostname: '127.0.0.1',
+  password: 'password',
+);
 client.updateStream.listen(
   (final RemoteFrameBufferClientUpdate update) {
     // Update your framebuffer
   },
 );
+await client.startReadLoop();
 client.requestUpdate();
 ```
 
