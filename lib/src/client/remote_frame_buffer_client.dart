@@ -39,6 +39,10 @@ class RemoteFrameBufferClient {
 
   Option<String> _password = none();
 
+  Option<RemoteFrameBufferProtocolVersion> _selectedProtocolVersion = none();
+
+  Option<RemoteFrameBufferSecurityType> _selectedSecurityType = none();
+
   /// A client that implements communication according to
   /// The Remote Framebuffer Protocol, aka RFC 6143, aka VNC).
   RemoteFrameBufferClient() {
@@ -283,18 +287,6 @@ class RemoteFrameBufferClient {
         },
       );
 
-  TaskEither<Object, void> _performHandshake() => _socket.match(
-        () => TaskEither<Object, void>.left('Error using socket'),
-        (final RawSocket socket) => _readProtocolVersionMessage(socket: socket)
-            .andThen(() => _sendProtocolVersionMessage(socket: socket))
-            .andThen(() => _readSecurityHandshake(socket: socket))
-            .andThen(() => _sendSecurityType(socket: socket))
-            .andThen(() => _handleSecurityType(socket: socket))
-            .andThen(() => _readSecurityResultMessage(socket: socket))
-            .andThen(() => _sendClientInitMessage(socket: socket))
-            .andThen(() => _readServerInitMessage(socket: socket)),
-      );
-
   TaskEither<Object, void> _handleSecurityType({
     required final RawSocket socket,
   }) =>
@@ -346,6 +338,18 @@ class RemoteFrameBufferClient {
         ),
       );
 
+  TaskEither<Object, void> _performHandshake() => _socket.match(
+        () => TaskEither<Object, void>.left('Error using socket'),
+        (final RawSocket socket) => _readProtocolVersionMessage(socket: socket)
+            .andThen(() => _sendProtocolVersionMessage(socket: socket))
+            .andThen(() => _readSecurityHandshake(socket: socket))
+            .andThen(() => _sendSecurityType(socket: socket))
+            .andThen(() => _handleSecurityType(socket: socket))
+            .andThen(() => _readSecurityResultMessage(socket: socket))
+            .andThen(() => _sendClientInitMessage(socket: socket))
+            .andThen(() => _readServerInitMessage(socket: socket)),
+      );
+
   TaskEither<Object, void> _readProtocolVersionMessage({
     required final RawSocket socket,
   }) =>
@@ -371,11 +375,14 @@ class RemoteFrameBufferClient {
             ),
           );
           _logger.log(Level.INFO, '< $protocolVersionHandshakeMessage');
-          if (protocolVersionHandshakeMessage.version !=
-              const RemoteFrameBufferProtocolVersion.v3_8()) {
+          if (protocolVersionHandshakeMessage.version
+              is RemoteFrameBufferProtocolVersionUnknown) {
             throw Exception(
-              'Unsupported server protocol version (${protocolVersionHandshakeMessage.version})',
+              'Unsupported server protocol version: ${protocolVersionHandshakeMessage.version}',
             );
+          } else {
+            _selectedProtocolVersion =
+                some(protocolVersionHandshakeMessage.version);
           }
         },
         (final Object error, final _) => error,
@@ -383,121 +390,218 @@ class RemoteFrameBufferClient {
 
   TaskEither<Object, void> _readSecurityHandshake({
     required final RawSocket socket,
-  }) =>
-      TaskEither<Object, void>.tryCatch(
-        () async {
-          while (socket.available() < 1) {
-            await Future<void>.delayed(Constants.socketReadWaitDuration);
-          }
-          final int numberOfSecurityTypes = optionOf(socket.read(1)).getOrElse(
-            () => throw Exception('Error reading number of security types'),
-          )[0];
-          _logger.log(
-            Level.INFO,
-            '< numberOfSecurityTypes=$numberOfSecurityTypes',
-          );
-          if (numberOfSecurityTypes == 0) {
-            // Error, next 4 bytes is reason-length, then reason-string
-            while (socket.available() < 4) {
-              await Future<void>.delayed(Constants.socketReadWaitDuration);
-            }
-            final int reasonLength = ByteData.sublistView(
-              optionOf(socket.read(4)).getOrElse(
-                () => throw Exception('Error getting reason length'),
-              ),
-            ).getUint32(0);
-            while (socket.available() < reasonLength) {
-              await Future<void>.delayed(Constants.socketReadWaitDuration);
-            }
-            final String reason = optionOf(socket.read(reasonLength))
-                .map((final Uint8List bytes) => ascii.decode(bytes))
-                .getOrElse(() => throw Exception('Error reading reason'));
-            throw Exception(
-              'Error reading security handshake message: $reason',
-            );
-          } else {
-            while (socket.available() < numberOfSecurityTypes) {
-              await Future<void>.delayed(Constants.socketReadWaitDuration);
-            }
-            final RemoteFrameBufferSecurityHandshakeMessage
-                securityResultHandshakeMessage =
-                RemoteFrameBufferSecurityHandshakeMessage.fromBytes(
-              bytes: ByteData.sublistView(
-                Uint8List.fromList(
-                  <int>[
-                    numberOfSecurityTypes,
-                    ...optionOf(socket.read(numberOfSecurityTypes)).getOrElse(
-                      () => throw Exception('Error reading security types'),
-                    )
-                  ],
-                ),
-              ),
-            );
-            _logger.log(Level.INFO, '< $securityResultHandshakeMessage');
-            if (_password.isNone() &&
-                securityResultHandshakeMessage.securityTypes.notElem(
-                  const RemoteFrameBufferSecurityType.none(),
-                )) {
-              throw Exception(
-                'Server does not support security type "none", but not password was provided',
-              );
-            }
-            if (_password.isSome() &&
-                securityResultHandshakeMessage.securityTypes.notElem(
-                  const RemoteFrameBufferSecurityType.vncAuthentication(),
-                )) {
-              throw Exception(
-                'Server does not support security type "vncAuthentication"',
-              );
-            }
-          }
-        },
-        (final Object error, final _) => error,
-      );
-
-  TaskEither<Object, void> _readSecurityResultMessage({
-    required final RawSocket socket,
-  }) =>
-      TaskEither<Object, void>.tryCatch(
-        () async {
+  }) {
+    final TaskEither<Object, void> taskEitherWithList =
+        TaskEither<Object, void>.tryCatch(
+      () async {
+        while (socket.available() < 1) {
+          await Future<void>.delayed(Constants.socketReadWaitDuration);
+        }
+        final int numberOfSecurityTypes = optionOf(socket.read(1)).getOrElse(
+          () => throw Exception('Error reading number of security types'),
+        )[0];
+        _logger.log(
+          Level.INFO,
+          '< numberOfSecurityTypes=$numberOfSecurityTypes',
+        );
+        if (numberOfSecurityTypes == 0) {
+          // Error, next 4 bytes is reason-length, then reason-string
           while (socket.available() < 4) {
-            await Future<void>.delayed(Constants.socketReadWaitDuration);
+            await Future<void>.delayed(
+              Constants.socketReadWaitDuration,
+            );
           }
-          final RemoteFrameBufferSecurityResultHandshakeMessage
+          final int reasonLength = ByteData.sublistView(
+            optionOf(socket.read(4)).getOrElse(
+              () => throw Exception('Error getting reason length'),
+            ),
+          ).getUint32(0);
+          while (socket.available() < reasonLength) {
+            await Future<void>.delayed(
+              Constants.socketReadWaitDuration,
+            );
+          }
+          final String reason = optionOf(socket.read(reasonLength))
+              .map((final Uint8List bytes) => ascii.decode(bytes))
+              .getOrElse(() => throw Exception('Error reading reason'));
+          throw Exception(
+            'Error reading security handshake message: $reason',
+          );
+        } else {
+          while (socket.available() < numberOfSecurityTypes) {
+            await Future<void>.delayed(
+              Constants.socketReadWaitDuration,
+            );
+          }
+          final RemoteFrameBufferSecurityHandshakeMessage
               securityResultHandshakeMessage =
-              RemoteFrameBufferSecurityResultHandshakeMessage.fromBytes(
+              RemoteFrameBufferSecurityHandshakeMessage.fromBytes(
             bytes: ByteData.sublistView(
-              optionOf(socket.read(4)).getOrElse(
-                () => throw Exception(
-                  'Error reading security result message',
-                ),
+              Uint8List.fromList(
+                <int>[
+                  numberOfSecurityTypes,
+                  ...optionOf(socket.read(numberOfSecurityTypes)).getOrElse(
+                    () => throw Exception('Error reading security types'),
+                  )
+                ],
               ),
             ),
           );
           _logger.log(Level.INFO, '< $securityResultHandshakeMessage');
-          if (!securityResultHandshakeMessage.success) {
-            while (socket.available() < 4) {
-              await Future<void>.delayed(Constants.socketReadWaitDuration);
-            }
-            final int reasonLength = optionOf(socket.read(4))
-                .map(
-                  (final Uint8List bytes) =>
-                      ByteData.sublistView(bytes).getUint32(0),
-                )
-                .getOrElse(
-                  () => throw Exception('Error reading reason length'),
-                );
-            while (socket.available() < reasonLength) {
-              await Future<void>.delayed(Constants.socketReadWaitDuration);
-            }
-            final String reason = optionOf(socket.read(reasonLength))
-                .map((final Uint8List bytes) => ascii.decode(bytes))
-                .getOrElse(() => throw Exception('Error reading reason'));
-            throw Exception('Error reading security result message: $reason');
+          if (_password.isNone() &&
+              securityResultHandshakeMessage.securityTypes.notElem(
+                const RemoteFrameBufferSecurityType.none(),
+              )) {
+            throw Exception(
+              'Server does not support security type "none", but not password was provided',
+            );
           }
-        },
-        (final Object error, final _) => error,
-      );
+          if (_password.isSome() &&
+              securityResultHandshakeMessage.securityTypes.notElem(
+                const RemoteFrameBufferSecurityType.vncAuthentication(),
+              )) {
+            throw Exception(
+              'Server does not support security type "vncAuthentication"',
+            );
+          }
+        }
+      },
+      (final Object error, final _) => error,
+    );
+    final TaskEither<Object, void> taskEitherWithoutList =
+        TaskEither<Object, void>.tryCatch(
+      () async {
+        while (socket.available() < 4) {
+          await Future<void>.delayed(Constants.socketReadWaitDuration);
+        }
+        final RemoteFrameBufferSecurityType securityType =
+            RemoteFrameBufferSecurityType.fromBytes(
+          bytes: ByteData.sublistView(
+            optionOf(socket.read(4)).getOrElse(
+              () => throw Exception('Error reading security type'),
+            ),
+          ),
+        );
+        _logger.info('< $securityType');
+
+        if (_password.isNone() &&
+            securityType != const RemoteFrameBufferSecurityType.none()) {
+          throw Exception(
+            'Server does not support security type "none", but not password was provided',
+          );
+        }
+        if (_password.isSome() &&
+            securityType !=
+                const RemoteFrameBufferSecurityType.vncAuthentication()) {
+          throw Exception(
+            'Server does not support security type "vncAuthentication"',
+          );
+        }
+        _selectedSecurityType = some(securityType);
+      },
+      (final Object error, final _) => error,
+    );
+    return _selectedProtocolVersion
+        .getOrElse(
+          () => throw Exception('Protocol version has not been chosen yet'),
+        )
+        .map(
+          unknown: (final _) => throw Exception('Unknown protocol version'),
+          v3_3: (final _) => taskEitherWithoutList,
+          v3_7: (final _) => taskEitherWithList,
+          v3_8: (final _) => taskEitherWithList,
+        );
+  }
+
+  TaskEither<Object, void> _readSecurityResultMessage({
+    required final RawSocket socket,
+  }) {
+    final TaskEither<Object, void> taskEitherWithErrorMessage =
+        TaskEither<Object, void>.tryCatch(
+      () async {
+        while (socket.available() < 4) {
+          await Future<void>.delayed(Constants.socketReadWaitDuration);
+        }
+        final RemoteFrameBufferSecurityResultHandshakeMessage
+            securityResultHandshakeMessage =
+            RemoteFrameBufferSecurityResultHandshakeMessage.fromBytes(
+          bytes: ByteData.sublistView(
+            optionOf(socket.read(4)).getOrElse(
+              () => throw Exception(
+                'Error reading security result message',
+              ),
+            ),
+          ),
+        );
+        _logger.log(Level.INFO, '< $securityResultHandshakeMessage');
+        if (!securityResultHandshakeMessage.success) {
+          while (socket.available() < 4) {
+            await Future<void>.delayed(Constants.socketReadWaitDuration);
+          }
+          final int reasonLength = optionOf(socket.read(4))
+              .map(
+                (final Uint8List bytes) =>
+                    ByteData.sublistView(bytes).getUint32(0),
+              )
+              .getOrElse(
+                () => throw Exception('Error reading reason length'),
+              );
+          while (socket.available() < reasonLength) {
+            await Future<void>.delayed(Constants.socketReadWaitDuration);
+          }
+          final String reason = optionOf(socket.read(reasonLength))
+              .map((final Uint8List bytes) => ascii.decode(bytes))
+              .getOrElse(() => throw Exception('Error reading reason'));
+          throw Exception('Error reading security result message: $reason');
+        }
+      },
+      (final Object error, final _) => error,
+    );
+    final TaskEither<Object, void> taskEitherWithoutErrorMessage =
+        TaskEither<Object, void>.tryCatch(
+      () async {
+        while (socket.available() < 4) {
+          await Future<void>.delayed(Constants.socketReadWaitDuration);
+        }
+        final RemoteFrameBufferSecurityResultHandshakeMessage
+            securityResultHandshakeMessage =
+            RemoteFrameBufferSecurityResultHandshakeMessage.fromBytes(
+          bytes: ByteData.sublistView(
+            optionOf(socket.read(4)).getOrElse(
+              () => throw Exception(
+                'Error reading security result message',
+              ),
+            ),
+          ),
+        );
+        _logger.log(Level.INFO, '< $securityResultHandshakeMessage');
+        if (!securityResultHandshakeMessage.success) {
+          throw Exception('Security handshake failed');
+        }
+      },
+      (final Object error, final _) => error,
+    );
+    return _selectedProtocolVersion
+        .getOrElse(() => throw Exception('Protocol version not chosen yet'))
+        .map(
+          unknown: (final _) => throw Exception('Unknown protocol version'),
+          v3_3: (final _) => _selectedSecurityType
+              .getOrElse(() => throw Exception('Security type not chosen yet'))
+              .map(
+                invalid: (final _) => throw Exception('Invalid security type'),
+                none: (final _) => TaskEither<Object, void>.of(null),
+                vncAuthentication: (final _) => taskEitherWithoutErrorMessage,
+              ),
+          v3_7: (final _) => _selectedSecurityType
+              .getOrElse(() => throw Exception('Security type not chosen yet'))
+              .map(
+                invalid: (final _) => throw Exception('Invalid security type'),
+                none: (final _) => TaskEither<Object, void>.of(null),
+                vncAuthentication: (final _) => taskEitherWithoutErrorMessage,
+              ),
+          v3_8: (final _) => taskEitherWithErrorMessage,
+        );
+  }
 
   TaskEither<Object, void> _readServerInitMessage({
     required final RawSocket socket,
@@ -536,36 +640,41 @@ class RemoteFrameBufferClient {
   }) =>
       TaskEither<Object, void>.tryCatch(
         () async {
-          _logger.log(
-              Level.INFO,
-              '> ${const RemoteFrameBufferProtocolVersionHandshakeMessage(
-                version: RemoteFrameBufferProtocolVersion.v3_8(),
-              )}');
-          socket.write(
-            const RemoteFrameBufferProtocolVersionHandshakeMessage(
-              version: RemoteFrameBufferProtocolVersion.v3_8(),
-            ).toBytes().asUint8List(),
+          final RemoteFrameBufferProtocolVersionHandshakeMessage message =
+              RemoteFrameBufferProtocolVersionHandshakeMessage(
+            version: _selectedProtocolVersion.getOrElse(
+              () => throw Exception('Error selecting protocol version'),
+            ),
           );
+          _logger.log(Level.INFO, '> $message');
+          socket.write(message.toBytes().asUint8List());
         },
         (final Object error, final _) => error,
       );
 
   TaskEither<Object, void> _sendSecurityType({
     required final RawSocket socket,
-  }) =>
-      TaskEither<Object, void>.tryCatch(
-        () async {
-          final RemoteFrameBufferSecurityType securityType = _password.match(
-            () => const RemoteFrameBufferSecurityType.none(),
-            (final _) =>
-                const RemoteFrameBufferSecurityType.vncAuthentication(),
-          );
-          _logger.log(
-            Level.INFO,
-            '> $securityType',
-          );
-          socket.write(securityType.toBytes().asUint8List());
-        },
-        (final Object error, final _) => error,
-      );
+  }) {
+    final TaskEither<Object, void> taskEither =
+        TaskEither<Object, void>.tryCatch(
+      () async {
+        final RemoteFrameBufferSecurityType securityType = _password.match(
+          () => const RemoteFrameBufferSecurityType.none(),
+          (final _) => const RemoteFrameBufferSecurityType.vncAuthentication(),
+        );
+        _logger.info('> $securityType');
+        _selectedSecurityType = some(securityType);
+        socket.write(securityType.toBytes().asUint8List());
+      },
+      (final Object error, final _) => error,
+    );
+    return _selectedProtocolVersion
+        .getOrElse(() => throw Exception('Protocol version not chosen yet'))
+        .map(
+          unknown: (final _) => throw Exception('Unknown protocol version'),
+          v3_3: (final _) => TaskEither<Object, void>.of(null),
+          v3_7: (final _) => taskEither,
+          v3_8: (final _) => taskEither,
+        );
+  }
 }
