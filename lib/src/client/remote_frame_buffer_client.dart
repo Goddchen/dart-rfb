@@ -127,7 +127,7 @@ class RemoteFrameBufferClient {
             x: pointerEvent.x,
             y: pointerEvent.y,
           );
-          _logger.info('> $message');
+          logger.info('> $message');
           socket.write(message.toBytes().asUint8List());
         },
       );
