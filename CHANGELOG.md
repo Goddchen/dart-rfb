@@ -13,3 +13,8 @@
 ## 0.2.0
 
 - Add support for protocol versions 3.3 and 3.7
+
+## 0.3.0
+
+- Add support for pointer events
+- Properly use the `logging` package
