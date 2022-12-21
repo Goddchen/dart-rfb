@@ -18,3 +18,7 @@
 
 - Add support for pointer events
 - Properly use the `logging` package
+
+## 0.3.1
+
+- Fix a minor typo issue
