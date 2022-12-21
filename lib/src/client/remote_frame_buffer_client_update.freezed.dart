@@ -303,6 +303,10 @@ mixin _$RemoteFrameBufferClientUpdateRectangle {
   /// The [ByteData] that holds the pixel data of this rectangle.
   ByteData get byteData => throw _privateConstructorUsedError;
 
+  /// The encoding used to interpret the bytes in [byteData].
+  RemoteFrameBufferEncodingType get encodingType =>
+      throw _privateConstructorUsedError;
+
   /// The height in pixels.
   int get height => throw _privateConstructorUsedError;
 
@@ -329,7 +333,15 @@ abstract class $RemoteFrameBufferClientUpdateRectangleCopyWith<$Res> {
       _$RemoteFrameBufferClientUpdateRectangleCopyWithImpl<$Res,
           RemoteFrameBufferClientUpdateRectangle>;
   @useResult
-  $Res call({ByteData byteData, int height, int width, int x, int y});
+  $Res call(
+      {ByteData byteData,
+      RemoteFrameBufferEncodingType encodingType,
+      int height,
+      int width,
+      int x,
+      int y});
+
+  $RemoteFrameBufferEncodingTypeCopyWith<$Res> get encodingType;
 }
 
 /// @nodoc
@@ -347,6 +359,7 @@ class _$RemoteFrameBufferClientUpdateRectangleCopyWithImpl<$Res,
   @override
   $Res call({
     Object? byteData = null,
+    Object? encodingType = null,
     Object? height = null,
     Object? width = null,
     Object? x = null,
@@ -357,6 +370,10 @@ class _$RemoteFrameBufferClientUpdateRectangleCopyWithImpl<$Res,
           ? _value.byteData
           : byteData // ignore: cast_nullable_to_non_nullable
               as ByteData,
+      encodingType: null == encodingType
+          ? _value.encodingType
+          : encodingType // ignore: cast_nullable_to_non_nullable
+              as RemoteFrameBufferEncodingType,
       height: null == height
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
@@ -375,6 +392,15 @@ class _$RemoteFrameBufferClientUpdateRectangleCopyWithImpl<$Res,
               as int,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RemoteFrameBufferEncodingTypeCopyWith<$Res> get encodingType {
+    return $RemoteFrameBufferEncodingTypeCopyWith<$Res>(_value.encodingType,
+        (value) {
+      return _then(_value.copyWith(encodingType: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -386,7 +412,16 @@ abstract class _$$_RemoteFrameBufferClientUpdateRectangleCopyWith<$Res>
       __$$_RemoteFrameBufferClientUpdateRectangleCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ByteData byteData, int height, int width, int x, int y});
+  $Res call(
+      {ByteData byteData,
+      RemoteFrameBufferEncodingType encodingType,
+      int height,
+      int width,
+      int x,
+      int y});
+
+  @override
+  $RemoteFrameBufferEncodingTypeCopyWith<$Res> get encodingType;
 }
 
 /// @nodoc
@@ -403,6 +438,7 @@ class __$$_RemoteFrameBufferClientUpdateRectangleCopyWithImpl<$Res>
   @override
   $Res call({
     Object? byteData = null,
+    Object? encodingType = null,
     Object? height = null,
     Object? width = null,
     Object? x = null,
@@ -413,6 +449,10 @@ class __$$_RemoteFrameBufferClientUpdateRectangleCopyWithImpl<$Res>
           ? _value.byteData
           : byteData // ignore: cast_nullable_to_non_nullable
               as ByteData,
+      encodingType: null == encodingType
+          ? _value.encodingType
+          : encodingType // ignore: cast_nullable_to_non_nullable
+              as RemoteFrameBufferEncodingType,
       height: null == height
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
@@ -439,6 +479,7 @@ class _$_RemoteFrameBufferClientUpdateRectangle
     implements _RemoteFrameBufferClientUpdateRectangle {
   const _$_RemoteFrameBufferClientUpdateRectangle(
       {required this.byteData,
+      required this.encodingType,
       required this.height,
       required this.width,
       required this.x,
@@ -447,6 +488,10 @@ class _$_RemoteFrameBufferClientUpdateRectangle
   /// The [ByteData] that holds the pixel data of this rectangle.
   @override
   final ByteData byteData;
+
+  /// The encoding used to interpret the bytes in [byteData].
+  @override
+  final RemoteFrameBufferEncodingType encodingType;
 
   /// The height in pixels.
   @override
@@ -466,7 +511,7 @@ class _$_RemoteFrameBufferClientUpdateRectangle
 
   @override
   String toString() {
-    return 'RemoteFrameBufferClientUpdateRectangle(byteData: $byteData, height: $height, width: $width, x: $x, y: $y)';
+    return 'RemoteFrameBufferClientUpdateRectangle(byteData: $byteData, encodingType: $encodingType, height: $height, width: $width, x: $x, y: $y)';
   }
 
   @override
@@ -476,6 +521,8 @@ class _$_RemoteFrameBufferClientUpdateRectangle
             other is _$_RemoteFrameBufferClientUpdateRectangle &&
             (identical(other.byteData, byteData) ||
                 other.byteData == byteData) &&
+            (identical(other.encodingType, encodingType) ||
+                other.encodingType == encodingType) &&
             (identical(other.height, height) || other.height == height) &&
             (identical(other.width, width) || other.width == width) &&
             (identical(other.x, x) || other.x == x) &&
@@ -483,7 +530,8 @@ class _$_RemoteFrameBufferClientUpdateRectangle
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, byteData, height, width, x, y);
+  int get hashCode =>
+      Object.hash(runtimeType, byteData, encodingType, height, width, x, y);
 
   @JsonKey(ignore: true)
   @override
@@ -498,6 +546,7 @@ abstract class _RemoteFrameBufferClientUpdateRectangle
     implements RemoteFrameBufferClientUpdateRectangle {
   const factory _RemoteFrameBufferClientUpdateRectangle(
       {required final ByteData byteData,
+      required final RemoteFrameBufferEncodingType encodingType,
       required final int height,
       required final int width,
       required final int x,
@@ -507,6 +556,10 @@ abstract class _RemoteFrameBufferClientUpdateRectangle
 
   /// The [ByteData] that holds the pixel data of this rectangle.
   ByteData get byteData;
+  @override
+
+  /// The encoding used to interpret the bytes in [byteData].
+  RemoteFrameBufferEncodingType get encodingType;
   @override
 
   /// The height in pixels.

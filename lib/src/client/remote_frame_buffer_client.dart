@@ -206,6 +206,7 @@ class RemoteFrameBufferClient {
                               ) =>
                                   RemoteFrameBufferClientUpdateRectangle(
                                 byteData: rectangle.pixelData,
+                                encodingType: rectangle.encodingType,
                                 height: rectangle.height,
                                 width: rectangle.width,
                                 x: rectangle.x,
@@ -686,6 +687,7 @@ class RemoteFrameBufferClient {
           const RemoteFrameBufferSetEncodingsMessage message =
               RemoteFrameBufferSetEncodingsMessage(
             encodingTypes: <RemoteFrameBufferEncodingType>[
+              RemoteFrameBufferEncodingType.copyRect(),
               RemoteFrameBufferEncodingType.raw(),
             ],
           );
