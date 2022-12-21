@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:dart_rfb/src/protocol/pixel_format.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,4 +14,19 @@ class RemoteFrameBufferSetPixelFormatMessage
   const factory RemoteFrameBufferSetPixelFormatMessage({
     required final RemoteFrameBufferPixelFormat pixelFormat,
   }) = _RemoteFrameBufferSetPixelFormatMessage;
+
+  const RemoteFrameBufferSetPixelFormatMessage._();
+
+  /// Get byte representation of this message.
+  ByteData toBytes() => ByteData.sublistView(
+        Uint8List.fromList(
+          <int>[
+            0,
+            0,
+            0,
+            0,
+            ...pixelFormat.toBytes().buffer.asUint8List(),
+          ],
+        ),
+      );
 }

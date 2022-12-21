@@ -114,8 +114,9 @@ class __$$_RemoteFrameBufferSetPixelFormatMessageCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_RemoteFrameBufferSetPixelFormatMessage
-    implements _RemoteFrameBufferSetPixelFormatMessage {
-  const _$_RemoteFrameBufferSetPixelFormatMessage({required this.pixelFormat});
+    extends _RemoteFrameBufferSetPixelFormatMessage {
+  const _$_RemoteFrameBufferSetPixelFormatMessage({required this.pixelFormat})
+      : super._();
 
   @override
   final RemoteFrameBufferPixelFormat pixelFormat;
@@ -147,10 +148,11 @@ class _$_RemoteFrameBufferSetPixelFormatMessage
 }
 
 abstract class _RemoteFrameBufferSetPixelFormatMessage
-    implements RemoteFrameBufferSetPixelFormatMessage {
+    extends RemoteFrameBufferSetPixelFormatMessage {
   const factory _RemoteFrameBufferSetPixelFormatMessage(
           {required final RemoteFrameBufferPixelFormat pixelFormat}) =
       _$_RemoteFrameBufferSetPixelFormatMessage;
+  const _RemoteFrameBufferSetPixelFormatMessage._() : super._();
 
   @override
   RemoteFrameBufferPixelFormat get pixelFormat;

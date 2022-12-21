@@ -11,12 +11,7 @@ import '../mocks.mocks.dart';
 
 void main() {
   test('Framebuffer update message from bytes works', () async {
-    final MockConfig mockConfig = MockConfig();
     final MockRawSocket mockRawSocket = MockRawSocket();
-    final MockRemoteFrameBufferPixelFormat mockPixelFormat =
-        MockRemoteFrameBufferPixelFormat();
-    when(mockPixelFormat.bitsPerPixel).thenReturn(32);
-    when(mockConfig.pixelFormat).thenReturn(mockPixelFormat);
     when(mockRawSocket.available()).thenReturn(18);
     final List<ByteData> readResponses = <ByteData>[
       ByteData(2)..setUint16(0, 1),
@@ -34,7 +29,11 @@ void main() {
     final Either<Object, RemoteFrameBufferFrameBufferUpdateMessage> message =
         await runFakeAsync(
       (final _) => RemoteFrameBufferFrameBufferUpdateMessage.readFromSocket(
-        config: mockConfig,
+        config: Config(
+          frameBufferHeight: 1,
+          frameBufferWidth: 1,
+          pixelFormat: RemoteFrameBufferPixelFormat.bgra8888,
+        ),
         socket: mockRawSocket,
       ).run(),
     );

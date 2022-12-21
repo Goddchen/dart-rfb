@@ -44,20 +44,9 @@ class _Fake$ConfigCopyWith_1<$Res> extends _i1.SmartFake
         );
 }
 
-class _Fake$RemoteFrameBufferPixelFormatCopyWith_2<$Res> extends _i1.SmartFake
-    implements _i2.$RemoteFrameBufferPixelFormatCopyWith<$Res> {
-  _Fake$RemoteFrameBufferPixelFormatCopyWith_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeInternetAddress_3 extends _i1.SmartFake
+class _FakeInternetAddress_2 extends _i1.SmartFake
     implements _i4.InternetAddress {
-  _FakeInternetAddress_3(
+  _FakeInternetAddress_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -66,9 +55,9 @@ class _FakeInternetAddress_3 extends _i1.SmartFake
         );
 }
 
-class _FakeRawSocketEvent_4 extends _i1.SmartFake
+class _FakeRawSocketEvent_3 extends _i1.SmartFake
     implements _i4.RawSocketEvent {
-  _FakeRawSocketEvent_4(
+  _FakeRawSocketEvent_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -77,8 +66,8 @@ class _FakeRawSocketEvent_4 extends _i1.SmartFake
         );
 }
 
-class _FakeRawSocket_5 extends _i1.SmartFake implements _i4.RawSocket {
-  _FakeRawSocket_5(
+class _FakeRawSocket_4 extends _i1.SmartFake implements _i4.RawSocket {
+  _FakeRawSocket_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -87,9 +76,9 @@ class _FakeRawSocket_5 extends _i1.SmartFake implements _i4.RawSocket {
         );
 }
 
-class _FakeStreamSubscription_6<T> extends _i1.SmartFake
+class _FakeStreamSubscription_5<T> extends _i1.SmartFake
     implements _i5.StreamSubscription<T> {
-  _FakeStreamSubscription_6(
+  _FakeStreamSubscription_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -132,78 +121,6 @@ class MockConfig extends _i1.Mock implements _i3.Config {
           Invocation.getter(#copyWith),
         ),
       ) as _i3.$ConfigCopyWith<_i3.Config>);
-}
-
-/// A class which mocks [RemoteFrameBufferPixelFormat].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockRemoteFrameBufferPixelFormat extends _i1.Mock
-    implements _i2.RemoteFrameBufferPixelFormat {
-  MockRemoteFrameBufferPixelFormat() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  int get bitsPerPixel => (super.noSuchMethod(
-        Invocation.getter(#bitsPerPixel),
-        returnValue: 0,
-      ) as int);
-  @override
-  int get depth => (super.noSuchMethod(
-        Invocation.getter(#depth),
-        returnValue: 0,
-      ) as int);
-  @override
-  bool get bigEndian => (super.noSuchMethod(
-        Invocation.getter(#bigEndian),
-        returnValue: false,
-      ) as bool);
-  @override
-  bool get trueColor => (super.noSuchMethod(
-        Invocation.getter(#trueColor),
-        returnValue: false,
-      ) as bool);
-  @override
-  int get redMax => (super.noSuchMethod(
-        Invocation.getter(#redMax),
-        returnValue: 0,
-      ) as int);
-  @override
-  int get greenMax => (super.noSuchMethod(
-        Invocation.getter(#greenMax),
-        returnValue: 0,
-      ) as int);
-  @override
-  int get blueMax => (super.noSuchMethod(
-        Invocation.getter(#blueMax),
-        returnValue: 0,
-      ) as int);
-  @override
-  int get redShift => (super.noSuchMethod(
-        Invocation.getter(#redShift),
-        returnValue: 0,
-      ) as int);
-  @override
-  int get greenShift => (super.noSuchMethod(
-        Invocation.getter(#greenShift),
-        returnValue: 0,
-      ) as int);
-  @override
-  int get blueShift => (super.noSuchMethod(
-        Invocation.getter(#blueShift),
-        returnValue: 0,
-      ) as int);
-  @override
-  _i2.$RemoteFrameBufferPixelFormatCopyWith<_i2.RemoteFrameBufferPixelFormat>
-      get copyWith => (super.noSuchMethod(
-            Invocation.getter(#copyWith),
-            returnValue: _Fake$RemoteFrameBufferPixelFormatCopyWith_2<
-                _i2.RemoteFrameBufferPixelFormat>(
-              this,
-              Invocation.getter(#copyWith),
-            ),
-          ) as _i2.$RemoteFrameBufferPixelFormatCopyWith<
-              _i2.RemoteFrameBufferPixelFormat>);
 }
 
 /// A class which mocks [RawSocket].
@@ -253,7 +170,7 @@ class MockRawSocket extends _i1.Mock implements _i4.RawSocket {
   @override
   _i4.InternetAddress get address => (super.noSuchMethod(
         Invocation.getter(#address),
-        returnValue: _FakeInternetAddress_3(
+        returnValue: _FakeInternetAddress_2(
           this,
           Invocation.getter(#address),
         ),
@@ -261,7 +178,7 @@ class MockRawSocket extends _i1.Mock implements _i4.RawSocket {
   @override
   _i4.InternetAddress get remoteAddress => (super.noSuchMethod(
         Invocation.getter(#remoteAddress),
-        returnValue: _FakeInternetAddress_3(
+        returnValue: _FakeInternetAddress_2(
           this,
           Invocation.getter(#remoteAddress),
         ),
@@ -284,7 +201,7 @@ class MockRawSocket extends _i1.Mock implements _i4.RawSocket {
   @override
   _i5.Future<_i4.RawSocketEvent> get first => (super.noSuchMethod(
         Invocation.getter(#first),
-        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_3(
           this,
           Invocation.getter(#first),
         )),
@@ -292,7 +209,7 @@ class MockRawSocket extends _i1.Mock implements _i4.RawSocket {
   @override
   _i5.Future<_i4.RawSocketEvent> get last => (super.noSuchMethod(
         Invocation.getter(#last),
-        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_3(
           this,
           Invocation.getter(#last),
         )),
@@ -300,7 +217,7 @@ class MockRawSocket extends _i1.Mock implements _i4.RawSocket {
   @override
   _i5.Future<_i4.RawSocketEvent> get single => (super.noSuchMethod(
         Invocation.getter(#single),
-        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_3(
           this,
           Invocation.getter(#single),
         )),
@@ -355,7 +272,7 @@ class MockRawSocket extends _i1.Mock implements _i4.RawSocket {
           #close,
           [],
         ),
-        returnValue: _i5.Future<_i4.RawSocket>.value(_FakeRawSocket_5(
+        returnValue: _i5.Future<_i4.RawSocket>.value(_FakeRawSocket_4(
           this,
           Invocation.method(
             #close,
@@ -436,7 +353,7 @@ class MockRawSocket extends _i1.Mock implements _i4.RawSocket {
             #cancelOnError: cancelOnError,
           },
         ),
-        returnValue: _FakeStreamSubscription_6<_i4.RawSocketEvent>(
+        returnValue: _FakeStreamSubscription_5<_i4.RawSocketEvent>(
           this,
           Invocation.method(
             #listen,
@@ -542,7 +459,7 @@ class MockRawSocket extends _i1.Mock implements _i4.RawSocket {
           #reduce,
           [combine],
         ),
-        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_3(
           this,
           Invocation.method(
             #reduce,
@@ -707,7 +624,7 @@ class MockRawSocket extends _i1.Mock implements _i4.RawSocket {
           [test],
           {#orElse: orElse},
         ),
-        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_3(
           this,
           Invocation.method(
             #firstWhere,
@@ -727,7 +644,7 @@ class MockRawSocket extends _i1.Mock implements _i4.RawSocket {
           [test],
           {#orElse: orElse},
         ),
-        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_3(
           this,
           Invocation.method(
             #lastWhere,
@@ -747,7 +664,7 @@ class MockRawSocket extends _i1.Mock implements _i4.RawSocket {
           [test],
           {#orElse: orElse},
         ),
-        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_3(
           this,
           Invocation.method(
             #singleWhere,
@@ -762,7 +679,7 @@ class MockRawSocket extends _i1.Mock implements _i4.RawSocket {
           #elementAt,
           [index],
         ),
-        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_4(
+        returnValue: _i5.Future<_i4.RawSocketEvent>.value(_FakeRawSocketEvent_3(
           this,
           Invocation.method(
             #elementAt,

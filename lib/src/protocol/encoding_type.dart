@@ -27,5 +27,15 @@ class RemoteFrameBufferEncodingType with _$RemoteFrameBufferEncodingType {
     }
   }
 
+  /// Generate byte representation of thie encoding type.
+  ByteData toBytes() => ByteData(4)
+    ..setInt32(
+      0,
+      map(
+        raw: (final _) => 0,
+        unsupported: (final _) => -1,
+      ),
+    );
+
   const RemoteFrameBufferEncodingType._();
 }
