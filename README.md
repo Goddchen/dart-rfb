@@ -23,7 +23,7 @@ And here we are, after a weekend, with the first, minimal, protocol implementati
 ### Encodings
 
 - ✅ Raw
-- ⬜ CopyRect
+- ✅ CopyRect
 - ⬜ RRE (obsolescent)
 - ⬜ Hextile (obsolescent)
 - ⬜ TRLE
@@ -48,8 +48,8 @@ And here we are, after a weekend, with the first, minimal, protocol implementati
 - ✅ ClientInit
 - ✅ ServerInit
 - Client-to-Server
-  - ⬜ SetPixelFormat
-  - ⬜ SetEncodings
+  - ✅ SetPixelFormat
+  - ✅ SetEncodings
   - ✅ FramebufferUpdateRequest
   - ⬜ KeyEvent
   - ✅ PointerEvent
@@ -64,7 +64,7 @@ And here we are, after a weekend, with the first, minimal, protocol implementati
 
 As simple as `dart pub add dart_rfb`.
 
-Or manually add `dart_rfb: ^0.3.1` to your `pubspec.yaml`.
+Or manually add `dart_rfb: ^<latest-version>` to your `pubspec.yaml`.
 
 ## Usage
 

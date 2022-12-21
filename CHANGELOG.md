@@ -22,3 +22,9 @@
 ## 0.3.1
 
 - Fix a minor typo issue
+
+## 0.4.0
+
+- Add CopyRect encoding support
+- Add SetEncodings message support
+- Add SetPixelFormat message support
