@@ -52,7 +52,7 @@ And here we are, after a weekend, with the first, minimal, protocol implementati
   - ⬜ SetEncodings
   - ✅ FramebufferUpdateRequest
   - ⬜ KeyEvent
-  - ⬜ PointerEvent
+  - ✅ PointerEvent
   - ⬜ ClientCutText
 - Server-to-Client
   - ✅ FramebufferUpdate
@@ -64,7 +64,7 @@ And here we are, after a weekend, with the first, minimal, protocol implementati
 
 As simple as `dart pub add dart_rfb`.
 
-Or manually add `dart_rfb: ^0.2.0` to your `pubspec.yaml`.
+Or manually add `dart_rfb: ^0.3.0` to your `pubspec.yaml`.
 
 ## Usage
 

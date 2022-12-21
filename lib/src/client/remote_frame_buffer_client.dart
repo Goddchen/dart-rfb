@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 import 'package:dart_des/dart_des.dart';
 import 'package:dart_rfb/src/client/config.dart';
+import 'package:dart_rfb/src/client/remote_frame_buffer_client_pointer_event.dart';
 import 'package:dart_rfb/src/client/remote_frame_buffer_client_update.dart';
 import 'package:dart_rfb/src/constants.dart';
 import 'package:dart_rfb/src/extensions/byte_data_extensions.dart';
@@ -12,6 +13,7 @@ import 'package:dart_rfb/src/extensions/int_extensions.dart';
 import 'package:dart_rfb/src/protocol/client_init_message.dart';
 import 'package:dart_rfb/src/protocol/frame_buffer_update_message.dart';
 import 'package:dart_rfb/src/protocol/frame_buffer_update_request_message.dart';
+import 'package:dart_rfb/src/protocol/pointer_event_message.dart';
 import 'package:dart_rfb/src/protocol/protocol_version_handshake_message.dart';
 import 'package:dart_rfb/src/protocol/security_handshake_message.dart';
 import 'package:dart_rfb/src/protocol/security_result_handshake_message.dart';
@@ -137,6 +139,30 @@ class RemoteFrameBufferClient {
             );
           },
         ),
+      );
+
+  void sendPointerEvent({
+    required final RemoteFrameBufferClientPointerEvent pointerEvent,
+  }) =>
+      _socket.match(
+        () {},
+        (final RawSocket socket) {
+          final RemoteFrameBufferPointerEventMessage message =
+              RemoteFrameBufferPointerEventMessage(
+            button1Down: pointerEvent.button1Down,
+            button2Down: pointerEvent.button2Down,
+            button3Down: pointerEvent.button3Down,
+            button4Down: pointerEvent.button4Down,
+            button5Down: pointerEvent.button5Down,
+            button6Down: pointerEvent.button6Down,
+            button7Down: pointerEvent.button7Down,
+            button8Down: pointerEvent.button8Down,
+            x: pointerEvent.x,
+            y: pointerEvent.y,
+          );
+          _logger.info('> $message');
+          socket.write(message.toBytes().asUint8List());
+        },
       );
 
   /// Start the reading loop that handles incoming protocol messages.
