@@ -20,8 +20,10 @@ import 'package:dart_rfb/src/protocol/server_init_message.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:logging/logging.dart';
 
+/// A client that implements communication according to
+/// The Remote Framebuffer Protocol, aka RFC 6143, aka VNC).
 class RemoteFrameBufferClient {
-  static final Logger _logger = Logger('RemoteFrameBufferClient');
+  static final Logger logger = Logger('RemoteFrameBufferClient');
 
   final StreamController<RemoteFrameBufferClientUpdate>
       _updateStreamController =
@@ -31,10 +33,6 @@ class RemoteFrameBufferClient {
 
   Option<RawSocket> _socket = none();
 
-  bool _loggingEnabled = false;
-
-  Option<StreamSubscription<LogRecord>> _loggingSubscription = none();
-
   bool _readLoopRunning = false;
 
   Option<String> _password = none();
@@ -43,34 +41,8 @@ class RemoteFrameBufferClient {
 
   Option<RemoteFrameBufferSecurityType> _selectedSecurityType = none();
 
-  /// A client that implements communication according to
-  /// The Remote Framebuffer Protocol, aka RFC 6143, aka VNC).
-  RemoteFrameBufferClient() {
-    loggingEnabled = false;
-    _loggingSubscription = some(
-      Logger.root.onRecord.listen(
-        (final LogRecord logRecord) {
-          // ignore: avoid_print
-          print('${logRecord.loggerName}: ${logRecord.message}');
-        },
-      ),
-    );
-  }
-
   /// The config used by the underlying session.
   Option<Config> get config => _config;
-
-  /// Wether logging messages should be printed.
-  bool get loggingEnabled => _loggingEnabled;
-
-  set loggingEnabled(final bool enabled) {
-    _loggingEnabled = enabled;
-    if (enabled) {
-      Logger.root.level = Level.ALL;
-    } else {
-      Logger.root.level = Level.OFF;
-    }
-  }
 
   /// A [Stream] that will give access to all incoming framebuffer updates.
   Stream<RemoteFrameBufferClientUpdate> get updateStream =>
@@ -80,11 +52,6 @@ class RemoteFrameBufferClient {
   Future<void> close() async {
     _readLoopRunning = false;
     await _updateStreamController.close();
-    await _loggingSubscription.match(
-      () {},
-      (final StreamSubscription<LogRecord> subscription) =>
-          subscription.cancel(),
-    );
   }
 
   /// Connect to [hostname] on [port] and perform the protocol handshake,
@@ -131,7 +98,7 @@ class RemoteFrameBufferClient {
               x: 0,
               y: 0,
             );
-            _logger.log(Level.INFO, '> $requestMessage');
+            logger.log(Level.INFO, '> $requestMessage');
             socket.write(
               requestMessage.toBytes().asUint8List(),
             );
@@ -171,7 +138,7 @@ class RemoteFrameBufferClient {
                         'Error reading incoming message type',
                       ),
                     );
-                _logger.log(Level.INFO, '< messageType: $messageType');
+                logger.log(Level.INFO, '< messageType: $messageType');
                 switch (messageType) {
                   case 0:
                     while (socket.available() < 1) {
@@ -187,7 +154,7 @@ class RemoteFrameBufferClient {
                                 .readFromSocket(config: config, socket: socket)
                             .run())
                         .match(
-                      (final Object error) => _logger.log(
+                      (final Object error) => logger.log(
                         Level.INFO,
                         'Error reading and handling update message: $error',
                       ),
@@ -195,7 +162,7 @@ class RemoteFrameBufferClient {
                         final RemoteFrameBufferFrameBufferUpdateMessage
                             updateMessage,
                       ) {
-                        _logger.log(
+                        logger.log(
                           Level.INFO,
                           '< ${updateMessage.rectangles.length} update rectangles',
                         );
@@ -270,7 +237,7 @@ class RemoteFrameBufferClient {
                     );
                     break;
                   default:
-                    _logger.log(
+                    logger.log(
                       Level.INFO,
                       'Receive unsupported message type: $messageType',
                     );
@@ -302,7 +269,7 @@ class RemoteFrameBufferClient {
                 () => throw Exception('Error reading security challenge'),
               ),
             );
-            _logger.info('< Security challenge');
+            logger.info('< Security challenge');
             final ByteData encodedAndTruncatedPassword = ByteData.sublistView(
               Uint8List.fromList(ascii.encode(password).take(8).toList()),
             );
@@ -328,7 +295,7 @@ class RemoteFrameBufferClient {
               0,
               16,
             );
-            _logger.info('> Security challenge response');
+            logger.info('> Security challenge response');
             socket.write(
               response.buffer
                   .asUint8List(response.offsetInBytes, response.lengthInBytes),
@@ -374,7 +341,7 @@ class RemoteFrameBufferClient {
               ),
             ),
           );
-          _logger.log(Level.INFO, '< $protocolVersionHandshakeMessage');
+          logger.log(Level.INFO, '< $protocolVersionHandshakeMessage');
           if (protocolVersionHandshakeMessage.version
               is RemoteFrameBufferProtocolVersionUnknown) {
             throw Exception(
@@ -400,7 +367,7 @@ class RemoteFrameBufferClient {
         final int numberOfSecurityTypes = optionOf(socket.read(1)).getOrElse(
           () => throw Exception('Error reading number of security types'),
         )[0];
-        _logger.log(
+        logger.log(
           Level.INFO,
           '< numberOfSecurityTypes=$numberOfSecurityTypes',
         );
@@ -447,7 +414,7 @@ class RemoteFrameBufferClient {
               ),
             ),
           );
-          _logger.log(Level.INFO, '< $securityResultHandshakeMessage');
+          logger.log(Level.INFO, '< $securityResultHandshakeMessage');
           if (_password.isNone() &&
               securityResultHandshakeMessage.securityTypes.notElem(
                 const RemoteFrameBufferSecurityType.none(),
@@ -482,7 +449,7 @@ class RemoteFrameBufferClient {
             ),
           ),
         );
-        _logger.info('< $securityType');
+        logger.info('< $securityType');
 
         if (_password.isNone() &&
             securityType != const RemoteFrameBufferSecurityType.none()) {
@@ -533,7 +500,7 @@ class RemoteFrameBufferClient {
             ),
           ),
         );
-        _logger.log(Level.INFO, '< $securityResultHandshakeMessage');
+        logger.log(Level.INFO, '< $securityResultHandshakeMessage');
         if (!securityResultHandshakeMessage.success) {
           while (socket.available() < 4) {
             await Future<void>.delayed(Constants.socketReadWaitDuration);
@@ -574,7 +541,7 @@ class RemoteFrameBufferClient {
             ),
           ),
         );
-        _logger.log(Level.INFO, '< $securityResultHandshakeMessage');
+        logger.log(Level.INFO, '< $securityResultHandshakeMessage');
         if (!securityResultHandshakeMessage.success) {
           throw Exception('Security handshake failed');
         }
@@ -622,7 +589,7 @@ class RemoteFrameBufferClient {
   }) =>
       TaskEither<Object, void>.tryCatch(
         () async {
-          _logger.log(
+          logger.log(
             Level.INFO,
             '> ${const RemoteFrameBufferClientInitMessage(sharedFlag: true)}',
           );
@@ -646,7 +613,7 @@ class RemoteFrameBufferClient {
               () => throw Exception('Error selecting protocol version'),
             ),
           );
-          _logger.log(Level.INFO, '> $message');
+          logger.log(Level.INFO, '> $message');
           socket.write(message.toBytes().asUint8List());
         },
         (final Object error, final _) => error,
@@ -662,7 +629,7 @@ class RemoteFrameBufferClient {
           () => const RemoteFrameBufferSecurityType.none(),
           (final _) => const RemoteFrameBufferSecurityType.vncAuthentication(),
         );
-        _logger.info('> $securityType');
+        logger.info('> $securityType');
         _selectedSecurityType = some(securityType);
         socket.write(securityType.toBytes().asUint8List());
       },

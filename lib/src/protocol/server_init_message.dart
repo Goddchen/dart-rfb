@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:dart_rfb/src/client/remote_frame_buffer_client.dart';
 import 'package:dart_rfb/src/constants.dart';
 import 'package:dart_rfb/src/protocol/pixel_format.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:logging/logging.dart';
 
 part 'server_init_message.freezed.dart';
 
@@ -16,8 +16,6 @@ part 'server_init_message.freezed.dart';
 @freezed
 class RemoteFrameBufferServerInitMessage
     with _$RemoteFrameBufferServerInitMessage {
-  static final Logger _logger = Logger('RemoteFrameBufferServerInitMessage');
-
   const factory RemoteFrameBufferServerInitMessage({
     required final int frameBufferHeightInPixels,
     required final int frameBufferWidthInPixels,
@@ -58,7 +56,7 @@ class RemoteFrameBufferServerInitMessage
               bytes: ByteData.sublistView(bytes, 4, 20),
             ),
           );
-          _logger.log(Level.INFO, '< $serverInitMessage');
+          RemoteFrameBufferClient.logger.info('< $serverInitMessage');
           return serverInitMessage;
         },
         (final Object error, final _) => error,
