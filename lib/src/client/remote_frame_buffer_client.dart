@@ -11,6 +11,7 @@ import 'package:dart_rfb/src/client/remote_frame_buffer_client_update.dart';
 import 'package:dart_rfb/src/constants.dart';
 import 'package:dart_rfb/src/extensions/byte_data_extensions.dart';
 import 'package:dart_rfb/src/extensions/int_extensions.dart';
+import 'package:dart_rfb/src/extensions/raw_socket_extensions.dart';
 import 'package:dart_rfb/src/protocol/client_init_message.dart';
 import 'package:dart_rfb/src/protocol/encoding_type.dart';
 import 'package:dart_rfb/src/protocol/frame_buffer_update_message.dart';
@@ -156,31 +157,19 @@ class RemoteFrameBufferClient {
               );
               _readLoopRunning = true;
               while (_readLoopRunning) {
-                while (socket.available() < 1) {
-                  await Future<void>.delayed(Constants.socketReadWaitDuration);
-                }
-                final int messageType = optionOf(socket.read(1))
-                    .map(
-                      (final Uint8List bytes) =>
-                          ByteData.sublistView(bytes).getUint8(0),
-                    )
-                    .getOrElse(
-                      () => throw Exception(
-                        'Error reading incoming message type',
-                      ),
-                    );
+                final int messageType = (await socket
+                        .readSync(
+                          length: 1,
+                          readWaitDuration:
+                              some(Constants.socketReadWaitDuration),
+                        )
+                        .run())
+                    .getUint8(0);
                 logger.log(Level.INFO, '< messageType: $messageType');
                 switch (messageType) {
                   case 0:
-                    while (socket.available() < 1) {
-                      await Future<void>.delayed(
-                        Constants.socketReadWaitDuration,
-                      );
-                    }
                     // read and ignore padding
-                    optionOf(socket.read(1)).getOrElse(
-                      () => throw Exception('Error reading padding'),
-                    );
+                    await socket.readSync(length: 1).run();
                     (await RemoteFrameBufferFrameBufferUpdateMessage
                                 .readFromSocket(config: config, socket: socket)
                             .run())
@@ -219,54 +208,17 @@ class RemoteFrameBufferClient {
                     );
                     break;
                   case 1: // SetColorMapEntries
-                    while (socket.available() < 5) {
-                      await Future<void>.delayed(
-                        Constants.socketReadWaitDuration,
-                      );
-                    }
-                    final int numberOfColors = optionOf(socket.read(5))
-                        .map(
-                          (final Uint8List bytes) =>
-                              ByteData.sublistView(bytes).getUint16(3),
-                        )
-                        .getOrElse(
-                          () =>
-                              throw Exception('Error reading number of colors'),
-                        );
-                    while (socket.available() < numberOfColors * 6) {
-                      await Future<void>.delayed(
-                        Constants.socketReadWaitDuration,
-                      );
-                    }
-                    optionOf(socket.read(numberOfColors * 6)).getOrElse(
-                      () => throw Exception('Error reading colors'),
-                    );
+                    final int numberOfColors =
+                        (await socket.readSync(length: 5).run()).getUint16(3);
+                    socket.readSync(length: numberOfColors * 6);
                     break;
                   case 2: // Bell
                     // no data, just ignore for now
                     break;
                   case 3: // ServerCutText
-                    while (socket.available() < 7) {
-                      await Future<void>.delayed(
-                        Constants.socketReadWaitDuration,
-                      );
-                    }
-                    final int length = optionOf(socket.read(7))
-                        .map(
-                          (final Uint8List bytes) =>
-                              ByteData.sublistView(bytes).getUint32(3),
-                        )
-                        .getOrElse(
-                          () => throw Exception('Error reading length'),
-                        );
-                    while (socket.available() < length) {
-                      await Future<void>.delayed(
-                        Constants.socketReadWaitDuration,
-                      );
-                    }
-                    optionOf(socket.read(length)).getOrElse(
-                      () => throw Exception('Error reading content'),
-                    );
+                    final int length =
+                        (await socket.readSync(length: 7).run()).getUint32(3);
+                    socket.readSync(length: length);
                     break;
                   default:
                     logger.log(
@@ -293,14 +245,7 @@ class RemoteFrameBufferClient {
         () => TaskEither<Object, void>.of(null),
         (final String password) => TaskEither<Object, void>.tryCatch(
           () async {
-            while (socket.available() < 16) {
-              await Future<void>.delayed(Constants.socketReadWaitDuration);
-            }
-            final ByteData challenge = ByteData.sublistView(
-              optionOf(socket.read(16)).getOrElse(
-                () => throw Exception('Error reading security challenge'),
-              ),
-            );
+            final ByteData challenge = await socket.readSync(length: 16).run();
             logger.info('< Security challenge');
             final ByteData encodedAndTruncatedPassword = ByteData.sublistView(
               Uint8List.fromList(ascii.encode(password).take(8).toList()),
@@ -356,24 +301,15 @@ class RemoteFrameBufferClient {
   }) =>
       TaskEither<Object, void>.tryCatch(
         () async {
-          while (socket.available() <
-              RemoteFrameBufferProtocolVersionHandshakeMessage.length) {
-            await Future<void>.delayed(Constants.socketReadWaitDuration);
-          }
           final RemoteFrameBufferProtocolVersionHandshakeMessage
               protocolVersionHandshakeMessage =
               RemoteFrameBufferProtocolVersionHandshakeMessage.fromBytes(
-            bytes: ByteData.sublistView(
-              optionOf(
-                socket.read(
-                  RemoteFrameBufferProtocolVersionHandshakeMessage.length,
-                ),
-              ).getOrElse(
-                () => throw Exception(
-                  'Error reading protocol version handshake message',
-                ),
-              ),
-            ),
+            bytes: await socket
+                .readSync(
+                  length:
+                      RemoteFrameBufferProtocolVersionHandshakeMessage.length,
+                )
+                .run(),
           );
           logger.log(Level.INFO, '< $protocolVersionHandshakeMessage');
           if (protocolVersionHandshakeMessage.version
@@ -395,45 +331,25 @@ class RemoteFrameBufferClient {
     final TaskEither<Object, void> taskEitherWithList =
         TaskEither<Object, void>.tryCatch(
       () async {
-        while (socket.available() < 1) {
-          await Future<void>.delayed(Constants.socketReadWaitDuration);
-        }
-        final int numberOfSecurityTypes = optionOf(socket.read(1)).getOrElse(
-          () => throw Exception('Error reading number of security types'),
-        )[0];
+        final int numberOfSecurityTypes =
+            (await socket.readSync(length: 1).run()).getUint8(0);
         logger.log(
           Level.INFO,
           '< numberOfSecurityTypes=$numberOfSecurityTypes',
         );
         if (numberOfSecurityTypes == 0) {
           // Error, next 4 bytes is reason-length, then reason-string
-          while (socket.available() < 4) {
-            await Future<void>.delayed(
-              Constants.socketReadWaitDuration,
-            );
-          }
-          final int reasonLength = ByteData.sublistView(
-            optionOf(socket.read(4)).getOrElse(
-              () => throw Exception('Error getting reason length'),
-            ),
-          ).getUint32(0);
-          while (socket.available() < reasonLength) {
-            await Future<void>.delayed(
-              Constants.socketReadWaitDuration,
-            );
-          }
-          final String reason = optionOf(socket.read(reasonLength))
-              .map((final Uint8List bytes) => ascii.decode(bytes))
-              .getOrElse(() => throw Exception('Error reading reason'));
+          final int reasonLength =
+              (await socket.readSync(length: 4).run()).getUint32(0);
+          final String reason = ascii.decode(
+            (await socket.readSync(length: reasonLength).run())
+                .buffer
+                .asUint8List(),
+          );
           throw Exception(
             'Error reading security handshake message: $reason',
           );
         } else {
-          while (socket.available() < numberOfSecurityTypes) {
-            await Future<void>.delayed(
-              Constants.socketReadWaitDuration,
-            );
-          }
           final RemoteFrameBufferSecurityHandshakeMessage
               securityResultHandshakeMessage =
               RemoteFrameBufferSecurityHandshakeMessage.fromBytes(
@@ -441,9 +357,11 @@ class RemoteFrameBufferClient {
               Uint8List.fromList(
                 <int>[
                   numberOfSecurityTypes,
-                  ...optionOf(socket.read(numberOfSecurityTypes)).getOrElse(
-                    () => throw Exception('Error reading security types'),
-                  )
+                  ...(await socket
+                          .readSync(length: numberOfSecurityTypes)
+                          .run())
+                      .buffer
+                      .asUint8List(),
                 ],
               ),
             ),
@@ -472,16 +390,9 @@ class RemoteFrameBufferClient {
     final TaskEither<Object, void> taskEitherWithoutList =
         TaskEither<Object, void>.tryCatch(
       () async {
-        while (socket.available() < 4) {
-          await Future<void>.delayed(Constants.socketReadWaitDuration);
-        }
         final RemoteFrameBufferSecurityType securityType =
             RemoteFrameBufferSecurityType.fromBytes(
-          bytes: ByteData.sublistView(
-            optionOf(socket.read(4)).getOrElse(
-              () => throw Exception('Error reading security type'),
-            ),
-          ),
+          bytes: await socket.readSync(length: 4).run(),
         );
         logger.info('< $securityType');
 
@@ -520,39 +431,20 @@ class RemoteFrameBufferClient {
     final TaskEither<Object, void> taskEitherWithErrorMessage =
         TaskEither<Object, void>.tryCatch(
       () async {
-        while (socket.available() < 4) {
-          await Future<void>.delayed(Constants.socketReadWaitDuration);
-        }
         final RemoteFrameBufferSecurityResultHandshakeMessage
             securityResultHandshakeMessage =
             RemoteFrameBufferSecurityResultHandshakeMessage.fromBytes(
-          bytes: ByteData.sublistView(
-            optionOf(socket.read(4)).getOrElse(
-              () => throw Exception(
-                'Error reading security result message',
-              ),
-            ),
-          ),
+          bytes: await socket.readSync(length: 4).run(),
         );
         logger.log(Level.INFO, '< $securityResultHandshakeMessage');
         if (!securityResultHandshakeMessage.success) {
-          while (socket.available() < 4) {
-            await Future<void>.delayed(Constants.socketReadWaitDuration);
-          }
-          final int reasonLength = optionOf(socket.read(4))
-              .map(
-                (final Uint8List bytes) =>
-                    ByteData.sublistView(bytes).getUint32(0),
-              )
-              .getOrElse(
-                () => throw Exception('Error reading reason length'),
-              );
-          while (socket.available() < reasonLength) {
-            await Future<void>.delayed(Constants.socketReadWaitDuration);
-          }
-          final String reason = optionOf(socket.read(reasonLength))
-              .map((final Uint8List bytes) => ascii.decode(bytes))
-              .getOrElse(() => throw Exception('Error reading reason'));
+          final int reasonLength =
+              (await socket.readSync(length: 4).run()).getUint32(0);
+          final String reason = ascii.decode(
+            (await socket.readSync(length: reasonLength).run())
+                .buffer
+                .asUint8List(),
+          );
           throw Exception('Error reading security result message: $reason');
         }
       },
@@ -561,19 +453,10 @@ class RemoteFrameBufferClient {
     final TaskEither<Object, void> taskEitherWithoutErrorMessage =
         TaskEither<Object, void>.tryCatch(
       () async {
-        while (socket.available() < 4) {
-          await Future<void>.delayed(Constants.socketReadWaitDuration);
-        }
         final RemoteFrameBufferSecurityResultHandshakeMessage
             securityResultHandshakeMessage =
             RemoteFrameBufferSecurityResultHandshakeMessage.fromBytes(
-          bytes: ByteData.sublistView(
-            optionOf(socket.read(4)).getOrElse(
-              () => throw Exception(
-                'Error reading security result message',
-              ),
-            ),
-          ),
+          bytes: await socket.readSync(length: 4).run(),
         );
         logger.log(Level.INFO, '< $securityResultHandshakeMessage');
         if (!securityResultHandshakeMessage.success) {
