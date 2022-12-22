@@ -36,4 +36,36 @@ void main() {
       ),
     );
   });
+
+  test('PixelFormat to bytes works', () {
+    expect(
+      const RemoteFrameBufferPixelFormat(
+        bitsPerPixel: 32,
+        depth: 24,
+        bigEndian: false,
+        trueColor: true,
+        redMax: 255,
+        greenMax: 255,
+        blueMax: 255,
+        redShift: 16,
+        greenShift: 8,
+        blueShift: 0,
+      ).toBytes().buffer.asUint8List(),
+      equals(
+        (ByteData(16)
+              ..setUint8(0, 32)
+              ..setUint8(1, 24)
+              ..setUint8(2, 0)
+              ..setUint8(3, 1)
+              ..setUint16(4, 255)
+              ..setUint16(6, 255)
+              ..setUint16(8, 255)
+              ..setUint8(10, 16)
+              ..setUint8(11, 8)
+              ..setUint8(12, 0))
+            .buffer
+            .asUint8List(),
+      ),
+    );
+  });
 }

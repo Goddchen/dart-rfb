@@ -56,10 +56,14 @@ class RemoteFrameBufferFrameBufferUpdateMessage
                 rectangleHeader =
                 RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader
                     .fromBytes(bytes: headerBytes);
-            final int numberOfDataBytes = (rectangleHeader.width *
-                    rectangleHeader.height *
-                    (config.pixelFormat.bitsPerPixel / 8))
-                .toInt();
+            final int numberOfDataBytes = rectangleHeader.encodingType.map(
+              copyRect: (final _) => 4,
+              raw: (final _) => (rectangleHeader.width *
+                      rectangleHeader.height *
+                      (config.pixelFormat.bitsPerPixel / 8))
+                  .toInt(),
+              unsupported: (final _) => 0,
+            );
             final BytesBuilder bytesBuilder = BytesBuilder();
             while (bytesBuilder.length < numberOfDataBytes) {
               optionOf(

@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:dart_rfb/src/protocol/encoding_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'remote_frame_buffer_client_update.freezed.dart';
@@ -30,6 +31,9 @@ class RemoteFrameBufferClientUpdateRectangle
   const factory RemoteFrameBufferClientUpdateRectangle({
     /// The [ByteData] that holds the pixel data of this rectangle.
     required final ByteData byteData,
+
+    /// The encoding used to interpret the bytes in [byteData].
+    required final RemoteFrameBufferEncodingType encodingType,
 
     /// The height in pixels.
     required final int height,

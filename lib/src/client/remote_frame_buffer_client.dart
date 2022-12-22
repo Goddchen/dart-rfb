@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:collection/collection.dart';
 import 'package:dart_des/dart_des.dart';
 import 'package:dart_rfb/src/client/config.dart';
 import 'package:dart_rfb/src/client/remote_frame_buffer_client_pointer_event.dart';
@@ -11,14 +12,18 @@ import 'package:dart_rfb/src/constants.dart';
 import 'package:dart_rfb/src/extensions/byte_data_extensions.dart';
 import 'package:dart_rfb/src/extensions/int_extensions.dart';
 import 'package:dart_rfb/src/protocol/client_init_message.dart';
+import 'package:dart_rfb/src/protocol/encoding_type.dart';
 import 'package:dart_rfb/src/protocol/frame_buffer_update_message.dart';
 import 'package:dart_rfb/src/protocol/frame_buffer_update_request_message.dart';
+import 'package:dart_rfb/src/protocol/pixel_format.dart';
 import 'package:dart_rfb/src/protocol/pointer_event_message.dart';
 import 'package:dart_rfb/src/protocol/protocol_version_handshake_message.dart';
 import 'package:dart_rfb/src/protocol/security_handshake_message.dart';
 import 'package:dart_rfb/src/protocol/security_result_handshake_message.dart';
 import 'package:dart_rfb/src/protocol/security_type.dart';
 import 'package:dart_rfb/src/protocol/server_init_message.dart';
+import 'package:dart_rfb/src/protocol/set_encodings_message.dart';
+import 'package:dart_rfb/src/protocol/set_pixel_format_message.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:logging/logging.dart';
 
@@ -190,7 +195,7 @@ class RemoteFrameBufferClient {
                       ) {
                         logger.log(
                           Level.INFO,
-                          '< ${updateMessage.rectangles.length} update rectangles',
+                          '< update rectangles: ${updateMessage.rectangles.groupListsBy((final RemoteFrameBufferFrameBufferUpdateMessageRectangle rectangle) => rectangle.encodingType).mapValue((final List<RemoteFrameBufferFrameBufferUpdateMessageRectangle> list) => list.length)}',
                         );
                         _updateStreamController.add(
                           RemoteFrameBufferClientUpdate(
@@ -201,6 +206,7 @@ class RemoteFrameBufferClient {
                               ) =>
                                   RemoteFrameBufferClientUpdateRectangle(
                                 byteData: rectangle.pixelData,
+                                encodingType: rectangle.encodingType,
                                 height: rectangle.height,
                                 width: rectangle.width,
                                 x: rectangle.x,
@@ -340,7 +346,9 @@ class RemoteFrameBufferClient {
             .andThen(() => _handleSecurityType(socket: socket))
             .andThen(() => _readSecurityResultMessage(socket: socket))
             .andThen(() => _sendClientInitMessage(socket: socket))
-            .andThen(() => _readServerInitMessage(socket: socket)),
+            .andThen(() => _readServerInitMessage(socket: socket))
+            .andThen(() => _setPixelFormat(socket: socket))
+            .andThen(() => _setEncodingTypes(socket: socket)),
       );
 
   TaskEither<Object, void> _readProtocolVersionMessage({
@@ -670,4 +678,37 @@ class RemoteFrameBufferClient {
           v3_8: (final _) => taskEither,
         );
   }
+
+  TaskEither<Object, void> _setEncodingTypes({
+    required final RawSocket socket,
+  }) =>
+      TaskEither<Object, void>.tryCatch(
+        () async {
+          const RemoteFrameBufferSetEncodingsMessage message =
+              RemoteFrameBufferSetEncodingsMessage(
+            encodingTypes: <RemoteFrameBufferEncodingType>[
+              RemoteFrameBufferEncodingType.copyRect(),
+              RemoteFrameBufferEncodingType.raw(),
+            ],
+          );
+          logger.info('> $message');
+          socket.write(message.toBytes().buffer.asUint8List());
+        },
+        (final Object error, final _) => error,
+      );
+
+  TaskEither<Object, void> _setPixelFormat({
+    required final RawSocket socket,
+  }) =>
+      TaskEither<Object, void>.tryCatch(
+        () async {
+          final RemoteFrameBufferSetPixelFormatMessage message =
+              RemoteFrameBufferSetPixelFormatMessage(
+            pixelFormat: RemoteFrameBufferPixelFormat.bgra8888,
+          );
+          logger.info('> $message');
+          socket.write(message.toBytes().buffer.asUint8ClampedList());
+        },
+        (final Object error, final _) => error,
+      );
 }

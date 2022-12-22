@@ -14,7 +14,7 @@ void main() {
     );
     final RemoteFrameBufferEncodingType encodingType =
         RemoteFrameBufferEncodingType.fromBytes(
-      bytes: ByteData(4)..setInt32(0, 1),
+      bytes: ByteData(4)..setInt32(0, -1),
     );
     expect(encodingType, isA<RemoteFrameBufferEncodingTypeUnsupported>());
     expect(
@@ -22,7 +22,25 @@ void main() {
           .bytes
           .buffer
           .asUint8List(),
-      (ByteData(4)..setInt32(0, 1)).buffer.asUint8List(),
+      (ByteData(4)..setInt32(0, -1)).buffer.asUint8List(),
+    );
+  });
+
+  test('Encoding type to bytes works', () {
+    expect(
+      const RemoteFrameBufferEncodingType.raw().toBytes().buffer.asUint8List(),
+      equals(
+        (ByteData(4)..setInt32(0, 0)).buffer.asUint8List(),
+      ),
+    );
+    expect(
+      const RemoteFrameBufferEncodingType.copyRect()
+          .toBytes()
+          .buffer
+          .asUint8List(),
+      equals(
+        (ByteData(4)..setInt32(0, 1)).buffer.asUint8List(),
+      ),
     );
   });
 }
