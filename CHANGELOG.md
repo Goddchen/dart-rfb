@@ -28,3 +28,7 @@
 - Add CopyRect encoding support
 - Add SetEncodings message support
 - Add SetPixelFormat message support
+
+## 0.4.1
+
+- Fix [issue #9](https://github.com/Goddchen/dart-rfb/issues/9) (hanging after some time)

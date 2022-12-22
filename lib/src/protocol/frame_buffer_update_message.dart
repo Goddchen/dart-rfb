@@ -1,9 +1,9 @@
 import 'dart:io';
-import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:dart_rfb/src/client/config.dart';
-import 'package:dart_rfb/src/constants.dart';
+import 'package:dart_rfb/src/client/remote_frame_buffer_client.dart';
+import 'package:dart_rfb/src/extensions/raw_socket_extensions.dart';
 import 'package:dart_rfb/src/protocol/encoding_type.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -29,33 +29,23 @@ class RemoteFrameBufferFrameBufferUpdateMessage
   }) =>
       TaskEither<Object, RemoteFrameBufferFrameBufferUpdateMessage>.tryCatch(
         () async {
-          while (socket.available() < 2) {
-            await Future<void>.delayed(Constants.socketReadWaitDuration);
-          }
-          final int numberOfRectangles = optionOf(socket.read(2))
-              .map(
-                (final Uint8List bytes) =>
-                    ByteData.sublistView(bytes).getUint16(0),
-              )
-              .getOrElse(
-                () => throw Exception('Error reading number of rectangles'),
-              );
+          final int numberOfRectangles =
+              (await socket.readSync(length: 2).run()).getUint16(0);
+          RemoteFrameBufferClient.logger
+              .fine('< $numberOfRectangles rectangles');
           final List<RemoteFrameBufferFrameBufferUpdateMessageRectangle>
               rectangles =
               List<RemoteFrameBufferFrameBufferUpdateMessageRectangle>.empty(
             growable: true,
           );
           for (int i = 0; i < numberOfRectangles; i++) {
-            while (socket.available() < 12) {
-              await Future<void>.delayed(Constants.socketReadWaitDuration);
-            }
-            final ByteData headerBytes = optionOf(socket.read(12))
-                .map(ByteData.sublistView)
-                .getOrElse(() => throw Exception('Error reading header bytes'));
             final RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader
                 rectangleHeader =
                 RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader
-                    .fromBytes(bytes: headerBytes);
+                    .fromBytes(
+              bytes: await socket.readSync(length: 12).run(),
+            );
+            RemoteFrameBufferClient.logger.fine('< $rectangleHeader');
             final int numberOfDataBytes = rectangleHeader.encodingType.map(
               copyRect: (final _) => 4,
               raw: (final _) => (rectangleHeader.width *
@@ -64,20 +54,16 @@ class RemoteFrameBufferFrameBufferUpdateMessage
                   .toInt(),
               unsupported: (final _) => 0,
             );
-            final BytesBuilder bytesBuilder = BytesBuilder();
-            while (bytesBuilder.length < numberOfDataBytes) {
-              optionOf(
-                socket.read(min(1024, numberOfDataBytes - bytesBuilder.length)),
-              ).match(
-                () {},
-                bytesBuilder.add,
-              );
-            }
             rectangles.add(
               RemoteFrameBufferFrameBufferUpdateMessageRectangle(
                 encodingType: rectangleHeader.encodingType,
                 height: rectangleHeader.height,
-                pixelData: ByteData.sublistView(bytesBuilder.toBytes()),
+                pixelData: await socket
+                    .readSync(
+                      length: numberOfDataBytes,
+                      readWaitDuration: none(),
+                    )
+                    .run(),
                 width: rectangleHeader.width,
                 x: rectangleHeader.x,
                 y: rectangleHeader.y,
