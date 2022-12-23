@@ -32,3 +32,7 @@
 ## 0.4.1
 
 - Fix [issue #9](https://github.com/Goddchen/dart-rfb/issues/9) (hanging after some time)
+
+## 0.5.0
+
+- Add key event support
