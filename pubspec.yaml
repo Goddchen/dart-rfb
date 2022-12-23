@@ -1,7 +1,7 @@
 description: Implementation of The Remote Framebuffer Protocol (RFC 6143, aka VNC protocol)
 name: dart_rfb
 repository: https://github.com/Goddchen/dart-rfb
-version: 0.5.0
+version: 0.6.0
 
 environment:
   sdk: ">=2.18.4 <3.0.0"

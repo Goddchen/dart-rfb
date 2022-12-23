@@ -36,3 +36,7 @@
 ## 0.5.0
 
 - Add key event support
+
+## 0.6.0
+
+- Add clipboard support
