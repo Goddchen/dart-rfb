@@ -13,6 +13,7 @@ import 'package:dart_rfb/src/constants.dart';
 import 'package:dart_rfb/src/extensions/byte_data_extensions.dart';
 import 'package:dart_rfb/src/extensions/int_extensions.dart';
 import 'package:dart_rfb/src/extensions/raw_socket_extensions.dart';
+import 'package:dart_rfb/src/protocol/client_cut_text_message.dart';
 import 'package:dart_rfb/src/protocol/client_init_message.dart';
 import 'package:dart_rfb/src/protocol/encoding_type.dart';
 import 'package:dart_rfb/src/protocol/frame_buffer_update_message.dart';
@@ -24,6 +25,7 @@ import 'package:dart_rfb/src/protocol/protocol_version_handshake_message.dart';
 import 'package:dart_rfb/src/protocol/security_handshake_message.dart';
 import 'package:dart_rfb/src/protocol/security_result_handshake_message.dart';
 import 'package:dart_rfb/src/protocol/security_type.dart';
+import 'package:dart_rfb/src/protocol/server_cut_text_message.dart';
 import 'package:dart_rfb/src/protocol/server_init_message.dart';
 import 'package:dart_rfb/src/protocol/set_encodings_message.dart';
 import 'package:dart_rfb/src/protocol/set_pixel_format_message.dart';
@@ -35,24 +37,31 @@ import 'package:logging/logging.dart';
 class RemoteFrameBufferClient {
   static final Logger logger = Logger('RemoteFrameBufferClient');
 
-  final StreamController<RemoteFrameBufferClientUpdate>
-      _updateStreamController =
-      StreamController<RemoteFrameBufferClientUpdate>.broadcast();
-
   Option<Config> _config = none();
 
-  Option<RawSocket> _socket = none();
+  Option<String> _password = none();
 
   bool _readLoopRunning = false;
-
-  Option<String> _password = none();
 
   Option<RemoteFrameBufferProtocolVersion> _selectedProtocolVersion = none();
 
   Option<RemoteFrameBufferSecurityType> _selectedSecurityType = none();
 
+  Option<RawSocket> _socket = none();
+
+  final StreamController<String> _serverClipBoardStreamController =
+      StreamController<String>();
+
+  final StreamController<RemoteFrameBufferClientUpdate>
+      _updateStreamController =
+      StreamController<RemoteFrameBufferClientUpdate>.broadcast();
+
   /// The config used by the underlying session.
   Option<Config> get config => _config;
+
+  /// A [Stream] that will give access to the server's clipboard updates.
+  Stream<String> get serverClipBoardStream =>
+      _serverClipBoardStreamController.stream;
 
   /// A [Stream] that will give access to all incoming framebuffer updates.
   Stream<RemoteFrameBufferClientUpdate> get updateStream =>
@@ -114,6 +123,19 @@ class RemoteFrameBufferClient {
             );
           },
         ),
+      );
+
+  void sendClientCutText({
+    required final String text,
+  }) =>
+      _socket.match(
+        () {},
+        (final RawSocket socket) {
+          final RemoteFrameBufferClientCutTextMessage message =
+              RemoteFrameBufferClientCutTextMessage(text: text);
+          logger.info('> $message');
+          socket.write(message.toBytes().buffer.asUint8List());
+        },
       );
 
   void sendKeyEvent({
@@ -234,13 +256,20 @@ class RemoteFrameBufferClient {
                     // no data, just ignore for now
                     break;
                   case 3: // ServerCutText
-                    final int length =
-                        (await socket.readSync(length: 7).run()).getUint32(3);
-                    socket.readSync(length: length);
+                    final RemoteFrameBufferServerCutTextMessage message =
+                        (await RemoteFrameBufferServerCutTextMessage
+                                    .readFromSocket(socket: socket)
+                                .run())
+                            .getOrElse(
+                      (final Object error) => throw Exception(
+                        'Error reading server cut text: $error',
+                      ),
+                    );
+                    logger.info('< $message');
+                    _serverClipBoardStreamController.add(message.text);
                     break;
                   default:
-                    logger.log(
-                      Level.INFO,
+                    logger.info(
                       'Receive unsupported message type: $messageType',
                     );
                     break;
