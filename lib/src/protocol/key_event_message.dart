@@ -16,5 +16,5 @@ class RemoteFrameBufferKeyEventMessage with _$RemoteFrameBufferKeyEventMessage {
   ByteData toBytes() => ByteData(8)
     ..setUint8(0, 4)
     ..setUint8(1, down ? 1 : 0)
-    ..setUint32(3, key);
+    ..setUint32(4, key);
 }

@@ -15,7 +15,7 @@ void main() {
         (ByteData(8)
               ..setUint8(0, 4)
               ..setUint8(1, 1)
-              ..setUint32(3, 0))
+              ..setUint32(4, 0))
             .buffer
             .asUint8List(),
       ),
@@ -29,7 +29,7 @@ void main() {
         (ByteData(8)
               ..setUint8(0, 4)
               ..setUint8(1, 0)
-              ..setUint32(3, 1))
+              ..setUint32(4, 1))
             .buffer
             .asUint8List(),
       ),
