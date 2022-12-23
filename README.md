@@ -53,12 +53,12 @@ And here we are, after a weekend, with the first, minimal, protocol implementati
   - ✅ FramebufferUpdateRequest
   - ✅ KeyEvent
   - ✅ PointerEvent
-  - ⬜ ClientCutText
+  - ✅ ClientCutText
 - Server-to-Client
   - ✅ FramebufferUpdate
   - ⬜ SetColorMapEntries
   - ⬜ Bell
-  - ⬜ ServerCutText
+  - ✅ ServerCutText
 
 ## Installation
 
