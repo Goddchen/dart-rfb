@@ -51,7 +51,7 @@ And here we are, after a weekend, with the first, minimal, protocol implementati
   - ✅ SetPixelFormat
   - ✅ SetEncodings
   - ✅ FramebufferUpdateRequest
-  - ⬜ KeyEvent
+  - ✅ KeyEvent
   - ✅ PointerEvent
   - ⬜ ClientCutText
 - Server-to-Client
