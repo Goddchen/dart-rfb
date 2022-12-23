@@ -6,6 +6,7 @@ import 'dart:typed_data';
 import 'package:collection/collection.dart';
 import 'package:dart_des/dart_des.dart';
 import 'package:dart_rfb/src/client/config.dart';
+import 'package:dart_rfb/src/client/remote_frame_buffer_client_key_event.dart';
 import 'package:dart_rfb/src/client/remote_frame_buffer_client_pointer_event.dart';
 import 'package:dart_rfb/src/client/remote_frame_buffer_client_update.dart';
 import 'package:dart_rfb/src/constants.dart';
@@ -16,6 +17,7 @@ import 'package:dart_rfb/src/protocol/client_init_message.dart';
 import 'package:dart_rfb/src/protocol/encoding_type.dart';
 import 'package:dart_rfb/src/protocol/frame_buffer_update_message.dart';
 import 'package:dart_rfb/src/protocol/frame_buffer_update_request_message.dart';
+import 'package:dart_rfb/src/protocol/key_event_message.dart';
 import 'package:dart_rfb/src/protocol/pixel_format.dart';
 import 'package:dart_rfb/src/protocol/pointer_event_message.dart';
 import 'package:dart_rfb/src/protocol/protocol_version_handshake_message.dart';
@@ -112,6 +114,22 @@ class RemoteFrameBufferClient {
             );
           },
         ),
+      );
+
+  void sendKeyEvent({
+    required final RemoteFrameBufferClientKeyEvent keyEvent,
+  }) =>
+      _socket.match(
+        () {},
+        (final RawSocket socket) {
+          final RemoteFrameBufferKeyEventMessage message =
+              RemoteFrameBufferKeyEventMessage(
+            down: keyEvent.down,
+            key: keyEvent.key,
+          );
+          logger.info('> $message');
+          socket.write(message.toBytes().asUint8List());
+        },
       );
 
   void sendPointerEvent({
