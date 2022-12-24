@@ -79,7 +79,16 @@ client.updateStream.listen(
     // Update your framebuffer
   },
 );
-await client.startReadLoop();
+// To let the package handle incoming messages
+client.handleIncomingMessages();
+// Or handle yourself
+StreamSubscription<RemoteFrameBufferClientReadMessage> subscription =
+    client.incomingMessages.listen(
+  (final RemoteFrameBufferClientReadMessage message) {
+    // Do something
+  },
+);
+// Request an initial framebuffer update
 client.requestUpdate();
 ```
 

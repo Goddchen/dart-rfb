@@ -40,3 +40,7 @@
 ## 0.6.0
 
 - Add clipboard support
+
+## 0.7.0
+
+- Refactoring: replace `startReadLoop()` with `Stream<RemoteFrameBufferClientReadMessage> incomingMessages` and `void handleIncomingMessages()`

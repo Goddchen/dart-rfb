@@ -20,7 +20,7 @@ void main() {
         hostname: '127.0.0.1',
         password: 'password',
       );
-      unawaited(client.startReadLoop());
+      client.handleIncomingMessages();
       while (true) {
         client.requestUpdate();
         await Future<void>.delayed(const Duration(milliseconds: 33));
