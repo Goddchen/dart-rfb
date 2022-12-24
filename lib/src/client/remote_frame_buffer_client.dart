@@ -8,6 +8,7 @@ import 'package:dart_des/dart_des.dart';
 import 'package:dart_rfb/src/client/config.dart';
 import 'package:dart_rfb/src/client/remote_frame_buffer_client_key_event.dart';
 import 'package:dart_rfb/src/client/remote_frame_buffer_client_pointer_event.dart';
+import 'package:dart_rfb/src/client/remote_frame_buffer_client_read_message.dart';
 import 'package:dart_rfb/src/client/remote_frame_buffer_client_update.dart';
 import 'package:dart_rfb/src/constants.dart';
 import 'package:dart_rfb/src/extensions/byte_data_extensions.dart';
@@ -39,6 +40,9 @@ class RemoteFrameBufferClient {
 
   Option<Config> _config = none();
 
+  Option<StreamSubscription<RemoteFrameBufferClientReadMessage>>
+      _incomingMessagesSubscription = none();
+
   Option<String> _password = none();
 
   bool _readLoopRunning = false;
@@ -59,6 +63,85 @@ class RemoteFrameBufferClient {
   /// The config used by the underlying session.
   Option<Config> get config => _config;
 
+  /// Start the reading loop that reads incoming protocol messages.
+  /// You can then call [handleIncomingMessages] to let the package handle
+  /// incoming messages or just listen to the returned [Stream] diretly to
+  /// handle incoming messages yourself.
+  Stream<RemoteFrameBufferClientReadMessage> get incomingMessages async* {
+    assert(!_readLoopRunning);
+    yield* _socket.match(
+      () => throw Exception('Socket not available'),
+      (final RawSocket socket) async* {
+        final Config config =
+            _config.getOrElse(() => throw Exception('Config not available'));
+        _readLoopRunning = true;
+        while (_readLoopRunning) {
+          final int messageType = (await socket
+                  .readSync(
+                    length: 1,
+                    readWaitDuration: some(Constants.socketReadWaitDuration),
+                  )
+                  .run())
+              .getUint8(0);
+          logger.log(Level.INFO, '< messageType: $messageType');
+          switch (messageType) {
+            case 0:
+              // read and ignore padding
+              await socket.readSync(length: 1).run();
+              yield (await RemoteFrameBufferFrameBufferUpdateMessage
+                          .readFromSocket(config: config, socket: socket)
+                      .run())
+                  .match(
+                (final Object error) => throw Exception(
+                  'Error reading and handling update message: $error',
+                ),
+                (
+                  final RemoteFrameBufferFrameBufferUpdateMessage updateMessage,
+                ) {
+                  logger.info(
+                    '< update rectangles: ${updateMessage.rectangles.groupListsBy((final RemoteFrameBufferFrameBufferUpdateMessageRectangle rectangle) => rectangle.encodingType).mapValue((final List<RemoteFrameBufferFrameBufferUpdateMessageRectangle> list) => list.length)}',
+                  );
+                  return RemoteFrameBufferClientReadMessage.frameBufferUpdate(
+                    message: updateMessage,
+                  );
+                },
+              );
+              break;
+            case 1: // SetColorMapEntries
+              final int numberOfColors =
+                  (await socket.readSync(length: 5).run()).getUint16(3);
+              socket.readSync(length: numberOfColors * 6);
+              yield const RemoteFrameBufferClientReadMessage
+                  .setColorMapEntries();
+              break;
+            case 2: // Bell
+              // no data, just ignore for now
+              yield const RemoteFrameBufferClientReadMessage.bell();
+              break;
+            case 3: // ServerCutText
+              final RemoteFrameBufferServerCutTextMessage message =
+                  (await RemoteFrameBufferServerCutTextMessage.readFromSocket(
+                socket: socket,
+              ).run())
+                      .getOrElse(
+                (final Object error) => throw Exception(
+                  'Error reading server cut text: $error',
+                ),
+              );
+              logger.info('< $message');
+              yield RemoteFrameBufferClientReadMessage.serverCutTextMessage(
+                message: message,
+              );
+              // _serverClipBoardStreamController.add(message.text);
+              break;
+            default:
+              throw Exception('Receive unsupported message type: $messageType');
+          }
+        }
+      },
+    );
+  }
+
   /// A [Stream] that will give access to the server's clipboard updates.
   Stream<String> get serverClipBoardStream =>
       _serverClipBoardStreamController.stream;
@@ -70,6 +153,14 @@ class RemoteFrameBufferClient {
   /// Dispose the currently active session and all used resources.
   Future<void> close() async {
     _readLoopRunning = false;
+    await _incomingMessagesSubscription.match(
+      () {},
+      (
+        final StreamSubscription<RemoteFrameBufferClientReadMessage>
+            subscription,
+      ) =>
+          subscription.cancel(),
+    );
     await _updateStreamController.close();
   }
 
@@ -100,6 +191,45 @@ class RemoteFrameBufferClient {
         (final Object error) => throw Exception(error),
         (final _) {},
       );
+
+  /// Invoke this method to let the package read and handle incoming messages.
+  /// If you want to handle incoming messages yourself, directly listen to
+  /// [incomingMessages].
+  void handleIncomingMessages() {
+    _incomingMessagesSubscription = some(
+      incomingMessages
+          .listen((final RemoteFrameBufferClientReadMessage message) {
+        message.when(
+          bell: () {},
+          frameBufferUpdate:
+              (final RemoteFrameBufferFrameBufferUpdateMessage message) {
+            _updateStreamController.add(
+              RemoteFrameBufferClientUpdate(
+                rectangles: message.rectangles.map(
+                  (
+                    final RemoteFrameBufferFrameBufferUpdateMessageRectangle
+                        rectangle,
+                  ) =>
+                      RemoteFrameBufferClientUpdateRectangle(
+                    byteData: rectangle.pixelData,
+                    encodingType: rectangle.encodingType,
+                    height: rectangle.height,
+                    width: rectangle.width,
+                    x: rectangle.x,
+                    y: rectangle.y,
+                  ),
+                ),
+              ),
+            );
+          },
+          serverCutTextMessage:
+              (final RemoteFrameBufferServerCutTextMessage message) =>
+                  _serverClipBoardStreamController.add(message.text),
+          setColorMapEntries: () {},
+        );
+      }),
+    );
+  }
 
   /// Request a framebuffer update from the server.
   /// Call this once you are finished processing any received updates.
@@ -175,113 +305,6 @@ class RemoteFrameBufferClient {
           );
           logger.info('> $message');
           socket.write(message.toBytes().asUint8List());
-        },
-      );
-
-  /// Start the reading loop that handles incoming protocol messages.
-  Future<void> startReadLoop() async => await _socket.match(
-        () => throw Exception('Socket not available'),
-        (final RawSocket socket) async {
-          (await TaskEither<Object, void>.tryCatch(
-            () async {
-              final Config config = _config
-                  .getOrElse(() => throw Exception('Config not available'));
-              socket.write(
-                RemoteFrameBufferFrameBufferUpdateRequestMessage(
-                  height: config.frameBufferHeight,
-                  incremental: true,
-                  width: config.frameBufferWidth,
-                  x: 0,
-                  y: 0,
-                ).toBytes().asUint8List(),
-              );
-              _readLoopRunning = true;
-              while (_readLoopRunning) {
-                final int messageType = (await socket
-                        .readSync(
-                          length: 1,
-                          readWaitDuration:
-                              some(Constants.socketReadWaitDuration),
-                        )
-                        .run())
-                    .getUint8(0);
-                logger.log(Level.INFO, '< messageType: $messageType');
-                switch (messageType) {
-                  case 0:
-                    // read and ignore padding
-                    await socket.readSync(length: 1).run();
-                    (await RemoteFrameBufferFrameBufferUpdateMessage
-                                .readFromSocket(config: config, socket: socket)
-                            .run())
-                        .match(
-                      (final Object error) => logger.log(
-                        Level.INFO,
-                        'Error reading and handling update message: $error',
-                      ),
-                      (
-                        final RemoteFrameBufferFrameBufferUpdateMessage
-                            updateMessage,
-                      ) {
-                        logger.log(
-                          Level.INFO,
-                          '< update rectangles: ${updateMessage.rectangles.groupListsBy((final RemoteFrameBufferFrameBufferUpdateMessageRectangle rectangle) => rectangle.encodingType).mapValue((final List<RemoteFrameBufferFrameBufferUpdateMessageRectangle> list) => list.length)}',
-                        );
-                        _updateStreamController.add(
-                          RemoteFrameBufferClientUpdate(
-                            rectangles: updateMessage.rectangles.map(
-                              (
-                                final RemoteFrameBufferFrameBufferUpdateMessageRectangle
-                                    rectangle,
-                              ) =>
-                                  RemoteFrameBufferClientUpdateRectangle(
-                                byteData: rectangle.pixelData,
-                                encodingType: rectangle.encodingType,
-                                height: rectangle.height,
-                                width: rectangle.width,
-                                x: rectangle.x,
-                                y: rectangle.y,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                    break;
-                  case 1: // SetColorMapEntries
-                    final int numberOfColors =
-                        (await socket.readSync(length: 5).run()).getUint16(3);
-                    socket.readSync(length: numberOfColors * 6);
-                    break;
-                  case 2: // Bell
-                    // no data, just ignore for now
-                    break;
-                  case 3: // ServerCutText
-                    final RemoteFrameBufferServerCutTextMessage message =
-                        (await RemoteFrameBufferServerCutTextMessage
-                                    .readFromSocket(socket: socket)
-                                .run())
-                            .getOrElse(
-                      (final Object error) => throw Exception(
-                        'Error reading server cut text: $error',
-                      ),
-                    );
-                    logger.info('< $message');
-                    _serverClipBoardStreamController.add(message.text);
-                    break;
-                  default:
-                    logger.info(
-                      'Receive unsupported message type: $messageType',
-                    );
-                    break;
-                }
-              }
-            },
-            (final Object error, final _) => error,
-          ).run())
-              .match(
-            (final Object error) => throw Exception(error),
-            (final _) {},
-          );
         },
       );
 
