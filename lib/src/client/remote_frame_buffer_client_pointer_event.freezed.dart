@@ -125,12 +125,12 @@ class _$RemoteFrameBufferClientPointerEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferClientPointerEventCopyWith<$Res>
+abstract class _$$RemoteFrameBufferClientPointerEventImplCopyWith<$Res>
     implements $RemoteFrameBufferClientPointerEventCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferClientPointerEventCopyWith(
-          _$_RemoteFrameBufferClientPointerEvent value,
-          $Res Function(_$_RemoteFrameBufferClientPointerEvent) then) =
-      __$$_RemoteFrameBufferClientPointerEventCopyWithImpl<$Res>;
+  factory _$$RemoteFrameBufferClientPointerEventImplCopyWith(
+          _$RemoteFrameBufferClientPointerEventImpl value,
+          $Res Function(_$RemoteFrameBufferClientPointerEventImpl) then) =
+      __$$RemoteFrameBufferClientPointerEventImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -147,13 +147,13 @@ abstract class _$$_RemoteFrameBufferClientPointerEventCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferClientPointerEventCopyWithImpl<$Res>
+class __$$RemoteFrameBufferClientPointerEventImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferClientPointerEventCopyWithImpl<$Res,
-        _$_RemoteFrameBufferClientPointerEvent>
-    implements _$$_RemoteFrameBufferClientPointerEventCopyWith<$Res> {
-  __$$_RemoteFrameBufferClientPointerEventCopyWithImpl(
-      _$_RemoteFrameBufferClientPointerEvent _value,
-      $Res Function(_$_RemoteFrameBufferClientPointerEvent) _then)
+        _$RemoteFrameBufferClientPointerEventImpl>
+    implements _$$RemoteFrameBufferClientPointerEventImplCopyWith<$Res> {
+  __$$RemoteFrameBufferClientPointerEventImplCopyWithImpl(
+      _$RemoteFrameBufferClientPointerEventImpl _value,
+      $Res Function(_$RemoteFrameBufferClientPointerEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -170,7 +170,7 @@ class __$$_RemoteFrameBufferClientPointerEventCopyWithImpl<$Res>
     Object? x = null,
     Object? y = null,
   }) {
-    return _then(_$_RemoteFrameBufferClientPointerEvent(
+    return _then(_$RemoteFrameBufferClientPointerEventImpl(
       button1Down: null == button1Down
           ? _value.button1Down
           : button1Down // ignore: cast_nullable_to_non_nullable
@@ -217,9 +217,9 @@ class __$$_RemoteFrameBufferClientPointerEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferClientPointerEvent
+class _$RemoteFrameBufferClientPointerEventImpl
     implements _RemoteFrameBufferClientPointerEvent {
-  const _$_RemoteFrameBufferClientPointerEvent(
+  const _$RemoteFrameBufferClientPointerEventImpl(
       {required this.button1Down,
       required this.button2Down,
       required this.button3Down,
@@ -261,7 +261,7 @@ class _$_RemoteFrameBufferClientPointerEvent
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferClientPointerEvent &&
+            other is _$RemoteFrameBufferClientPointerEventImpl &&
             (identical(other.button1Down, button1Down) ||
                 other.button1Down == button1Down) &&
             (identical(other.button2Down, button2Down) ||
@@ -299,10 +299,10 @@ class _$_RemoteFrameBufferClientPointerEvent
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferClientPointerEventCopyWith<
-          _$_RemoteFrameBufferClientPointerEvent>
-      get copyWith => __$$_RemoteFrameBufferClientPointerEventCopyWithImpl<
-          _$_RemoteFrameBufferClientPointerEvent>(this, _$identity);
+  _$$RemoteFrameBufferClientPointerEventImplCopyWith<
+          _$RemoteFrameBufferClientPointerEventImpl>
+      get copyWith => __$$RemoteFrameBufferClientPointerEventImplCopyWithImpl<
+          _$RemoteFrameBufferClientPointerEventImpl>(this, _$identity);
 }
 
 abstract class _RemoteFrameBufferClientPointerEvent
@@ -317,7 +317,7 @@ abstract class _RemoteFrameBufferClientPointerEvent
       required final bool button7Down,
       required final bool button8Down,
       required final int x,
-      required final int y}) = _$_RemoteFrameBufferClientPointerEvent;
+      required final int y}) = _$RemoteFrameBufferClientPointerEventImpl;
 
   @override
   bool get button1Down;
@@ -341,7 +341,7 @@ abstract class _RemoteFrameBufferClientPointerEvent
   int get y;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferClientPointerEventCopyWith<
-          _$_RemoteFrameBufferClientPointerEvent>
+  _$$RemoteFrameBufferClientPointerEventImplCopyWith<
+          _$RemoteFrameBufferClientPointerEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

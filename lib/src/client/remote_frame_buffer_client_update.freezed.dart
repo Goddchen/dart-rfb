@@ -68,25 +68,25 @@ class _$RemoteFrameBufferClientFrameBufferConfigCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferClientFrameBufferConfigCopyWith<$Res>
+abstract class _$$RemoteFrameBufferClientFrameBufferConfigImplCopyWith<$Res>
     implements $RemoteFrameBufferClientFrameBufferConfigCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferClientFrameBufferConfigCopyWith(
-          _$_RemoteFrameBufferClientFrameBufferConfig value,
-          $Res Function(_$_RemoteFrameBufferClientFrameBufferConfig) then) =
-      __$$_RemoteFrameBufferClientFrameBufferConfigCopyWithImpl<$Res>;
+  factory _$$RemoteFrameBufferClientFrameBufferConfigImplCopyWith(
+          _$RemoteFrameBufferClientFrameBufferConfigImpl value,
+          $Res Function(_$RemoteFrameBufferClientFrameBufferConfigImpl) then) =
+      __$$RemoteFrameBufferClientFrameBufferConfigImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int height, int width});
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferClientFrameBufferConfigCopyWithImpl<$Res>
+class __$$RemoteFrameBufferClientFrameBufferConfigImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferClientFrameBufferConfigCopyWithImpl<$Res,
-        _$_RemoteFrameBufferClientFrameBufferConfig>
-    implements _$$_RemoteFrameBufferClientFrameBufferConfigCopyWith<$Res> {
-  __$$_RemoteFrameBufferClientFrameBufferConfigCopyWithImpl(
-      _$_RemoteFrameBufferClientFrameBufferConfig _value,
-      $Res Function(_$_RemoteFrameBufferClientFrameBufferConfig) _then)
+        _$RemoteFrameBufferClientFrameBufferConfigImpl>
+    implements _$$RemoteFrameBufferClientFrameBufferConfigImplCopyWith<$Res> {
+  __$$RemoteFrameBufferClientFrameBufferConfigImplCopyWithImpl(
+      _$RemoteFrameBufferClientFrameBufferConfigImpl _value,
+      $Res Function(_$RemoteFrameBufferClientFrameBufferConfigImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -95,7 +95,7 @@ class __$$_RemoteFrameBufferClientFrameBufferConfigCopyWithImpl<$Res>
     Object? height = null,
     Object? width = null,
   }) {
-    return _then(_$_RemoteFrameBufferClientFrameBufferConfig(
+    return _then(_$RemoteFrameBufferClientFrameBufferConfigImpl(
       height: null == height
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
@@ -110,9 +110,9 @@ class __$$_RemoteFrameBufferClientFrameBufferConfigCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferClientFrameBufferConfig
+class _$RemoteFrameBufferClientFrameBufferConfigImpl
     implements _RemoteFrameBufferClientFrameBufferConfig {
-  const _$_RemoteFrameBufferClientFrameBufferConfig(
+  const _$RemoteFrameBufferClientFrameBufferConfigImpl(
       {required this.height, required this.width});
 
   @override
@@ -129,7 +129,7 @@ class _$_RemoteFrameBufferClientFrameBufferConfig
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferClientFrameBufferConfig &&
+            other is _$RemoteFrameBufferClientFrameBufferConfigImpl &&
             (identical(other.height, height) || other.height == height) &&
             (identical(other.width, width) || other.width == width));
   }
@@ -140,17 +140,18 @@ class _$_RemoteFrameBufferClientFrameBufferConfig
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferClientFrameBufferConfigCopyWith<
-          _$_RemoteFrameBufferClientFrameBufferConfig>
-      get copyWith => __$$_RemoteFrameBufferClientFrameBufferConfigCopyWithImpl<
-          _$_RemoteFrameBufferClientFrameBufferConfig>(this, _$identity);
+  _$$RemoteFrameBufferClientFrameBufferConfigImplCopyWith<
+          _$RemoteFrameBufferClientFrameBufferConfigImpl>
+      get copyWith =>
+          __$$RemoteFrameBufferClientFrameBufferConfigImplCopyWithImpl<
+              _$RemoteFrameBufferClientFrameBufferConfigImpl>(this, _$identity);
 }
 
 abstract class _RemoteFrameBufferClientFrameBufferConfig
     implements RemoteFrameBufferClientFrameBufferConfig {
   const factory _RemoteFrameBufferClientFrameBufferConfig(
-      {required final int height,
-      required final int width}) = _$_RemoteFrameBufferClientFrameBufferConfig;
+          {required final int height, required final int width}) =
+      _$RemoteFrameBufferClientFrameBufferConfigImpl;
 
   @override
   int get height;
@@ -158,8 +159,8 @@ abstract class _RemoteFrameBufferClientFrameBufferConfig
   int get width;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferClientFrameBufferConfigCopyWith<
-          _$_RemoteFrameBufferClientFrameBufferConfig>
+  _$$RemoteFrameBufferClientFrameBufferConfigImplCopyWith<
+          _$RemoteFrameBufferClientFrameBufferConfigImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -211,25 +212,25 @@ class _$RemoteFrameBufferClientUpdateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferClientUpdateCopyWith<$Res>
+abstract class _$$RemoteFrameBufferClientUpdateImplCopyWith<$Res>
     implements $RemoteFrameBufferClientUpdateCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferClientUpdateCopyWith(
-          _$_RemoteFrameBufferClientUpdate value,
-          $Res Function(_$_RemoteFrameBufferClientUpdate) then) =
-      __$$_RemoteFrameBufferClientUpdateCopyWithImpl<$Res>;
+  factory _$$RemoteFrameBufferClientUpdateImplCopyWith(
+          _$RemoteFrameBufferClientUpdateImpl value,
+          $Res Function(_$RemoteFrameBufferClientUpdateImpl) then) =
+      __$$RemoteFrameBufferClientUpdateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Iterable<RemoteFrameBufferClientUpdateRectangle> rectangles});
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferClientUpdateCopyWithImpl<$Res>
+class __$$RemoteFrameBufferClientUpdateImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferClientUpdateCopyWithImpl<$Res,
-        _$_RemoteFrameBufferClientUpdate>
-    implements _$$_RemoteFrameBufferClientUpdateCopyWith<$Res> {
-  __$$_RemoteFrameBufferClientUpdateCopyWithImpl(
-      _$_RemoteFrameBufferClientUpdate _value,
-      $Res Function(_$_RemoteFrameBufferClientUpdate) _then)
+        _$RemoteFrameBufferClientUpdateImpl>
+    implements _$$RemoteFrameBufferClientUpdateImplCopyWith<$Res> {
+  __$$RemoteFrameBufferClientUpdateImplCopyWithImpl(
+      _$RemoteFrameBufferClientUpdateImpl _value,
+      $Res Function(_$RemoteFrameBufferClientUpdateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -237,7 +238,7 @@ class __$$_RemoteFrameBufferClientUpdateCopyWithImpl<$Res>
   $Res call({
     Object? rectangles = null,
   }) {
-    return _then(_$_RemoteFrameBufferClientUpdate(
+    return _then(_$RemoteFrameBufferClientUpdateImpl(
       rectangles: null == rectangles
           ? _value.rectangles
           : rectangles // ignore: cast_nullable_to_non_nullable
@@ -248,9 +249,9 @@ class __$$_RemoteFrameBufferClientUpdateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferClientUpdate
+class _$RemoteFrameBufferClientUpdateImpl
     implements _RemoteFrameBufferClientUpdate {
-  const _$_RemoteFrameBufferClientUpdate({required this.rectangles});
+  const _$RemoteFrameBufferClientUpdateImpl({required this.rectangles});
 
   /// The list of [RemoteFrameBufferClientUpdateRectangle]s that make this update.
   @override
@@ -265,7 +266,7 @@ class _$_RemoteFrameBufferClientUpdate
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferClientUpdate &&
+            other is _$RemoteFrameBufferClientUpdateImpl &&
             const DeepCollectionEquality()
                 .equals(other.rectangles, rectangles));
   }
@@ -277,16 +278,17 @@ class _$_RemoteFrameBufferClientUpdate
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferClientUpdateCopyWith<_$_RemoteFrameBufferClientUpdate>
-      get copyWith => __$$_RemoteFrameBufferClientUpdateCopyWithImpl<
-          _$_RemoteFrameBufferClientUpdate>(this, _$identity);
+  _$$RemoteFrameBufferClientUpdateImplCopyWith<
+          _$RemoteFrameBufferClientUpdateImpl>
+      get copyWith => __$$RemoteFrameBufferClientUpdateImplCopyWithImpl<
+          _$RemoteFrameBufferClientUpdateImpl>(this, _$identity);
 }
 
 abstract class _RemoteFrameBufferClientUpdate
     implements RemoteFrameBufferClientUpdate {
   const factory _RemoteFrameBufferClientUpdate(
       {required final Iterable<RemoteFrameBufferClientUpdateRectangle>
-          rectangles}) = _$_RemoteFrameBufferClientUpdate;
+          rectangles}) = _$RemoteFrameBufferClientUpdateImpl;
 
   @override
 
@@ -294,7 +296,8 @@ abstract class _RemoteFrameBufferClientUpdate
   Iterable<RemoteFrameBufferClientUpdateRectangle> get rectangles;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferClientUpdateCopyWith<_$_RemoteFrameBufferClientUpdate>
+  _$$RemoteFrameBufferClientUpdateImplCopyWith<
+          _$RemoteFrameBufferClientUpdateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -404,12 +407,12 @@ class _$RemoteFrameBufferClientUpdateRectangleCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferClientUpdateRectangleCopyWith<$Res>
+abstract class _$$RemoteFrameBufferClientUpdateRectangleImplCopyWith<$Res>
     implements $RemoteFrameBufferClientUpdateRectangleCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferClientUpdateRectangleCopyWith(
-          _$_RemoteFrameBufferClientUpdateRectangle value,
-          $Res Function(_$_RemoteFrameBufferClientUpdateRectangle) then) =
-      __$$_RemoteFrameBufferClientUpdateRectangleCopyWithImpl<$Res>;
+  factory _$$RemoteFrameBufferClientUpdateRectangleImplCopyWith(
+          _$RemoteFrameBufferClientUpdateRectangleImpl value,
+          $Res Function(_$RemoteFrameBufferClientUpdateRectangleImpl) then) =
+      __$$RemoteFrameBufferClientUpdateRectangleImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -425,13 +428,13 @@ abstract class _$$_RemoteFrameBufferClientUpdateRectangleCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferClientUpdateRectangleCopyWithImpl<$Res>
+class __$$RemoteFrameBufferClientUpdateRectangleImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferClientUpdateRectangleCopyWithImpl<$Res,
-        _$_RemoteFrameBufferClientUpdateRectangle>
-    implements _$$_RemoteFrameBufferClientUpdateRectangleCopyWith<$Res> {
-  __$$_RemoteFrameBufferClientUpdateRectangleCopyWithImpl(
-      _$_RemoteFrameBufferClientUpdateRectangle _value,
-      $Res Function(_$_RemoteFrameBufferClientUpdateRectangle) _then)
+        _$RemoteFrameBufferClientUpdateRectangleImpl>
+    implements _$$RemoteFrameBufferClientUpdateRectangleImplCopyWith<$Res> {
+  __$$RemoteFrameBufferClientUpdateRectangleImplCopyWithImpl(
+      _$RemoteFrameBufferClientUpdateRectangleImpl _value,
+      $Res Function(_$RemoteFrameBufferClientUpdateRectangleImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -444,7 +447,7 @@ class __$$_RemoteFrameBufferClientUpdateRectangleCopyWithImpl<$Res>
     Object? x = null,
     Object? y = null,
   }) {
-    return _then(_$_RemoteFrameBufferClientUpdateRectangle(
+    return _then(_$RemoteFrameBufferClientUpdateRectangleImpl(
       byteData: null == byteData
           ? _value.byteData
           : byteData // ignore: cast_nullable_to_non_nullable
@@ -475,9 +478,9 @@ class __$$_RemoteFrameBufferClientUpdateRectangleCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferClientUpdateRectangle
+class _$RemoteFrameBufferClientUpdateRectangleImpl
     implements _RemoteFrameBufferClientUpdateRectangle {
-  const _$_RemoteFrameBufferClientUpdateRectangle(
+  const _$RemoteFrameBufferClientUpdateRectangleImpl(
       {required this.byteData,
       required this.encodingType,
       required this.height,
@@ -518,7 +521,7 @@ class _$_RemoteFrameBufferClientUpdateRectangle
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferClientUpdateRectangle &&
+            other is _$RemoteFrameBufferClientUpdateRectangleImpl &&
             (identical(other.byteData, byteData) ||
                 other.byteData == byteData) &&
             (identical(other.encodingType, encodingType) ||
@@ -536,10 +539,11 @@ class _$_RemoteFrameBufferClientUpdateRectangle
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferClientUpdateRectangleCopyWith<
-          _$_RemoteFrameBufferClientUpdateRectangle>
-      get copyWith => __$$_RemoteFrameBufferClientUpdateRectangleCopyWithImpl<
-          _$_RemoteFrameBufferClientUpdateRectangle>(this, _$identity);
+  _$$RemoteFrameBufferClientUpdateRectangleImplCopyWith<
+          _$RemoteFrameBufferClientUpdateRectangleImpl>
+      get copyWith =>
+          __$$RemoteFrameBufferClientUpdateRectangleImplCopyWithImpl<
+              _$RemoteFrameBufferClientUpdateRectangleImpl>(this, _$identity);
 }
 
 abstract class _RemoteFrameBufferClientUpdateRectangle
@@ -550,7 +554,7 @@ abstract class _RemoteFrameBufferClientUpdateRectangle
       required final int height,
       required final int width,
       required final int x,
-      required final int y}) = _$_RemoteFrameBufferClientUpdateRectangle;
+      required final int y}) = _$RemoteFrameBufferClientUpdateRectangleImpl;
 
   @override
 
@@ -578,7 +582,7 @@ abstract class _RemoteFrameBufferClientUpdateRectangle
   int get y;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferClientUpdateRectangleCopyWith<
-          _$_RemoteFrameBufferClientUpdateRectangle>
+  _$$RemoteFrameBufferClientUpdateRectangleImplCopyWith<
+          _$RemoteFrameBufferClientUpdateRectangleImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

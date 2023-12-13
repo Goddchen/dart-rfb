@@ -62,27 +62,29 @@ class _$RemoteFrameBufferSecurityResultHandshakeMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferSecurityResultHandshakeMessageCopyWith<$Res>
+abstract class _$$RemoteFrameBufferSecurityResultHandshakeMessageImplCopyWith<
+        $Res>
     implements $RemoteFrameBufferSecurityResultHandshakeMessageCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferSecurityResultHandshakeMessageCopyWith(
-          _$_RemoteFrameBufferSecurityResultHandshakeMessage value,
-          $Res Function(_$_RemoteFrameBufferSecurityResultHandshakeMessage)
+  factory _$$RemoteFrameBufferSecurityResultHandshakeMessageImplCopyWith(
+          _$RemoteFrameBufferSecurityResultHandshakeMessageImpl value,
+          $Res Function(_$RemoteFrameBufferSecurityResultHandshakeMessageImpl)
               then) =
-      __$$_RemoteFrameBufferSecurityResultHandshakeMessageCopyWithImpl<$Res>;
+      __$$RemoteFrameBufferSecurityResultHandshakeMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool success});
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferSecurityResultHandshakeMessageCopyWithImpl<$Res>
+class __$$RemoteFrameBufferSecurityResultHandshakeMessageImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferSecurityResultHandshakeMessageCopyWithImpl<$Res,
-        _$_RemoteFrameBufferSecurityResultHandshakeMessage>
+        _$RemoteFrameBufferSecurityResultHandshakeMessageImpl>
     implements
-        _$$_RemoteFrameBufferSecurityResultHandshakeMessageCopyWith<$Res> {
-  __$$_RemoteFrameBufferSecurityResultHandshakeMessageCopyWithImpl(
-      _$_RemoteFrameBufferSecurityResultHandshakeMessage _value,
-      $Res Function(_$_RemoteFrameBufferSecurityResultHandshakeMessage) _then)
+        _$$RemoteFrameBufferSecurityResultHandshakeMessageImplCopyWith<$Res> {
+  __$$RemoteFrameBufferSecurityResultHandshakeMessageImplCopyWithImpl(
+      _$RemoteFrameBufferSecurityResultHandshakeMessageImpl _value,
+      $Res Function(_$RemoteFrameBufferSecurityResultHandshakeMessageImpl)
+          _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -90,7 +92,7 @@ class __$$_RemoteFrameBufferSecurityResultHandshakeMessageCopyWithImpl<$Res>
   $Res call({
     Object? success = null,
   }) {
-    return _then(_$_RemoteFrameBufferSecurityResultHandshakeMessage(
+    return _then(_$RemoteFrameBufferSecurityResultHandshakeMessageImpl(
       success: null == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
@@ -101,9 +103,9 @@ class __$$_RemoteFrameBufferSecurityResultHandshakeMessageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferSecurityResultHandshakeMessage
+class _$RemoteFrameBufferSecurityResultHandshakeMessageImpl
     extends _RemoteFrameBufferSecurityResultHandshakeMessage {
-  const _$_RemoteFrameBufferSecurityResultHandshakeMessage(
+  const _$RemoteFrameBufferSecurityResultHandshakeMessageImpl(
       {required this.success})
       : super._();
 
@@ -119,7 +121,7 @@ class _$_RemoteFrameBufferSecurityResultHandshakeMessage
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferSecurityResultHandshakeMessage &&
+            other is _$RemoteFrameBufferSecurityResultHandshakeMessageImpl &&
             (identical(other.success, success) || other.success == success));
   }
 
@@ -129,11 +131,11 @@ class _$_RemoteFrameBufferSecurityResultHandshakeMessage
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferSecurityResultHandshakeMessageCopyWith<
-          _$_RemoteFrameBufferSecurityResultHandshakeMessage>
+  _$$RemoteFrameBufferSecurityResultHandshakeMessageImplCopyWith<
+          _$RemoteFrameBufferSecurityResultHandshakeMessageImpl>
       get copyWith =>
-          __$$_RemoteFrameBufferSecurityResultHandshakeMessageCopyWithImpl<
-                  _$_RemoteFrameBufferSecurityResultHandshakeMessage>(
+          __$$RemoteFrameBufferSecurityResultHandshakeMessageImplCopyWithImpl<
+                  _$RemoteFrameBufferSecurityResultHandshakeMessageImpl>(
               this, _$identity);
 }
 
@@ -141,14 +143,14 @@ abstract class _RemoteFrameBufferSecurityResultHandshakeMessage
     extends RemoteFrameBufferSecurityResultHandshakeMessage {
   const factory _RemoteFrameBufferSecurityResultHandshakeMessage(
           {required final bool success}) =
-      _$_RemoteFrameBufferSecurityResultHandshakeMessage;
+      _$RemoteFrameBufferSecurityResultHandshakeMessageImpl;
   const _RemoteFrameBufferSecurityResultHandshakeMessage._() : super._();
 
   @override
   bool get success;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferSecurityResultHandshakeMessageCopyWith<
-          _$_RemoteFrameBufferSecurityResultHandshakeMessage>
+  _$$RemoteFrameBufferSecurityResultHandshakeMessageImplCopyWith<
+          _$RemoteFrameBufferSecurityResultHandshakeMessageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

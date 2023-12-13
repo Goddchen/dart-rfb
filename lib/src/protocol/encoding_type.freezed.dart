@@ -88,29 +88,29 @@ class _$RemoteFrameBufferEncodingTypeCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$RemoteFrameBufferEncodingTypeCopyRectCopyWith<$Res> {
-  factory _$$RemoteFrameBufferEncodingTypeCopyRectCopyWith(
-          _$RemoteFrameBufferEncodingTypeCopyRect value,
-          $Res Function(_$RemoteFrameBufferEncodingTypeCopyRect) then) =
-      __$$RemoteFrameBufferEncodingTypeCopyRectCopyWithImpl<$Res>;
+abstract class _$$RemoteFrameBufferEncodingTypeCopyRectImplCopyWith<$Res> {
+  factory _$$RemoteFrameBufferEncodingTypeCopyRectImplCopyWith(
+          _$RemoteFrameBufferEncodingTypeCopyRectImpl value,
+          $Res Function(_$RemoteFrameBufferEncodingTypeCopyRectImpl) then) =
+      __$$RemoteFrameBufferEncodingTypeCopyRectImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RemoteFrameBufferEncodingTypeCopyRectCopyWithImpl<$Res>
+class __$$RemoteFrameBufferEncodingTypeCopyRectImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferEncodingTypeCopyWithImpl<$Res,
-        _$RemoteFrameBufferEncodingTypeCopyRect>
-    implements _$$RemoteFrameBufferEncodingTypeCopyRectCopyWith<$Res> {
-  __$$RemoteFrameBufferEncodingTypeCopyRectCopyWithImpl(
-      _$RemoteFrameBufferEncodingTypeCopyRect _value,
-      $Res Function(_$RemoteFrameBufferEncodingTypeCopyRect) _then)
+        _$RemoteFrameBufferEncodingTypeCopyRectImpl>
+    implements _$$RemoteFrameBufferEncodingTypeCopyRectImplCopyWith<$Res> {
+  __$$RemoteFrameBufferEncodingTypeCopyRectImplCopyWithImpl(
+      _$RemoteFrameBufferEncodingTypeCopyRectImpl _value,
+      $Res Function(_$RemoteFrameBufferEncodingTypeCopyRectImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RemoteFrameBufferEncodingTypeCopyRect
+class _$RemoteFrameBufferEncodingTypeCopyRectImpl
     extends RemoteFrameBufferEncodingTypeCopyRect {
-  const _$RemoteFrameBufferEncodingTypeCopyRect() : super._();
+  const _$RemoteFrameBufferEncodingTypeCopyRectImpl() : super._();
 
   @override
   String toString() {
@@ -121,7 +121,7 @@ class _$RemoteFrameBufferEncodingTypeCopyRect
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RemoteFrameBufferEncodingTypeCopyRect);
+            other is _$RemoteFrameBufferEncodingTypeCopyRectImpl);
   }
 
   @override
@@ -203,34 +203,34 @@ class _$RemoteFrameBufferEncodingTypeCopyRect
 abstract class RemoteFrameBufferEncodingTypeCopyRect
     extends RemoteFrameBufferEncodingType {
   const factory RemoteFrameBufferEncodingTypeCopyRect() =
-      _$RemoteFrameBufferEncodingTypeCopyRect;
+      _$RemoteFrameBufferEncodingTypeCopyRectImpl;
   const RemoteFrameBufferEncodingTypeCopyRect._() : super._();
 }
 
 /// @nodoc
-abstract class _$$RemoteFrameBufferEncodingTypeRawCopyWith<$Res> {
-  factory _$$RemoteFrameBufferEncodingTypeRawCopyWith(
-          _$RemoteFrameBufferEncodingTypeRaw value,
-          $Res Function(_$RemoteFrameBufferEncodingTypeRaw) then) =
-      __$$RemoteFrameBufferEncodingTypeRawCopyWithImpl<$Res>;
+abstract class _$$RemoteFrameBufferEncodingTypeRawImplCopyWith<$Res> {
+  factory _$$RemoteFrameBufferEncodingTypeRawImplCopyWith(
+          _$RemoteFrameBufferEncodingTypeRawImpl value,
+          $Res Function(_$RemoteFrameBufferEncodingTypeRawImpl) then) =
+      __$$RemoteFrameBufferEncodingTypeRawImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RemoteFrameBufferEncodingTypeRawCopyWithImpl<$Res>
+class __$$RemoteFrameBufferEncodingTypeRawImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferEncodingTypeCopyWithImpl<$Res,
-        _$RemoteFrameBufferEncodingTypeRaw>
-    implements _$$RemoteFrameBufferEncodingTypeRawCopyWith<$Res> {
-  __$$RemoteFrameBufferEncodingTypeRawCopyWithImpl(
-      _$RemoteFrameBufferEncodingTypeRaw _value,
-      $Res Function(_$RemoteFrameBufferEncodingTypeRaw) _then)
+        _$RemoteFrameBufferEncodingTypeRawImpl>
+    implements _$$RemoteFrameBufferEncodingTypeRawImplCopyWith<$Res> {
+  __$$RemoteFrameBufferEncodingTypeRawImplCopyWithImpl(
+      _$RemoteFrameBufferEncodingTypeRawImpl _value,
+      $Res Function(_$RemoteFrameBufferEncodingTypeRawImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RemoteFrameBufferEncodingTypeRaw
+class _$RemoteFrameBufferEncodingTypeRawImpl
     extends RemoteFrameBufferEncodingTypeRaw {
-  const _$RemoteFrameBufferEncodingTypeRaw() : super._();
+  const _$RemoteFrameBufferEncodingTypeRawImpl() : super._();
 
   @override
   String toString() {
@@ -241,7 +241,7 @@ class _$RemoteFrameBufferEncodingTypeRaw
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RemoteFrameBufferEncodingTypeRaw);
+            other is _$RemoteFrameBufferEncodingTypeRawImpl);
   }
 
   @override
@@ -323,28 +323,28 @@ class _$RemoteFrameBufferEncodingTypeRaw
 abstract class RemoteFrameBufferEncodingTypeRaw
     extends RemoteFrameBufferEncodingType {
   const factory RemoteFrameBufferEncodingTypeRaw() =
-      _$RemoteFrameBufferEncodingTypeRaw;
+      _$RemoteFrameBufferEncodingTypeRawImpl;
   const RemoteFrameBufferEncodingTypeRaw._() : super._();
 }
 
 /// @nodoc
-abstract class _$$RemoteFrameBufferEncodingTypeUnsupportedCopyWith<$Res> {
-  factory _$$RemoteFrameBufferEncodingTypeUnsupportedCopyWith(
-          _$RemoteFrameBufferEncodingTypeUnsupported value,
-          $Res Function(_$RemoteFrameBufferEncodingTypeUnsupported) then) =
-      __$$RemoteFrameBufferEncodingTypeUnsupportedCopyWithImpl<$Res>;
+abstract class _$$RemoteFrameBufferEncodingTypeUnsupportedImplCopyWith<$Res> {
+  factory _$$RemoteFrameBufferEncodingTypeUnsupportedImplCopyWith(
+          _$RemoteFrameBufferEncodingTypeUnsupportedImpl value,
+          $Res Function(_$RemoteFrameBufferEncodingTypeUnsupportedImpl) then) =
+      __$$RemoteFrameBufferEncodingTypeUnsupportedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ByteData bytes});
 }
 
 /// @nodoc
-class __$$RemoteFrameBufferEncodingTypeUnsupportedCopyWithImpl<$Res>
+class __$$RemoteFrameBufferEncodingTypeUnsupportedImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferEncodingTypeCopyWithImpl<$Res,
-        _$RemoteFrameBufferEncodingTypeUnsupported>
-    implements _$$RemoteFrameBufferEncodingTypeUnsupportedCopyWith<$Res> {
-  __$$RemoteFrameBufferEncodingTypeUnsupportedCopyWithImpl(
-      _$RemoteFrameBufferEncodingTypeUnsupported _value,
-      $Res Function(_$RemoteFrameBufferEncodingTypeUnsupported) _then)
+        _$RemoteFrameBufferEncodingTypeUnsupportedImpl>
+    implements _$$RemoteFrameBufferEncodingTypeUnsupportedImplCopyWith<$Res> {
+  __$$RemoteFrameBufferEncodingTypeUnsupportedImplCopyWithImpl(
+      _$RemoteFrameBufferEncodingTypeUnsupportedImpl _value,
+      $Res Function(_$RemoteFrameBufferEncodingTypeUnsupportedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -352,7 +352,7 @@ class __$$RemoteFrameBufferEncodingTypeUnsupportedCopyWithImpl<$Res>
   $Res call({
     Object? bytes = null,
   }) {
-    return _then(_$RemoteFrameBufferEncodingTypeUnsupported(
+    return _then(_$RemoteFrameBufferEncodingTypeUnsupportedImpl(
       bytes: null == bytes
           ? _value.bytes
           : bytes // ignore: cast_nullable_to_non_nullable
@@ -363,9 +363,9 @@ class __$$RemoteFrameBufferEncodingTypeUnsupportedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RemoteFrameBufferEncodingTypeUnsupported
+class _$RemoteFrameBufferEncodingTypeUnsupportedImpl
     extends RemoteFrameBufferEncodingTypeUnsupported {
-  const _$RemoteFrameBufferEncodingTypeUnsupported({required this.bytes})
+  const _$RemoteFrameBufferEncodingTypeUnsupportedImpl({required this.bytes})
       : super._();
 
   @override
@@ -380,7 +380,7 @@ class _$RemoteFrameBufferEncodingTypeUnsupported
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RemoteFrameBufferEncodingTypeUnsupported &&
+            other is _$RemoteFrameBufferEncodingTypeUnsupportedImpl &&
             (identical(other.bytes, bytes) || other.bytes == bytes));
   }
 
@@ -390,10 +390,11 @@ class _$RemoteFrameBufferEncodingTypeUnsupported
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$RemoteFrameBufferEncodingTypeUnsupportedCopyWith<
-          _$RemoteFrameBufferEncodingTypeUnsupported>
-      get copyWith => __$$RemoteFrameBufferEncodingTypeUnsupportedCopyWithImpl<
-          _$RemoteFrameBufferEncodingTypeUnsupported>(this, _$identity);
+  _$$RemoteFrameBufferEncodingTypeUnsupportedImplCopyWith<
+          _$RemoteFrameBufferEncodingTypeUnsupportedImpl>
+      get copyWith =>
+          __$$RemoteFrameBufferEncodingTypeUnsupportedImplCopyWithImpl<
+              _$RemoteFrameBufferEncodingTypeUnsupportedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -472,12 +473,12 @@ abstract class RemoteFrameBufferEncodingTypeUnsupported
     extends RemoteFrameBufferEncodingType {
   const factory RemoteFrameBufferEncodingTypeUnsupported(
           {required final ByteData bytes}) =
-      _$RemoteFrameBufferEncodingTypeUnsupported;
+      _$RemoteFrameBufferEncodingTypeUnsupportedImpl;
   const RemoteFrameBufferEncodingTypeUnsupported._() : super._();
 
   ByteData get bytes;
   @JsonKey(ignore: true)
-  _$$RemoteFrameBufferEncodingTypeUnsupportedCopyWith<
-          _$RemoteFrameBufferEncodingTypeUnsupported>
+  _$$RemoteFrameBufferEncodingTypeUnsupportedImplCopyWith<
+          _$RemoteFrameBufferEncodingTypeUnsupportedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

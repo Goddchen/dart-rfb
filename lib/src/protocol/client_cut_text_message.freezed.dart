@@ -61,25 +61,25 @@ class _$RemoteFrameBufferClientCutTextMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferClientCutTextMessageCopyWith<$Res>
+abstract class _$$RemoteFrameBufferClientCutTextMessageImplCopyWith<$Res>
     implements $RemoteFrameBufferClientCutTextMessageCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferClientCutTextMessageCopyWith(
-          _$_RemoteFrameBufferClientCutTextMessage value,
-          $Res Function(_$_RemoteFrameBufferClientCutTextMessage) then) =
-      __$$_RemoteFrameBufferClientCutTextMessageCopyWithImpl<$Res>;
+  factory _$$RemoteFrameBufferClientCutTextMessageImplCopyWith(
+          _$RemoteFrameBufferClientCutTextMessageImpl value,
+          $Res Function(_$RemoteFrameBufferClientCutTextMessageImpl) then) =
+      __$$RemoteFrameBufferClientCutTextMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String text});
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferClientCutTextMessageCopyWithImpl<$Res>
+class __$$RemoteFrameBufferClientCutTextMessageImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferClientCutTextMessageCopyWithImpl<$Res,
-        _$_RemoteFrameBufferClientCutTextMessage>
-    implements _$$_RemoteFrameBufferClientCutTextMessageCopyWith<$Res> {
-  __$$_RemoteFrameBufferClientCutTextMessageCopyWithImpl(
-      _$_RemoteFrameBufferClientCutTextMessage _value,
-      $Res Function(_$_RemoteFrameBufferClientCutTextMessage) _then)
+        _$RemoteFrameBufferClientCutTextMessageImpl>
+    implements _$$RemoteFrameBufferClientCutTextMessageImplCopyWith<$Res> {
+  __$$RemoteFrameBufferClientCutTextMessageImplCopyWithImpl(
+      _$RemoteFrameBufferClientCutTextMessageImpl _value,
+      $Res Function(_$RemoteFrameBufferClientCutTextMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_RemoteFrameBufferClientCutTextMessageCopyWithImpl<$Res>
   $Res call({
     Object? text = null,
   }) {
-    return _then(_$_RemoteFrameBufferClientCutTextMessage(
+    return _then(_$RemoteFrameBufferClientCutTextMessageImpl(
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -98,9 +98,9 @@ class __$$_RemoteFrameBufferClientCutTextMessageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferClientCutTextMessage
+class _$RemoteFrameBufferClientCutTextMessageImpl
     extends _RemoteFrameBufferClientCutTextMessage {
-  const _$_RemoteFrameBufferClientCutTextMessage({required this.text})
+  const _$RemoteFrameBufferClientCutTextMessageImpl({required this.text})
       : super._();
 
   @override
@@ -115,7 +115,7 @@ class _$_RemoteFrameBufferClientCutTextMessage
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferClientCutTextMessage &&
+            other is _$RemoteFrameBufferClientCutTextMessageImpl &&
             (identical(other.text, text) || other.text == text));
   }
 
@@ -125,23 +125,24 @@ class _$_RemoteFrameBufferClientCutTextMessage
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferClientCutTextMessageCopyWith<
-          _$_RemoteFrameBufferClientCutTextMessage>
-      get copyWith => __$$_RemoteFrameBufferClientCutTextMessageCopyWithImpl<
-          _$_RemoteFrameBufferClientCutTextMessage>(this, _$identity);
+  _$$RemoteFrameBufferClientCutTextMessageImplCopyWith<
+          _$RemoteFrameBufferClientCutTextMessageImpl>
+      get copyWith => __$$RemoteFrameBufferClientCutTextMessageImplCopyWithImpl<
+          _$RemoteFrameBufferClientCutTextMessageImpl>(this, _$identity);
 }
 
 abstract class _RemoteFrameBufferClientCutTextMessage
     extends RemoteFrameBufferClientCutTextMessage {
   const factory _RemoteFrameBufferClientCutTextMessage(
-      {required final String text}) = _$_RemoteFrameBufferClientCutTextMessage;
+          {required final String text}) =
+      _$RemoteFrameBufferClientCutTextMessageImpl;
   const _RemoteFrameBufferClientCutTextMessage._() : super._();
 
   @override
   String get text;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferClientCutTextMessageCopyWith<
-          _$_RemoteFrameBufferClientCutTextMessage>
+  _$$RemoteFrameBufferClientCutTextMessageImplCopyWith<
+          _$RemoteFrameBufferClientCutTextMessageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

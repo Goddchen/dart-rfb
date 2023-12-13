@@ -62,25 +62,25 @@ class _$RemoteFrameBufferSetEncodingsMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferSetEncodingsMessageCopyWith<$Res>
+abstract class _$$RemoteFrameBufferSetEncodingsMessageImplCopyWith<$Res>
     implements $RemoteFrameBufferSetEncodingsMessageCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferSetEncodingsMessageCopyWith(
-          _$_RemoteFrameBufferSetEncodingsMessage value,
-          $Res Function(_$_RemoteFrameBufferSetEncodingsMessage) then) =
-      __$$_RemoteFrameBufferSetEncodingsMessageCopyWithImpl<$Res>;
+  factory _$$RemoteFrameBufferSetEncodingsMessageImplCopyWith(
+          _$RemoteFrameBufferSetEncodingsMessageImpl value,
+          $Res Function(_$RemoteFrameBufferSetEncodingsMessageImpl) then) =
+      __$$RemoteFrameBufferSetEncodingsMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Iterable<RemoteFrameBufferEncodingType> encodingTypes});
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferSetEncodingsMessageCopyWithImpl<$Res>
+class __$$RemoteFrameBufferSetEncodingsMessageImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferSetEncodingsMessageCopyWithImpl<$Res,
-        _$_RemoteFrameBufferSetEncodingsMessage>
-    implements _$$_RemoteFrameBufferSetEncodingsMessageCopyWith<$Res> {
-  __$$_RemoteFrameBufferSetEncodingsMessageCopyWithImpl(
-      _$_RemoteFrameBufferSetEncodingsMessage _value,
-      $Res Function(_$_RemoteFrameBufferSetEncodingsMessage) _then)
+        _$RemoteFrameBufferSetEncodingsMessageImpl>
+    implements _$$RemoteFrameBufferSetEncodingsMessageImplCopyWith<$Res> {
+  __$$RemoteFrameBufferSetEncodingsMessageImplCopyWithImpl(
+      _$RemoteFrameBufferSetEncodingsMessageImpl _value,
+      $Res Function(_$RemoteFrameBufferSetEncodingsMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +88,7 @@ class __$$_RemoteFrameBufferSetEncodingsMessageCopyWithImpl<$Res>
   $Res call({
     Object? encodingTypes = null,
   }) {
-    return _then(_$_RemoteFrameBufferSetEncodingsMessage(
+    return _then(_$RemoteFrameBufferSetEncodingsMessageImpl(
       encodingTypes: null == encodingTypes
           ? _value.encodingTypes
           : encodingTypes // ignore: cast_nullable_to_non_nullable
@@ -99,9 +99,10 @@ class __$$_RemoteFrameBufferSetEncodingsMessageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferSetEncodingsMessage
+class _$RemoteFrameBufferSetEncodingsMessageImpl
     extends _RemoteFrameBufferSetEncodingsMessage {
-  const _$_RemoteFrameBufferSetEncodingsMessage({required this.encodingTypes})
+  const _$RemoteFrameBufferSetEncodingsMessageImpl(
+      {required this.encodingTypes})
       : super._();
 
   @override
@@ -116,7 +117,7 @@ class _$_RemoteFrameBufferSetEncodingsMessage
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferSetEncodingsMessage &&
+            other is _$RemoteFrameBufferSetEncodingsMessageImpl &&
             const DeepCollectionEquality()
                 .equals(other.encodingTypes, encodingTypes));
   }
@@ -128,24 +129,24 @@ class _$_RemoteFrameBufferSetEncodingsMessage
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferSetEncodingsMessageCopyWith<
-          _$_RemoteFrameBufferSetEncodingsMessage>
-      get copyWith => __$$_RemoteFrameBufferSetEncodingsMessageCopyWithImpl<
-          _$_RemoteFrameBufferSetEncodingsMessage>(this, _$identity);
+  _$$RemoteFrameBufferSetEncodingsMessageImplCopyWith<
+          _$RemoteFrameBufferSetEncodingsMessageImpl>
+      get copyWith => __$$RemoteFrameBufferSetEncodingsMessageImplCopyWithImpl<
+          _$RemoteFrameBufferSetEncodingsMessageImpl>(this, _$identity);
 }
 
 abstract class _RemoteFrameBufferSetEncodingsMessage
     extends RemoteFrameBufferSetEncodingsMessage {
   const factory _RemoteFrameBufferSetEncodingsMessage(
       {required final Iterable<RemoteFrameBufferEncodingType>
-          encodingTypes}) = _$_RemoteFrameBufferSetEncodingsMessage;
+          encodingTypes}) = _$RemoteFrameBufferSetEncodingsMessageImpl;
   const _RemoteFrameBufferSetEncodingsMessage._() : super._();
 
   @override
   Iterable<RemoteFrameBufferEncodingType> get encodingTypes;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferSetEncodingsMessageCopyWith<
-          _$_RemoteFrameBufferSetEncodingsMessage>
+  _$$RemoteFrameBufferSetEncodingsMessageImplCopyWith<
+          _$RemoteFrameBufferSetEncodingsMessageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

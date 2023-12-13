@@ -66,25 +66,25 @@ class _$RemoteFrameBufferClientKeyEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferClientKeyEventCopyWith<$Res>
+abstract class _$$RemoteFrameBufferClientKeyEventImplCopyWith<$Res>
     implements $RemoteFrameBufferClientKeyEventCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferClientKeyEventCopyWith(
-          _$_RemoteFrameBufferClientKeyEvent value,
-          $Res Function(_$_RemoteFrameBufferClientKeyEvent) then) =
-      __$$_RemoteFrameBufferClientKeyEventCopyWithImpl<$Res>;
+  factory _$$RemoteFrameBufferClientKeyEventImplCopyWith(
+          _$RemoteFrameBufferClientKeyEventImpl value,
+          $Res Function(_$RemoteFrameBufferClientKeyEventImpl) then) =
+      __$$RemoteFrameBufferClientKeyEventImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool down, int key});
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferClientKeyEventCopyWithImpl<$Res>
+class __$$RemoteFrameBufferClientKeyEventImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferClientKeyEventCopyWithImpl<$Res,
-        _$_RemoteFrameBufferClientKeyEvent>
-    implements _$$_RemoteFrameBufferClientKeyEventCopyWith<$Res> {
-  __$$_RemoteFrameBufferClientKeyEventCopyWithImpl(
-      _$_RemoteFrameBufferClientKeyEvent _value,
-      $Res Function(_$_RemoteFrameBufferClientKeyEvent) _then)
+        _$RemoteFrameBufferClientKeyEventImpl>
+    implements _$$RemoteFrameBufferClientKeyEventImplCopyWith<$Res> {
+  __$$RemoteFrameBufferClientKeyEventImplCopyWithImpl(
+      _$RemoteFrameBufferClientKeyEventImpl _value,
+      $Res Function(_$RemoteFrameBufferClientKeyEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,7 +93,7 @@ class __$$_RemoteFrameBufferClientKeyEventCopyWithImpl<$Res>
     Object? down = null,
     Object? key = null,
   }) {
-    return _then(_$_RemoteFrameBufferClientKeyEvent(
+    return _then(_$RemoteFrameBufferClientKeyEventImpl(
       down: null == down
           ? _value.down
           : down // ignore: cast_nullable_to_non_nullable
@@ -108,9 +108,9 @@ class __$$_RemoteFrameBufferClientKeyEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferClientKeyEvent
+class _$RemoteFrameBufferClientKeyEventImpl
     implements _RemoteFrameBufferClientKeyEvent {
-  const _$_RemoteFrameBufferClientKeyEvent(
+  const _$RemoteFrameBufferClientKeyEventImpl(
       {required this.down, required this.key});
 
   @override
@@ -127,7 +127,7 @@ class _$_RemoteFrameBufferClientKeyEvent
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferClientKeyEvent &&
+            other is _$RemoteFrameBufferClientKeyEventImpl &&
             (identical(other.down, down) || other.down == down) &&
             (identical(other.key, key) || other.key == key));
   }
@@ -138,17 +138,17 @@ class _$_RemoteFrameBufferClientKeyEvent
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferClientKeyEventCopyWith<
-          _$_RemoteFrameBufferClientKeyEvent>
-      get copyWith => __$$_RemoteFrameBufferClientKeyEventCopyWithImpl<
-          _$_RemoteFrameBufferClientKeyEvent>(this, _$identity);
+  _$$RemoteFrameBufferClientKeyEventImplCopyWith<
+          _$RemoteFrameBufferClientKeyEventImpl>
+      get copyWith => __$$RemoteFrameBufferClientKeyEventImplCopyWithImpl<
+          _$RemoteFrameBufferClientKeyEventImpl>(this, _$identity);
 }
 
 abstract class _RemoteFrameBufferClientKeyEvent
     implements RemoteFrameBufferClientKeyEvent {
   const factory _RemoteFrameBufferClientKeyEvent(
       {required final bool down,
-      required final int key}) = _$_RemoteFrameBufferClientKeyEvent;
+      required final int key}) = _$RemoteFrameBufferClientKeyEventImpl;
 
   @override
   bool get down;
@@ -156,7 +156,7 @@ abstract class _RemoteFrameBufferClientKeyEvent
   int get key;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferClientKeyEventCopyWith<
-          _$_RemoteFrameBufferClientKeyEvent>
+  _$$RemoteFrameBufferClientKeyEventImplCopyWith<
+          _$RemoteFrameBufferClientKeyEventImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

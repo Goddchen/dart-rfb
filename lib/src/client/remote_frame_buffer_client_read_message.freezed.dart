@@ -115,29 +115,29 @@ class _$RemoteFrameBufferClientReadMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferClientReadMessageBellCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferClientReadMessageBellCopyWith(
-          _$_RemoteFrameBufferClientReadMessageBell value,
-          $Res Function(_$_RemoteFrameBufferClientReadMessageBell) then) =
-      __$$_RemoteFrameBufferClientReadMessageBellCopyWithImpl<$Res>;
+abstract class _$$RemoteFrameBufferClientReadMessageBellImplCopyWith<$Res> {
+  factory _$$RemoteFrameBufferClientReadMessageBellImplCopyWith(
+          _$RemoteFrameBufferClientReadMessageBellImpl value,
+          $Res Function(_$RemoteFrameBufferClientReadMessageBellImpl) then) =
+      __$$RemoteFrameBufferClientReadMessageBellImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferClientReadMessageBellCopyWithImpl<$Res>
+class __$$RemoteFrameBufferClientReadMessageBellImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferClientReadMessageCopyWithImpl<$Res,
-        _$_RemoteFrameBufferClientReadMessageBell>
-    implements _$$_RemoteFrameBufferClientReadMessageBellCopyWith<$Res> {
-  __$$_RemoteFrameBufferClientReadMessageBellCopyWithImpl(
-      _$_RemoteFrameBufferClientReadMessageBell _value,
-      $Res Function(_$_RemoteFrameBufferClientReadMessageBell) _then)
+        _$RemoteFrameBufferClientReadMessageBellImpl>
+    implements _$$RemoteFrameBufferClientReadMessageBellImplCopyWith<$Res> {
+  __$$RemoteFrameBufferClientReadMessageBellImplCopyWithImpl(
+      _$RemoteFrameBufferClientReadMessageBellImpl _value,
+      $Res Function(_$RemoteFrameBufferClientReadMessageBellImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_RemoteFrameBufferClientReadMessageBell
+class _$RemoteFrameBufferClientReadMessageBellImpl
     implements _RemoteFrameBufferClientReadMessageBell {
-  const _$_RemoteFrameBufferClientReadMessageBell();
+  const _$RemoteFrameBufferClientReadMessageBellImpl();
 
   @override
   String toString() {
@@ -148,7 +148,7 @@ class _$_RemoteFrameBufferClientReadMessageBell
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferClientReadMessageBell);
+            other is _$RemoteFrameBufferClientReadMessageBellImpl);
   }
 
   @override
@@ -257,17 +257,18 @@ class _$_RemoteFrameBufferClientReadMessageBell
 abstract class _RemoteFrameBufferClientReadMessageBell
     implements RemoteFrameBufferClientReadMessage {
   const factory _RemoteFrameBufferClientReadMessageBell() =
-      _$_RemoteFrameBufferClientReadMessageBell;
+      _$RemoteFrameBufferClientReadMessageBellImpl;
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferClientReadMessageFrameBufferUpdateCopyWith<
+abstract class _$$RemoteFrameBufferClientReadMessageFrameBufferUpdateImplCopyWith<
     $Res> {
-  factory _$$_RemoteFrameBufferClientReadMessageFrameBufferUpdateCopyWith(
-          _$_RemoteFrameBufferClientReadMessageFrameBufferUpdate value,
-          $Res Function(_$_RemoteFrameBufferClientReadMessageFrameBufferUpdate)
+  factory _$$RemoteFrameBufferClientReadMessageFrameBufferUpdateImplCopyWith(
+          _$RemoteFrameBufferClientReadMessageFrameBufferUpdateImpl value,
+          $Res Function(
+                  _$RemoteFrameBufferClientReadMessageFrameBufferUpdateImpl)
               then) =
-      __$$_RemoteFrameBufferClientReadMessageFrameBufferUpdateCopyWithImpl<
+      __$$RemoteFrameBufferClientReadMessageFrameBufferUpdateImplCopyWithImpl<
           $Res>;
   @useResult
   $Res call({RemoteFrameBufferFrameBufferUpdateMessage message});
@@ -276,14 +277,16 @@ abstract class _$$_RemoteFrameBufferClientReadMessageFrameBufferUpdateCopyWith<
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferClientReadMessageFrameBufferUpdateCopyWithImpl<$Res>
+class __$$RemoteFrameBufferClientReadMessageFrameBufferUpdateImplCopyWithImpl<
+        $Res>
     extends _$RemoteFrameBufferClientReadMessageCopyWithImpl<$Res,
-        _$_RemoteFrameBufferClientReadMessageFrameBufferUpdate>
+        _$RemoteFrameBufferClientReadMessageFrameBufferUpdateImpl>
     implements
-        _$$_RemoteFrameBufferClientReadMessageFrameBufferUpdateCopyWith<$Res> {
-  __$$_RemoteFrameBufferClientReadMessageFrameBufferUpdateCopyWithImpl(
-      _$_RemoteFrameBufferClientReadMessageFrameBufferUpdate _value,
-      $Res Function(_$_RemoteFrameBufferClientReadMessageFrameBufferUpdate)
+        _$$RemoteFrameBufferClientReadMessageFrameBufferUpdateImplCopyWith<
+            $Res> {
+  __$$RemoteFrameBufferClientReadMessageFrameBufferUpdateImplCopyWithImpl(
+      _$RemoteFrameBufferClientReadMessageFrameBufferUpdateImpl _value,
+      $Res Function(_$RemoteFrameBufferClientReadMessageFrameBufferUpdateImpl)
           _then)
       : super(_value, _then);
 
@@ -292,7 +295,7 @@ class __$$_RemoteFrameBufferClientReadMessageFrameBufferUpdateCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_RemoteFrameBufferClientReadMessageFrameBufferUpdate(
+    return _then(_$RemoteFrameBufferClientReadMessageFrameBufferUpdateImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -312,9 +315,9 @@ class __$$_RemoteFrameBufferClientReadMessageFrameBufferUpdateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferClientReadMessageFrameBufferUpdate
+class _$RemoteFrameBufferClientReadMessageFrameBufferUpdateImpl
     implements _RemoteFrameBufferClientReadMessageFrameBufferUpdate {
-  const _$_RemoteFrameBufferClientReadMessageFrameBufferUpdate(
+  const _$RemoteFrameBufferClientReadMessageFrameBufferUpdateImpl(
       {required this.message});
 
   @override
@@ -329,7 +332,8 @@ class _$_RemoteFrameBufferClientReadMessageFrameBufferUpdate
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferClientReadMessageFrameBufferUpdate &&
+            other
+                is _$RemoteFrameBufferClientReadMessageFrameBufferUpdateImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -339,11 +343,11 @@ class _$_RemoteFrameBufferClientReadMessageFrameBufferUpdate
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferClientReadMessageFrameBufferUpdateCopyWith<
-          _$_RemoteFrameBufferClientReadMessageFrameBufferUpdate>
+  _$$RemoteFrameBufferClientReadMessageFrameBufferUpdateImplCopyWith<
+          _$RemoteFrameBufferClientReadMessageFrameBufferUpdateImpl>
       get copyWith =>
-          __$$_RemoteFrameBufferClientReadMessageFrameBufferUpdateCopyWithImpl<
-                  _$_RemoteFrameBufferClientReadMessageFrameBufferUpdate>(
+          __$$RemoteFrameBufferClientReadMessageFrameBufferUpdateImplCopyWithImpl<
+                  _$RemoteFrameBufferClientReadMessageFrameBufferUpdateImpl>(
               this, _$identity);
 
   @override
@@ -450,24 +454,24 @@ abstract class _RemoteFrameBufferClientReadMessageFrameBufferUpdate
     implements RemoteFrameBufferClientReadMessage {
   const factory _RemoteFrameBufferClientReadMessageFrameBufferUpdate(
           {required final RemoteFrameBufferFrameBufferUpdateMessage message}) =
-      _$_RemoteFrameBufferClientReadMessageFrameBufferUpdate;
+      _$RemoteFrameBufferClientReadMessageFrameBufferUpdateImpl;
 
   RemoteFrameBufferFrameBufferUpdateMessage get message;
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferClientReadMessageFrameBufferUpdateCopyWith<
-          _$_RemoteFrameBufferClientReadMessageFrameBufferUpdate>
+  _$$RemoteFrameBufferClientReadMessageFrameBufferUpdateImplCopyWith<
+          _$RemoteFrameBufferClientReadMessageFrameBufferUpdateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferClientReadMessageServerCutTextMessageCopyWith<
+abstract class _$$RemoteFrameBufferClientReadMessageServerCutTextMessageImplCopyWith<
     $Res> {
-  factory _$$_RemoteFrameBufferClientReadMessageServerCutTextMessageCopyWith(
-          _$_RemoteFrameBufferClientReadMessageServerCutTextMessage value,
+  factory _$$RemoteFrameBufferClientReadMessageServerCutTextMessageImplCopyWith(
+          _$RemoteFrameBufferClientReadMessageServerCutTextMessageImpl value,
           $Res Function(
-                  _$_RemoteFrameBufferClientReadMessageServerCutTextMessage)
+                  _$RemoteFrameBufferClientReadMessageServerCutTextMessageImpl)
               then) =
-      __$$_RemoteFrameBufferClientReadMessageServerCutTextMessageCopyWithImpl<
+      __$$RemoteFrameBufferClientReadMessageServerCutTextMessageImplCopyWithImpl<
           $Res>;
   @useResult
   $Res call({RemoteFrameBufferServerCutTextMessage message});
@@ -476,16 +480,17 @@ abstract class _$$_RemoteFrameBufferClientReadMessageServerCutTextMessageCopyWit
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferClientReadMessageServerCutTextMessageCopyWithImpl<
+class __$$RemoteFrameBufferClientReadMessageServerCutTextMessageImplCopyWithImpl<
         $Res>
     extends _$RemoteFrameBufferClientReadMessageCopyWithImpl<$Res,
-        _$_RemoteFrameBufferClientReadMessageServerCutTextMessage>
+        _$RemoteFrameBufferClientReadMessageServerCutTextMessageImpl>
     implements
-        _$$_RemoteFrameBufferClientReadMessageServerCutTextMessageCopyWith<
+        _$$RemoteFrameBufferClientReadMessageServerCutTextMessageImplCopyWith<
             $Res> {
-  __$$_RemoteFrameBufferClientReadMessageServerCutTextMessageCopyWithImpl(
-      _$_RemoteFrameBufferClientReadMessageServerCutTextMessage _value,
-      $Res Function(_$_RemoteFrameBufferClientReadMessageServerCutTextMessage)
+  __$$RemoteFrameBufferClientReadMessageServerCutTextMessageImplCopyWithImpl(
+      _$RemoteFrameBufferClientReadMessageServerCutTextMessageImpl _value,
+      $Res Function(
+              _$RemoteFrameBufferClientReadMessageServerCutTextMessageImpl)
           _then)
       : super(_value, _then);
 
@@ -494,7 +499,7 @@ class __$$_RemoteFrameBufferClientReadMessageServerCutTextMessageCopyWithImpl<
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_RemoteFrameBufferClientReadMessageServerCutTextMessage(
+    return _then(_$RemoteFrameBufferClientReadMessageServerCutTextMessageImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -514,9 +519,9 @@ class __$$_RemoteFrameBufferClientReadMessageServerCutTextMessageCopyWithImpl<
 
 /// @nodoc
 
-class _$_RemoteFrameBufferClientReadMessageServerCutTextMessage
+class _$RemoteFrameBufferClientReadMessageServerCutTextMessageImpl
     implements _RemoteFrameBufferClientReadMessageServerCutTextMessage {
-  const _$_RemoteFrameBufferClientReadMessageServerCutTextMessage(
+  const _$RemoteFrameBufferClientReadMessageServerCutTextMessageImpl(
       {required this.message});
 
   @override
@@ -532,7 +537,7 @@ class _$_RemoteFrameBufferClientReadMessageServerCutTextMessage
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other
-                is _$_RemoteFrameBufferClientReadMessageServerCutTextMessage &&
+                is _$RemoteFrameBufferClientReadMessageServerCutTextMessageImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -542,11 +547,11 @@ class _$_RemoteFrameBufferClientReadMessageServerCutTextMessage
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferClientReadMessageServerCutTextMessageCopyWith<
-          _$_RemoteFrameBufferClientReadMessageServerCutTextMessage>
+  _$$RemoteFrameBufferClientReadMessageServerCutTextMessageImplCopyWith<
+          _$RemoteFrameBufferClientReadMessageServerCutTextMessageImpl>
       get copyWith =>
-          __$$_RemoteFrameBufferClientReadMessageServerCutTextMessageCopyWithImpl<
-                  _$_RemoteFrameBufferClientReadMessageServerCutTextMessage>(
+          __$$RemoteFrameBufferClientReadMessageServerCutTextMessageImplCopyWithImpl<
+                  _$RemoteFrameBufferClientReadMessageServerCutTextMessageImpl>(
               this, _$identity);
 
   @override
@@ -653,45 +658,47 @@ abstract class _RemoteFrameBufferClientReadMessageServerCutTextMessage
     implements RemoteFrameBufferClientReadMessage {
   const factory _RemoteFrameBufferClientReadMessageServerCutTextMessage(
           {required final RemoteFrameBufferServerCutTextMessage message}) =
-      _$_RemoteFrameBufferClientReadMessageServerCutTextMessage;
+      _$RemoteFrameBufferClientReadMessageServerCutTextMessageImpl;
 
   RemoteFrameBufferServerCutTextMessage get message;
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferClientReadMessageServerCutTextMessageCopyWith<
-          _$_RemoteFrameBufferClientReadMessageServerCutTextMessage>
+  _$$RemoteFrameBufferClientReadMessageServerCutTextMessageImplCopyWith<
+          _$RemoteFrameBufferClientReadMessageServerCutTextMessageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferClientReadMessageSetColorMapEntriesCopyWith<
+abstract class _$$RemoteFrameBufferClientReadMessageSetColorMapEntriesImplCopyWith<
     $Res> {
-  factory _$$_RemoteFrameBufferClientReadMessageSetColorMapEntriesCopyWith(
-          _$_RemoteFrameBufferClientReadMessageSetColorMapEntries value,
-          $Res Function(_$_RemoteFrameBufferClientReadMessageSetColorMapEntries)
+  factory _$$RemoteFrameBufferClientReadMessageSetColorMapEntriesImplCopyWith(
+          _$RemoteFrameBufferClientReadMessageSetColorMapEntriesImpl value,
+          $Res Function(
+                  _$RemoteFrameBufferClientReadMessageSetColorMapEntriesImpl)
               then) =
-      __$$_RemoteFrameBufferClientReadMessageSetColorMapEntriesCopyWithImpl<
+      __$$RemoteFrameBufferClientReadMessageSetColorMapEntriesImplCopyWithImpl<
           $Res>;
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferClientReadMessageSetColorMapEntriesCopyWithImpl<
+class __$$RemoteFrameBufferClientReadMessageSetColorMapEntriesImplCopyWithImpl<
         $Res>
     extends _$RemoteFrameBufferClientReadMessageCopyWithImpl<$Res,
-        _$_RemoteFrameBufferClientReadMessageSetColorMapEntries>
+        _$RemoteFrameBufferClientReadMessageSetColorMapEntriesImpl>
     implements
-        _$$_RemoteFrameBufferClientReadMessageSetColorMapEntriesCopyWith<$Res> {
-  __$$_RemoteFrameBufferClientReadMessageSetColorMapEntriesCopyWithImpl(
-      _$_RemoteFrameBufferClientReadMessageSetColorMapEntries _value,
-      $Res Function(_$_RemoteFrameBufferClientReadMessageSetColorMapEntries)
+        _$$RemoteFrameBufferClientReadMessageSetColorMapEntriesImplCopyWith<
+            $Res> {
+  __$$RemoteFrameBufferClientReadMessageSetColorMapEntriesImplCopyWithImpl(
+      _$RemoteFrameBufferClientReadMessageSetColorMapEntriesImpl _value,
+      $Res Function(_$RemoteFrameBufferClientReadMessageSetColorMapEntriesImpl)
           _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_RemoteFrameBufferClientReadMessageSetColorMapEntries
+class _$RemoteFrameBufferClientReadMessageSetColorMapEntriesImpl
     implements _RemoteFrameBufferClientReadMessageSetColorMapEntries {
-  const _$_RemoteFrameBufferClientReadMessageSetColorMapEntries();
+  const _$RemoteFrameBufferClientReadMessageSetColorMapEntriesImpl();
 
   @override
   String toString() {
@@ -702,7 +709,8 @@ class _$_RemoteFrameBufferClientReadMessageSetColorMapEntries
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferClientReadMessageSetColorMapEntries);
+            other
+                is _$RemoteFrameBufferClientReadMessageSetColorMapEntriesImpl);
   }
 
   @override
@@ -811,5 +819,5 @@ class _$_RemoteFrameBufferClientReadMessageSetColorMapEntries
 abstract class _RemoteFrameBufferClientReadMessageSetColorMapEntries
     implements RemoteFrameBufferClientReadMessage {
   const factory _RemoteFrameBufferClientReadMessageSetColorMapEntries() =
-      _$_RemoteFrameBufferClientReadMessageSetColorMapEntries;
+      _$RemoteFrameBufferClientReadMessageSetColorMapEntriesImpl;
 }

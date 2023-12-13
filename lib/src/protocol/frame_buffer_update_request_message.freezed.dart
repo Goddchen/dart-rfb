@@ -87,28 +87,30 @@ class _$RemoteFrameBufferFrameBufferUpdateRequestMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferFrameBufferUpdateRequestMessageCopyWith<
+abstract class _$$RemoteFrameBufferFrameBufferUpdateRequestMessageImplCopyWith<
         $Res>
     implements $RemoteFrameBufferFrameBufferUpdateRequestMessageCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferFrameBufferUpdateRequestMessageCopyWith(
-          _$_RemoteFrameBufferFrameBufferUpdateRequestMessage value,
-          $Res Function(_$_RemoteFrameBufferFrameBufferUpdateRequestMessage)
+  factory _$$RemoteFrameBufferFrameBufferUpdateRequestMessageImplCopyWith(
+          _$RemoteFrameBufferFrameBufferUpdateRequestMessageImpl value,
+          $Res Function(_$RemoteFrameBufferFrameBufferUpdateRequestMessageImpl)
               then) =
-      __$$_RemoteFrameBufferFrameBufferUpdateRequestMessageCopyWithImpl<$Res>;
+      __$$RemoteFrameBufferFrameBufferUpdateRequestMessageImplCopyWithImpl<
+          $Res>;
   @override
   @useResult
   $Res call({int height, bool incremental, int width, int x, int y});
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferFrameBufferUpdateRequestMessageCopyWithImpl<$Res>
+class __$$RemoteFrameBufferFrameBufferUpdateRequestMessageImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferFrameBufferUpdateRequestMessageCopyWithImpl<$Res,
-        _$_RemoteFrameBufferFrameBufferUpdateRequestMessage>
+        _$RemoteFrameBufferFrameBufferUpdateRequestMessageImpl>
     implements
-        _$$_RemoteFrameBufferFrameBufferUpdateRequestMessageCopyWith<$Res> {
-  __$$_RemoteFrameBufferFrameBufferUpdateRequestMessageCopyWithImpl(
-      _$_RemoteFrameBufferFrameBufferUpdateRequestMessage _value,
-      $Res Function(_$_RemoteFrameBufferFrameBufferUpdateRequestMessage) _then)
+        _$$RemoteFrameBufferFrameBufferUpdateRequestMessageImplCopyWith<$Res> {
+  __$$RemoteFrameBufferFrameBufferUpdateRequestMessageImplCopyWithImpl(
+      _$RemoteFrameBufferFrameBufferUpdateRequestMessageImpl _value,
+      $Res Function(_$RemoteFrameBufferFrameBufferUpdateRequestMessageImpl)
+          _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -120,7 +122,7 @@ class __$$_RemoteFrameBufferFrameBufferUpdateRequestMessageCopyWithImpl<$Res>
     Object? x = null,
     Object? y = null,
   }) {
-    return _then(_$_RemoteFrameBufferFrameBufferUpdateRequestMessage(
+    return _then(_$RemoteFrameBufferFrameBufferUpdateRequestMessageImpl(
       height: null == height
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
@@ -147,9 +149,9 @@ class __$$_RemoteFrameBufferFrameBufferUpdateRequestMessageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferFrameBufferUpdateRequestMessage
+class _$RemoteFrameBufferFrameBufferUpdateRequestMessageImpl
     extends _RemoteFrameBufferFrameBufferUpdateRequestMessage {
-  const _$_RemoteFrameBufferFrameBufferUpdateRequestMessage(
+  const _$RemoteFrameBufferFrameBufferUpdateRequestMessageImpl(
       {required this.height,
       required this.incremental,
       required this.width,
@@ -177,7 +179,7 @@ class _$_RemoteFrameBufferFrameBufferUpdateRequestMessage
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferFrameBufferUpdateRequestMessage &&
+            other is _$RemoteFrameBufferFrameBufferUpdateRequestMessageImpl &&
             (identical(other.height, height) || other.height == height) &&
             (identical(other.incremental, incremental) ||
                 other.incremental == incremental) &&
@@ -193,11 +195,11 @@ class _$_RemoteFrameBufferFrameBufferUpdateRequestMessage
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferFrameBufferUpdateRequestMessageCopyWith<
-          _$_RemoteFrameBufferFrameBufferUpdateRequestMessage>
+  _$$RemoteFrameBufferFrameBufferUpdateRequestMessageImplCopyWith<
+          _$RemoteFrameBufferFrameBufferUpdateRequestMessageImpl>
       get copyWith =>
-          __$$_RemoteFrameBufferFrameBufferUpdateRequestMessageCopyWithImpl<
-                  _$_RemoteFrameBufferFrameBufferUpdateRequestMessage>(
+          __$$RemoteFrameBufferFrameBufferUpdateRequestMessageImplCopyWithImpl<
+                  _$RemoteFrameBufferFrameBufferUpdateRequestMessageImpl>(
               this, _$identity);
 }
 
@@ -209,7 +211,7 @@ abstract class _RemoteFrameBufferFrameBufferUpdateRequestMessage
           required final int width,
           required final int x,
           required final int y}) =
-      _$_RemoteFrameBufferFrameBufferUpdateRequestMessage;
+      _$RemoteFrameBufferFrameBufferUpdateRequestMessageImpl;
   const _RemoteFrameBufferFrameBufferUpdateRequestMessage._() : super._();
 
   @override
@@ -224,7 +226,7 @@ abstract class _RemoteFrameBufferFrameBufferUpdateRequestMessage
   int get y;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferFrameBufferUpdateRequestMessageCopyWith<
-          _$_RemoteFrameBufferFrameBufferUpdateRequestMessage>
+  _$$RemoteFrameBufferFrameBufferUpdateRequestMessageImplCopyWith<
+          _$RemoteFrameBufferFrameBufferUpdateRequestMessageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -61,25 +61,25 @@ class _$RemoteFrameBufferClientInitMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferClientInitMessageCopyWith<$Res>
+abstract class _$$RemoteFrameBufferClientInitMessageImplCopyWith<$Res>
     implements $RemoteFrameBufferClientInitMessageCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferClientInitMessageCopyWith(
-          _$_RemoteFrameBufferClientInitMessage value,
-          $Res Function(_$_RemoteFrameBufferClientInitMessage) then) =
-      __$$_RemoteFrameBufferClientInitMessageCopyWithImpl<$Res>;
+  factory _$$RemoteFrameBufferClientInitMessageImplCopyWith(
+          _$RemoteFrameBufferClientInitMessageImpl value,
+          $Res Function(_$RemoteFrameBufferClientInitMessageImpl) then) =
+      __$$RemoteFrameBufferClientInitMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool sharedFlag});
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferClientInitMessageCopyWithImpl<$Res>
+class __$$RemoteFrameBufferClientInitMessageImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferClientInitMessageCopyWithImpl<$Res,
-        _$_RemoteFrameBufferClientInitMessage>
-    implements _$$_RemoteFrameBufferClientInitMessageCopyWith<$Res> {
-  __$$_RemoteFrameBufferClientInitMessageCopyWithImpl(
-      _$_RemoteFrameBufferClientInitMessage _value,
-      $Res Function(_$_RemoteFrameBufferClientInitMessage) _then)
+        _$RemoteFrameBufferClientInitMessageImpl>
+    implements _$$RemoteFrameBufferClientInitMessageImplCopyWith<$Res> {
+  __$$RemoteFrameBufferClientInitMessageImplCopyWithImpl(
+      _$RemoteFrameBufferClientInitMessageImpl _value,
+      $Res Function(_$RemoteFrameBufferClientInitMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_RemoteFrameBufferClientInitMessageCopyWithImpl<$Res>
   $Res call({
     Object? sharedFlag = null,
   }) {
-    return _then(_$_RemoteFrameBufferClientInitMessage(
+    return _then(_$RemoteFrameBufferClientInitMessageImpl(
       sharedFlag: null == sharedFlag
           ? _value.sharedFlag
           : sharedFlag // ignore: cast_nullable_to_non_nullable
@@ -98,9 +98,9 @@ class __$$_RemoteFrameBufferClientInitMessageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferClientInitMessage
+class _$RemoteFrameBufferClientInitMessageImpl
     extends _RemoteFrameBufferClientInitMessage {
-  const _$_RemoteFrameBufferClientInitMessage({required this.sharedFlag})
+  const _$RemoteFrameBufferClientInitMessageImpl({required this.sharedFlag})
       : super._();
 
   @override
@@ -115,7 +115,7 @@ class _$_RemoteFrameBufferClientInitMessage
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferClientInitMessage &&
+            other is _$RemoteFrameBufferClientInitMessageImpl &&
             (identical(other.sharedFlag, sharedFlag) ||
                 other.sharedFlag == sharedFlag));
   }
@@ -126,23 +126,24 @@ class _$_RemoteFrameBufferClientInitMessage
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferClientInitMessageCopyWith<
-          _$_RemoteFrameBufferClientInitMessage>
-      get copyWith => __$$_RemoteFrameBufferClientInitMessageCopyWithImpl<
-          _$_RemoteFrameBufferClientInitMessage>(this, _$identity);
+  _$$RemoteFrameBufferClientInitMessageImplCopyWith<
+          _$RemoteFrameBufferClientInitMessageImpl>
+      get copyWith => __$$RemoteFrameBufferClientInitMessageImplCopyWithImpl<
+          _$RemoteFrameBufferClientInitMessageImpl>(this, _$identity);
 }
 
 abstract class _RemoteFrameBufferClientInitMessage
     extends RemoteFrameBufferClientInitMessage {
   const factory _RemoteFrameBufferClientInitMessage(
-      {required final bool sharedFlag}) = _$_RemoteFrameBufferClientInitMessage;
+          {required final bool sharedFlag}) =
+      _$RemoteFrameBufferClientInitMessageImpl;
   const _RemoteFrameBufferClientInitMessage._() : super._();
 
   @override
   bool get sharedFlag;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferClientInitMessageCopyWith<
-          _$_RemoteFrameBufferClientInitMessage>
+  _$$RemoteFrameBufferClientInitMessageImplCopyWith<
+          _$RemoteFrameBufferClientInitMessageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
