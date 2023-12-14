@@ -124,12 +124,12 @@ class _$RemoteFrameBufferPixelFormatCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferPixelFormatCopyWith<$Res>
+abstract class _$$RemoteFrameBufferPixelFormatImplCopyWith<$Res>
     implements $RemoteFrameBufferPixelFormatCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferPixelFormatCopyWith(
-          _$_RemoteFrameBufferPixelFormat value,
-          $Res Function(_$_RemoteFrameBufferPixelFormat) then) =
-      __$$_RemoteFrameBufferPixelFormatCopyWithImpl<$Res>;
+  factory _$$RemoteFrameBufferPixelFormatImplCopyWith(
+          _$RemoteFrameBufferPixelFormatImpl value,
+          $Res Function(_$RemoteFrameBufferPixelFormatImpl) then) =
+      __$$RemoteFrameBufferPixelFormatImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -146,13 +146,13 @@ abstract class _$$_RemoteFrameBufferPixelFormatCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferPixelFormatCopyWithImpl<$Res>
+class __$$RemoteFrameBufferPixelFormatImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferPixelFormatCopyWithImpl<$Res,
-        _$_RemoteFrameBufferPixelFormat>
-    implements _$$_RemoteFrameBufferPixelFormatCopyWith<$Res> {
-  __$$_RemoteFrameBufferPixelFormatCopyWithImpl(
-      _$_RemoteFrameBufferPixelFormat _value,
-      $Res Function(_$_RemoteFrameBufferPixelFormat) _then)
+        _$RemoteFrameBufferPixelFormatImpl>
+    implements _$$RemoteFrameBufferPixelFormatImplCopyWith<$Res> {
+  __$$RemoteFrameBufferPixelFormatImplCopyWithImpl(
+      _$RemoteFrameBufferPixelFormatImpl _value,
+      $Res Function(_$RemoteFrameBufferPixelFormatImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -169,7 +169,7 @@ class __$$_RemoteFrameBufferPixelFormatCopyWithImpl<$Res>
     Object? greenShift = null,
     Object? blueShift = null,
   }) {
-    return _then(_$_RemoteFrameBufferPixelFormat(
+    return _then(_$RemoteFrameBufferPixelFormatImpl(
       bitsPerPixel: null == bitsPerPixel
           ? _value.bitsPerPixel
           : bitsPerPixel // ignore: cast_nullable_to_non_nullable
@@ -216,8 +216,8 @@ class __$$_RemoteFrameBufferPixelFormatCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferPixelFormat extends _RemoteFrameBufferPixelFormat {
-  const _$_RemoteFrameBufferPixelFormat(
+class _$RemoteFrameBufferPixelFormatImpl extends _RemoteFrameBufferPixelFormat {
+  const _$RemoteFrameBufferPixelFormatImpl(
       {required this.bitsPerPixel,
       required this.depth,
       required this.bigEndian,
@@ -260,7 +260,7 @@ class _$_RemoteFrameBufferPixelFormat extends _RemoteFrameBufferPixelFormat {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferPixelFormat &&
+            other is _$RemoteFrameBufferPixelFormatImpl &&
             (identical(other.bitsPerPixel, bitsPerPixel) ||
                 other.bitsPerPixel == bitsPerPixel) &&
             (identical(other.depth, depth) || other.depth == depth) &&
@@ -287,9 +287,10 @@ class _$_RemoteFrameBufferPixelFormat extends _RemoteFrameBufferPixelFormat {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferPixelFormatCopyWith<_$_RemoteFrameBufferPixelFormat>
-      get copyWith => __$$_RemoteFrameBufferPixelFormatCopyWithImpl<
-          _$_RemoteFrameBufferPixelFormat>(this, _$identity);
+  _$$RemoteFrameBufferPixelFormatImplCopyWith<
+          _$RemoteFrameBufferPixelFormatImpl>
+      get copyWith => __$$RemoteFrameBufferPixelFormatImplCopyWithImpl<
+          _$RemoteFrameBufferPixelFormatImpl>(this, _$identity);
 }
 
 abstract class _RemoteFrameBufferPixelFormat
@@ -304,7 +305,7 @@ abstract class _RemoteFrameBufferPixelFormat
       required final int blueMax,
       required final int redShift,
       required final int greenShift,
-      required final int blueShift}) = _$_RemoteFrameBufferPixelFormat;
+      required final int blueShift}) = _$RemoteFrameBufferPixelFormatImpl;
   const _RemoteFrameBufferPixelFormat._() : super._();
 
   @override
@@ -329,6 +330,7 @@ abstract class _RemoteFrameBufferPixelFormat
   int get blueShift;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferPixelFormatCopyWith<_$_RemoteFrameBufferPixelFormat>
+  _$$RemoteFrameBufferPixelFormatImplCopyWith<
+          _$RemoteFrameBufferPixelFormatImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -89,29 +89,29 @@ class _$RemoteFrameBufferSecurityTypeCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$RemoteFrameBufferSecurityTypeInvalidCopyWith<$Res> {
-  factory _$$RemoteFrameBufferSecurityTypeInvalidCopyWith(
-          _$RemoteFrameBufferSecurityTypeInvalid value,
-          $Res Function(_$RemoteFrameBufferSecurityTypeInvalid) then) =
-      __$$RemoteFrameBufferSecurityTypeInvalidCopyWithImpl<$Res>;
+abstract class _$$RemoteFrameBufferSecurityTypeInvalidImplCopyWith<$Res> {
+  factory _$$RemoteFrameBufferSecurityTypeInvalidImplCopyWith(
+          _$RemoteFrameBufferSecurityTypeInvalidImpl value,
+          $Res Function(_$RemoteFrameBufferSecurityTypeInvalidImpl) then) =
+      __$$RemoteFrameBufferSecurityTypeInvalidImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RemoteFrameBufferSecurityTypeInvalidCopyWithImpl<$Res>
+class __$$RemoteFrameBufferSecurityTypeInvalidImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferSecurityTypeCopyWithImpl<$Res,
-        _$RemoteFrameBufferSecurityTypeInvalid>
-    implements _$$RemoteFrameBufferSecurityTypeInvalidCopyWith<$Res> {
-  __$$RemoteFrameBufferSecurityTypeInvalidCopyWithImpl(
-      _$RemoteFrameBufferSecurityTypeInvalid _value,
-      $Res Function(_$RemoteFrameBufferSecurityTypeInvalid) _then)
+        _$RemoteFrameBufferSecurityTypeInvalidImpl>
+    implements _$$RemoteFrameBufferSecurityTypeInvalidImplCopyWith<$Res> {
+  __$$RemoteFrameBufferSecurityTypeInvalidImplCopyWithImpl(
+      _$RemoteFrameBufferSecurityTypeInvalidImpl _value,
+      $Res Function(_$RemoteFrameBufferSecurityTypeInvalidImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RemoteFrameBufferSecurityTypeInvalid
+class _$RemoteFrameBufferSecurityTypeInvalidImpl
     extends RemoteFrameBufferSecurityTypeInvalid {
-  const _$RemoteFrameBufferSecurityTypeInvalid() : super._();
+  const _$RemoteFrameBufferSecurityTypeInvalidImpl() : super._();
 
   @override
   String toString() {
@@ -122,7 +122,7 @@ class _$RemoteFrameBufferSecurityTypeInvalid
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RemoteFrameBufferSecurityTypeInvalid);
+            other is _$RemoteFrameBufferSecurityTypeInvalidImpl);
   }
 
   @override
@@ -205,34 +205,34 @@ class _$RemoteFrameBufferSecurityTypeInvalid
 abstract class RemoteFrameBufferSecurityTypeInvalid
     extends RemoteFrameBufferSecurityType {
   const factory RemoteFrameBufferSecurityTypeInvalid() =
-      _$RemoteFrameBufferSecurityTypeInvalid;
+      _$RemoteFrameBufferSecurityTypeInvalidImpl;
   const RemoteFrameBufferSecurityTypeInvalid._() : super._();
 }
 
 /// @nodoc
-abstract class _$$RemoteFrameBufferSecurityTypeNoneCopyWith<$Res> {
-  factory _$$RemoteFrameBufferSecurityTypeNoneCopyWith(
-          _$RemoteFrameBufferSecurityTypeNone value,
-          $Res Function(_$RemoteFrameBufferSecurityTypeNone) then) =
-      __$$RemoteFrameBufferSecurityTypeNoneCopyWithImpl<$Res>;
+abstract class _$$RemoteFrameBufferSecurityTypeNoneImplCopyWith<$Res> {
+  factory _$$RemoteFrameBufferSecurityTypeNoneImplCopyWith(
+          _$RemoteFrameBufferSecurityTypeNoneImpl value,
+          $Res Function(_$RemoteFrameBufferSecurityTypeNoneImpl) then) =
+      __$$RemoteFrameBufferSecurityTypeNoneImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RemoteFrameBufferSecurityTypeNoneCopyWithImpl<$Res>
+class __$$RemoteFrameBufferSecurityTypeNoneImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferSecurityTypeCopyWithImpl<$Res,
-        _$RemoteFrameBufferSecurityTypeNone>
-    implements _$$RemoteFrameBufferSecurityTypeNoneCopyWith<$Res> {
-  __$$RemoteFrameBufferSecurityTypeNoneCopyWithImpl(
-      _$RemoteFrameBufferSecurityTypeNone _value,
-      $Res Function(_$RemoteFrameBufferSecurityTypeNone) _then)
+        _$RemoteFrameBufferSecurityTypeNoneImpl>
+    implements _$$RemoteFrameBufferSecurityTypeNoneImplCopyWith<$Res> {
+  __$$RemoteFrameBufferSecurityTypeNoneImplCopyWithImpl(
+      _$RemoteFrameBufferSecurityTypeNoneImpl _value,
+      $Res Function(_$RemoteFrameBufferSecurityTypeNoneImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RemoteFrameBufferSecurityTypeNone
+class _$RemoteFrameBufferSecurityTypeNoneImpl
     extends RemoteFrameBufferSecurityTypeNone {
-  const _$RemoteFrameBufferSecurityTypeNone() : super._();
+  const _$RemoteFrameBufferSecurityTypeNoneImpl() : super._();
 
   @override
   String toString() {
@@ -243,7 +243,7 @@ class _$RemoteFrameBufferSecurityTypeNone
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RemoteFrameBufferSecurityTypeNone);
+            other is _$RemoteFrameBufferSecurityTypeNoneImpl);
   }
 
   @override
@@ -326,35 +326,37 @@ class _$RemoteFrameBufferSecurityTypeNone
 abstract class RemoteFrameBufferSecurityTypeNone
     extends RemoteFrameBufferSecurityType {
   const factory RemoteFrameBufferSecurityTypeNone() =
-      _$RemoteFrameBufferSecurityTypeNone;
+      _$RemoteFrameBufferSecurityTypeNoneImpl;
   const RemoteFrameBufferSecurityTypeNone._() : super._();
 }
 
 /// @nodoc
-abstract class _$$RemoteFrameBufferSecurityTypeVncAuthenticationCopyWith<$Res> {
-  factory _$$RemoteFrameBufferSecurityTypeVncAuthenticationCopyWith(
-          _$RemoteFrameBufferSecurityTypeVncAuthentication value,
-          $Res Function(_$RemoteFrameBufferSecurityTypeVncAuthentication)
+abstract class _$$RemoteFrameBufferSecurityTypeVncAuthenticationImplCopyWith<
+    $Res> {
+  factory _$$RemoteFrameBufferSecurityTypeVncAuthenticationImplCopyWith(
+          _$RemoteFrameBufferSecurityTypeVncAuthenticationImpl value,
+          $Res Function(_$RemoteFrameBufferSecurityTypeVncAuthenticationImpl)
               then) =
-      __$$RemoteFrameBufferSecurityTypeVncAuthenticationCopyWithImpl<$Res>;
+      __$$RemoteFrameBufferSecurityTypeVncAuthenticationImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RemoteFrameBufferSecurityTypeVncAuthenticationCopyWithImpl<$Res>
+class __$$RemoteFrameBufferSecurityTypeVncAuthenticationImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferSecurityTypeCopyWithImpl<$Res,
-        _$RemoteFrameBufferSecurityTypeVncAuthentication>
-    implements _$$RemoteFrameBufferSecurityTypeVncAuthenticationCopyWith<$Res> {
-  __$$RemoteFrameBufferSecurityTypeVncAuthenticationCopyWithImpl(
-      _$RemoteFrameBufferSecurityTypeVncAuthentication _value,
-      $Res Function(_$RemoteFrameBufferSecurityTypeVncAuthentication) _then)
+        _$RemoteFrameBufferSecurityTypeVncAuthenticationImpl>
+    implements
+        _$$RemoteFrameBufferSecurityTypeVncAuthenticationImplCopyWith<$Res> {
+  __$$RemoteFrameBufferSecurityTypeVncAuthenticationImplCopyWithImpl(
+      _$RemoteFrameBufferSecurityTypeVncAuthenticationImpl _value,
+      $Res Function(_$RemoteFrameBufferSecurityTypeVncAuthenticationImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RemoteFrameBufferSecurityTypeVncAuthentication
+class _$RemoteFrameBufferSecurityTypeVncAuthenticationImpl
     extends RemoteFrameBufferSecurityTypeVncAuthentication {
-  const _$RemoteFrameBufferSecurityTypeVncAuthentication() : super._();
+  const _$RemoteFrameBufferSecurityTypeVncAuthenticationImpl() : super._();
 
   @override
   String toString() {
@@ -365,7 +367,7 @@ class _$RemoteFrameBufferSecurityTypeVncAuthentication
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RemoteFrameBufferSecurityTypeVncAuthentication);
+            other is _$RemoteFrameBufferSecurityTypeVncAuthenticationImpl);
   }
 
   @override
@@ -448,6 +450,6 @@ class _$RemoteFrameBufferSecurityTypeVncAuthentication
 abstract class RemoteFrameBufferSecurityTypeVncAuthentication
     extends RemoteFrameBufferSecurityType {
   const factory RemoteFrameBufferSecurityTypeVncAuthentication() =
-      _$RemoteFrameBufferSecurityTypeVncAuthentication;
+      _$RemoteFrameBufferSecurityTypeVncAuthenticationImpl;
   const RemoteFrameBufferSecurityTypeVncAuthentication._() : super._();
 }

@@ -73,12 +73,12 @@ class _$RemoteFrameBufferSetPixelFormatMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferSetPixelFormatMessageCopyWith<$Res>
+abstract class _$$RemoteFrameBufferSetPixelFormatMessageImplCopyWith<$Res>
     implements $RemoteFrameBufferSetPixelFormatMessageCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferSetPixelFormatMessageCopyWith(
-          _$_RemoteFrameBufferSetPixelFormatMessage value,
-          $Res Function(_$_RemoteFrameBufferSetPixelFormatMessage) then) =
-      __$$_RemoteFrameBufferSetPixelFormatMessageCopyWithImpl<$Res>;
+  factory _$$RemoteFrameBufferSetPixelFormatMessageImplCopyWith(
+          _$RemoteFrameBufferSetPixelFormatMessageImpl value,
+          $Res Function(_$RemoteFrameBufferSetPixelFormatMessageImpl) then) =
+      __$$RemoteFrameBufferSetPixelFormatMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({RemoteFrameBufferPixelFormat pixelFormat});
@@ -88,13 +88,13 @@ abstract class _$$_RemoteFrameBufferSetPixelFormatMessageCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferSetPixelFormatMessageCopyWithImpl<$Res>
+class __$$RemoteFrameBufferSetPixelFormatMessageImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferSetPixelFormatMessageCopyWithImpl<$Res,
-        _$_RemoteFrameBufferSetPixelFormatMessage>
-    implements _$$_RemoteFrameBufferSetPixelFormatMessageCopyWith<$Res> {
-  __$$_RemoteFrameBufferSetPixelFormatMessageCopyWithImpl(
-      _$_RemoteFrameBufferSetPixelFormatMessage _value,
-      $Res Function(_$_RemoteFrameBufferSetPixelFormatMessage) _then)
+        _$RemoteFrameBufferSetPixelFormatMessageImpl>
+    implements _$$RemoteFrameBufferSetPixelFormatMessageImplCopyWith<$Res> {
+  __$$RemoteFrameBufferSetPixelFormatMessageImplCopyWithImpl(
+      _$RemoteFrameBufferSetPixelFormatMessageImpl _value,
+      $Res Function(_$RemoteFrameBufferSetPixelFormatMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -102,7 +102,7 @@ class __$$_RemoteFrameBufferSetPixelFormatMessageCopyWithImpl<$Res>
   $Res call({
     Object? pixelFormat = null,
   }) {
-    return _then(_$_RemoteFrameBufferSetPixelFormatMessage(
+    return _then(_$RemoteFrameBufferSetPixelFormatMessageImpl(
       pixelFormat: null == pixelFormat
           ? _value.pixelFormat
           : pixelFormat // ignore: cast_nullable_to_non_nullable
@@ -113,9 +113,10 @@ class __$$_RemoteFrameBufferSetPixelFormatMessageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferSetPixelFormatMessage
+class _$RemoteFrameBufferSetPixelFormatMessageImpl
     extends _RemoteFrameBufferSetPixelFormatMessage {
-  const _$_RemoteFrameBufferSetPixelFormatMessage({required this.pixelFormat})
+  const _$RemoteFrameBufferSetPixelFormatMessageImpl(
+      {required this.pixelFormat})
       : super._();
 
   @override
@@ -130,7 +131,7 @@ class _$_RemoteFrameBufferSetPixelFormatMessage
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferSetPixelFormatMessage &&
+            other is _$RemoteFrameBufferSetPixelFormatMessageImpl &&
             (identical(other.pixelFormat, pixelFormat) ||
                 other.pixelFormat == pixelFormat));
   }
@@ -141,24 +142,25 @@ class _$_RemoteFrameBufferSetPixelFormatMessage
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferSetPixelFormatMessageCopyWith<
-          _$_RemoteFrameBufferSetPixelFormatMessage>
-      get copyWith => __$$_RemoteFrameBufferSetPixelFormatMessageCopyWithImpl<
-          _$_RemoteFrameBufferSetPixelFormatMessage>(this, _$identity);
+  _$$RemoteFrameBufferSetPixelFormatMessageImplCopyWith<
+          _$RemoteFrameBufferSetPixelFormatMessageImpl>
+      get copyWith =>
+          __$$RemoteFrameBufferSetPixelFormatMessageImplCopyWithImpl<
+              _$RemoteFrameBufferSetPixelFormatMessageImpl>(this, _$identity);
 }
 
 abstract class _RemoteFrameBufferSetPixelFormatMessage
     extends RemoteFrameBufferSetPixelFormatMessage {
   const factory _RemoteFrameBufferSetPixelFormatMessage(
           {required final RemoteFrameBufferPixelFormat pixelFormat}) =
-      _$_RemoteFrameBufferSetPixelFormatMessage;
+      _$RemoteFrameBufferSetPixelFormatMessageImpl;
   const _RemoteFrameBufferSetPixelFormatMessage._() : super._();
 
   @override
   RemoteFrameBufferPixelFormat get pixelFormat;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferSetPixelFormatMessageCopyWith<
-          _$_RemoteFrameBufferSetPixelFormatMessage>
+  _$$RemoteFrameBufferSetPixelFormatMessageImplCopyWith<
+          _$RemoteFrameBufferSetPixelFormatMessageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

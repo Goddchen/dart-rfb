@@ -91,23 +91,23 @@ class _$RemoteFrameBufferProtocolVersionCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$RemoteFrameBufferProtocolVersionUnknownCopyWith<$Res> {
-  factory _$$RemoteFrameBufferProtocolVersionUnknownCopyWith(
-          _$RemoteFrameBufferProtocolVersionUnknown value,
-          $Res Function(_$RemoteFrameBufferProtocolVersionUnknown) then) =
-      __$$RemoteFrameBufferProtocolVersionUnknownCopyWithImpl<$Res>;
+abstract class _$$RemoteFrameBufferProtocolVersionUnknownImplCopyWith<$Res> {
+  factory _$$RemoteFrameBufferProtocolVersionUnknownImplCopyWith(
+          _$RemoteFrameBufferProtocolVersionUnknownImpl value,
+          $Res Function(_$RemoteFrameBufferProtocolVersionUnknownImpl) then) =
+      __$$RemoteFrameBufferProtocolVersionUnknownImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ByteData bytes});
 }
 
 /// @nodoc
-class __$$RemoteFrameBufferProtocolVersionUnknownCopyWithImpl<$Res>
+class __$$RemoteFrameBufferProtocolVersionUnknownImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferProtocolVersionCopyWithImpl<$Res,
-        _$RemoteFrameBufferProtocolVersionUnknown>
-    implements _$$RemoteFrameBufferProtocolVersionUnknownCopyWith<$Res> {
-  __$$RemoteFrameBufferProtocolVersionUnknownCopyWithImpl(
-      _$RemoteFrameBufferProtocolVersionUnknown _value,
-      $Res Function(_$RemoteFrameBufferProtocolVersionUnknown) _then)
+        _$RemoteFrameBufferProtocolVersionUnknownImpl>
+    implements _$$RemoteFrameBufferProtocolVersionUnknownImplCopyWith<$Res> {
+  __$$RemoteFrameBufferProtocolVersionUnknownImplCopyWithImpl(
+      _$RemoteFrameBufferProtocolVersionUnknownImpl _value,
+      $Res Function(_$RemoteFrameBufferProtocolVersionUnknownImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -115,7 +115,7 @@ class __$$RemoteFrameBufferProtocolVersionUnknownCopyWithImpl<$Res>
   $Res call({
     Object? bytes = null,
   }) {
-    return _then(_$RemoteFrameBufferProtocolVersionUnknown(
+    return _then(_$RemoteFrameBufferProtocolVersionUnknownImpl(
       bytes: null == bytes
           ? _value.bytes
           : bytes // ignore: cast_nullable_to_non_nullable
@@ -126,9 +126,9 @@ class __$$RemoteFrameBufferProtocolVersionUnknownCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RemoteFrameBufferProtocolVersionUnknown
+class _$RemoteFrameBufferProtocolVersionUnknownImpl
     implements RemoteFrameBufferProtocolVersionUnknown {
-  const _$RemoteFrameBufferProtocolVersionUnknown({required this.bytes});
+  const _$RemoteFrameBufferProtocolVersionUnknownImpl({required this.bytes});
 
   @override
   final ByteData bytes;
@@ -142,7 +142,7 @@ class _$RemoteFrameBufferProtocolVersionUnknown
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RemoteFrameBufferProtocolVersionUnknown &&
+            other is _$RemoteFrameBufferProtocolVersionUnknownImpl &&
             (identical(other.bytes, bytes) || other.bytes == bytes));
   }
 
@@ -152,10 +152,11 @@ class _$RemoteFrameBufferProtocolVersionUnknown
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$RemoteFrameBufferProtocolVersionUnknownCopyWith<
-          _$RemoteFrameBufferProtocolVersionUnknown>
-      get copyWith => __$$RemoteFrameBufferProtocolVersionUnknownCopyWithImpl<
-          _$RemoteFrameBufferProtocolVersionUnknown>(this, _$identity);
+  _$$RemoteFrameBufferProtocolVersionUnknownImplCopyWith<
+          _$RemoteFrameBufferProtocolVersionUnknownImpl>
+      get copyWith =>
+          __$$RemoteFrameBufferProtocolVersionUnknownImplCopyWithImpl<
+              _$RemoteFrameBufferProtocolVersionUnknownImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -237,39 +238,39 @@ abstract class RemoteFrameBufferProtocolVersionUnknown
     implements RemoteFrameBufferProtocolVersion {
   const factory RemoteFrameBufferProtocolVersionUnknown(
           {required final ByteData bytes}) =
-      _$RemoteFrameBufferProtocolVersionUnknown;
+      _$RemoteFrameBufferProtocolVersionUnknownImpl;
 
   ByteData get bytes;
   @JsonKey(ignore: true)
-  _$$RemoteFrameBufferProtocolVersionUnknownCopyWith<
-          _$RemoteFrameBufferProtocolVersionUnknown>
+  _$$RemoteFrameBufferProtocolVersionUnknownImplCopyWith<
+          _$RemoteFrameBufferProtocolVersionUnknownImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RemoteFrameBufferProtocolVersion_3_3CopyWith<$Res> {
-  factory _$$RemoteFrameBufferProtocolVersion_3_3CopyWith(
-          _$RemoteFrameBufferProtocolVersion_3_3 value,
-          $Res Function(_$RemoteFrameBufferProtocolVersion_3_3) then) =
-      __$$RemoteFrameBufferProtocolVersion_3_3CopyWithImpl<$Res>;
+abstract class _$$RemoteFrameBufferProtocolVersion_3_3ImplCopyWith<$Res> {
+  factory _$$RemoteFrameBufferProtocolVersion_3_3ImplCopyWith(
+          _$RemoteFrameBufferProtocolVersion_3_3Impl value,
+          $Res Function(_$RemoteFrameBufferProtocolVersion_3_3Impl) then) =
+      __$$RemoteFrameBufferProtocolVersion_3_3ImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RemoteFrameBufferProtocolVersion_3_3CopyWithImpl<$Res>
+class __$$RemoteFrameBufferProtocolVersion_3_3ImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferProtocolVersionCopyWithImpl<$Res,
-        _$RemoteFrameBufferProtocolVersion_3_3>
-    implements _$$RemoteFrameBufferProtocolVersion_3_3CopyWith<$Res> {
-  __$$RemoteFrameBufferProtocolVersion_3_3CopyWithImpl(
-      _$RemoteFrameBufferProtocolVersion_3_3 _value,
-      $Res Function(_$RemoteFrameBufferProtocolVersion_3_3) _then)
+        _$RemoteFrameBufferProtocolVersion_3_3Impl>
+    implements _$$RemoteFrameBufferProtocolVersion_3_3ImplCopyWith<$Res> {
+  __$$RemoteFrameBufferProtocolVersion_3_3ImplCopyWithImpl(
+      _$RemoteFrameBufferProtocolVersion_3_3Impl _value,
+      $Res Function(_$RemoteFrameBufferProtocolVersion_3_3Impl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RemoteFrameBufferProtocolVersion_3_3
+class _$RemoteFrameBufferProtocolVersion_3_3Impl
     implements RemoteFrameBufferProtocolVersion_3_3 {
-  const _$RemoteFrameBufferProtocolVersion_3_3();
+  const _$RemoteFrameBufferProtocolVersion_3_3Impl();
 
   @override
   String toString() {
@@ -280,7 +281,7 @@ class _$RemoteFrameBufferProtocolVersion_3_3
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RemoteFrameBufferProtocolVersion_3_3);
+            other is _$RemoteFrameBufferProtocolVersion_3_3Impl);
   }
 
   @override
@@ -365,33 +366,33 @@ class _$RemoteFrameBufferProtocolVersion_3_3
 abstract class RemoteFrameBufferProtocolVersion_3_3
     implements RemoteFrameBufferProtocolVersion {
   const factory RemoteFrameBufferProtocolVersion_3_3() =
-      _$RemoteFrameBufferProtocolVersion_3_3;
+      _$RemoteFrameBufferProtocolVersion_3_3Impl;
 }
 
 /// @nodoc
-abstract class _$$RemoteFrameBufferProtocolVersion_3_7CopyWith<$Res> {
-  factory _$$RemoteFrameBufferProtocolVersion_3_7CopyWith(
-          _$RemoteFrameBufferProtocolVersion_3_7 value,
-          $Res Function(_$RemoteFrameBufferProtocolVersion_3_7) then) =
-      __$$RemoteFrameBufferProtocolVersion_3_7CopyWithImpl<$Res>;
+abstract class _$$RemoteFrameBufferProtocolVersion_3_7ImplCopyWith<$Res> {
+  factory _$$RemoteFrameBufferProtocolVersion_3_7ImplCopyWith(
+          _$RemoteFrameBufferProtocolVersion_3_7Impl value,
+          $Res Function(_$RemoteFrameBufferProtocolVersion_3_7Impl) then) =
+      __$$RemoteFrameBufferProtocolVersion_3_7ImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RemoteFrameBufferProtocolVersion_3_7CopyWithImpl<$Res>
+class __$$RemoteFrameBufferProtocolVersion_3_7ImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferProtocolVersionCopyWithImpl<$Res,
-        _$RemoteFrameBufferProtocolVersion_3_7>
-    implements _$$RemoteFrameBufferProtocolVersion_3_7CopyWith<$Res> {
-  __$$RemoteFrameBufferProtocolVersion_3_7CopyWithImpl(
-      _$RemoteFrameBufferProtocolVersion_3_7 _value,
-      $Res Function(_$RemoteFrameBufferProtocolVersion_3_7) _then)
+        _$RemoteFrameBufferProtocolVersion_3_7Impl>
+    implements _$$RemoteFrameBufferProtocolVersion_3_7ImplCopyWith<$Res> {
+  __$$RemoteFrameBufferProtocolVersion_3_7ImplCopyWithImpl(
+      _$RemoteFrameBufferProtocolVersion_3_7Impl _value,
+      $Res Function(_$RemoteFrameBufferProtocolVersion_3_7Impl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RemoteFrameBufferProtocolVersion_3_7
+class _$RemoteFrameBufferProtocolVersion_3_7Impl
     implements RemoteFrameBufferProtocolVersion_3_7 {
-  const _$RemoteFrameBufferProtocolVersion_3_7();
+  const _$RemoteFrameBufferProtocolVersion_3_7Impl();
 
   @override
   String toString() {
@@ -402,7 +403,7 @@ class _$RemoteFrameBufferProtocolVersion_3_7
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RemoteFrameBufferProtocolVersion_3_7);
+            other is _$RemoteFrameBufferProtocolVersion_3_7Impl);
   }
 
   @override
@@ -487,33 +488,33 @@ class _$RemoteFrameBufferProtocolVersion_3_7
 abstract class RemoteFrameBufferProtocolVersion_3_7
     implements RemoteFrameBufferProtocolVersion {
   const factory RemoteFrameBufferProtocolVersion_3_7() =
-      _$RemoteFrameBufferProtocolVersion_3_7;
+      _$RemoteFrameBufferProtocolVersion_3_7Impl;
 }
 
 /// @nodoc
-abstract class _$$RemoteFrameBufferProtocolVersion_3_8CopyWith<$Res> {
-  factory _$$RemoteFrameBufferProtocolVersion_3_8CopyWith(
-          _$RemoteFrameBufferProtocolVersion_3_8 value,
-          $Res Function(_$RemoteFrameBufferProtocolVersion_3_8) then) =
-      __$$RemoteFrameBufferProtocolVersion_3_8CopyWithImpl<$Res>;
+abstract class _$$RemoteFrameBufferProtocolVersion_3_8ImplCopyWith<$Res> {
+  factory _$$RemoteFrameBufferProtocolVersion_3_8ImplCopyWith(
+          _$RemoteFrameBufferProtocolVersion_3_8Impl value,
+          $Res Function(_$RemoteFrameBufferProtocolVersion_3_8Impl) then) =
+      __$$RemoteFrameBufferProtocolVersion_3_8ImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RemoteFrameBufferProtocolVersion_3_8CopyWithImpl<$Res>
+class __$$RemoteFrameBufferProtocolVersion_3_8ImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferProtocolVersionCopyWithImpl<$Res,
-        _$RemoteFrameBufferProtocolVersion_3_8>
-    implements _$$RemoteFrameBufferProtocolVersion_3_8CopyWith<$Res> {
-  __$$RemoteFrameBufferProtocolVersion_3_8CopyWithImpl(
-      _$RemoteFrameBufferProtocolVersion_3_8 _value,
-      $Res Function(_$RemoteFrameBufferProtocolVersion_3_8) _then)
+        _$RemoteFrameBufferProtocolVersion_3_8Impl>
+    implements _$$RemoteFrameBufferProtocolVersion_3_8ImplCopyWith<$Res> {
+  __$$RemoteFrameBufferProtocolVersion_3_8ImplCopyWithImpl(
+      _$RemoteFrameBufferProtocolVersion_3_8Impl _value,
+      $Res Function(_$RemoteFrameBufferProtocolVersion_3_8Impl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RemoteFrameBufferProtocolVersion_3_8
+class _$RemoteFrameBufferProtocolVersion_3_8Impl
     implements RemoteFrameBufferProtocolVersion_3_8 {
-  const _$RemoteFrameBufferProtocolVersion_3_8();
+  const _$RemoteFrameBufferProtocolVersion_3_8Impl();
 
   @override
   String toString() {
@@ -524,7 +525,7 @@ class _$RemoteFrameBufferProtocolVersion_3_8
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RemoteFrameBufferProtocolVersion_3_8);
+            other is _$RemoteFrameBufferProtocolVersion_3_8Impl);
   }
 
   @override
@@ -609,7 +610,7 @@ class _$RemoteFrameBufferProtocolVersion_3_8
 abstract class RemoteFrameBufferProtocolVersion_3_8
     implements RemoteFrameBufferProtocolVersion {
   const factory RemoteFrameBufferProtocolVersion_3_8() =
-      _$RemoteFrameBufferProtocolVersion_3_8;
+      _$RemoteFrameBufferProtocolVersion_3_8Impl;
 }
 
 /// @nodoc
@@ -673,14 +674,15 @@ class _$RemoteFrameBufferProtocolVersionHandshakeMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferProtocolVersionHandshakeMessageCopyWith<
+abstract class _$$RemoteFrameBufferProtocolVersionHandshakeMessageImplCopyWith<
         $Res>
     implements $RemoteFrameBufferProtocolVersionHandshakeMessageCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferProtocolVersionHandshakeMessageCopyWith(
-          _$_RemoteFrameBufferProtocolVersionHandshakeMessage value,
-          $Res Function(_$_RemoteFrameBufferProtocolVersionHandshakeMessage)
+  factory _$$RemoteFrameBufferProtocolVersionHandshakeMessageImplCopyWith(
+          _$RemoteFrameBufferProtocolVersionHandshakeMessageImpl value,
+          $Res Function(_$RemoteFrameBufferProtocolVersionHandshakeMessageImpl)
               then) =
-      __$$_RemoteFrameBufferProtocolVersionHandshakeMessageCopyWithImpl<$Res>;
+      __$$RemoteFrameBufferProtocolVersionHandshakeMessageImplCopyWithImpl<
+          $Res>;
   @override
   @useResult
   $Res call({RemoteFrameBufferProtocolVersion version});
@@ -690,14 +692,15 @@ abstract class _$$_RemoteFrameBufferProtocolVersionHandshakeMessageCopyWith<
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferProtocolVersionHandshakeMessageCopyWithImpl<$Res>
+class __$$RemoteFrameBufferProtocolVersionHandshakeMessageImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferProtocolVersionHandshakeMessageCopyWithImpl<$Res,
-        _$_RemoteFrameBufferProtocolVersionHandshakeMessage>
+        _$RemoteFrameBufferProtocolVersionHandshakeMessageImpl>
     implements
-        _$$_RemoteFrameBufferProtocolVersionHandshakeMessageCopyWith<$Res> {
-  __$$_RemoteFrameBufferProtocolVersionHandshakeMessageCopyWithImpl(
-      _$_RemoteFrameBufferProtocolVersionHandshakeMessage _value,
-      $Res Function(_$_RemoteFrameBufferProtocolVersionHandshakeMessage) _then)
+        _$$RemoteFrameBufferProtocolVersionHandshakeMessageImplCopyWith<$Res> {
+  __$$RemoteFrameBufferProtocolVersionHandshakeMessageImplCopyWithImpl(
+      _$RemoteFrameBufferProtocolVersionHandshakeMessageImpl _value,
+      $Res Function(_$RemoteFrameBufferProtocolVersionHandshakeMessageImpl)
+          _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -705,7 +708,7 @@ class __$$_RemoteFrameBufferProtocolVersionHandshakeMessageCopyWithImpl<$Res>
   $Res call({
     Object? version = null,
   }) {
-    return _then(_$_RemoteFrameBufferProtocolVersionHandshakeMessage(
+    return _then(_$RemoteFrameBufferProtocolVersionHandshakeMessageImpl(
       version: null == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
@@ -716,9 +719,9 @@ class __$$_RemoteFrameBufferProtocolVersionHandshakeMessageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferProtocolVersionHandshakeMessage
+class _$RemoteFrameBufferProtocolVersionHandshakeMessageImpl
     extends _RemoteFrameBufferProtocolVersionHandshakeMessage {
-  const _$_RemoteFrameBufferProtocolVersionHandshakeMessage(
+  const _$RemoteFrameBufferProtocolVersionHandshakeMessageImpl(
       {required this.version})
       : super._();
 
@@ -734,7 +737,7 @@ class _$_RemoteFrameBufferProtocolVersionHandshakeMessage
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferProtocolVersionHandshakeMessage &&
+            other is _$RemoteFrameBufferProtocolVersionHandshakeMessageImpl &&
             (identical(other.version, version) || other.version == version));
   }
 
@@ -744,11 +747,11 @@ class _$_RemoteFrameBufferProtocolVersionHandshakeMessage
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferProtocolVersionHandshakeMessageCopyWith<
-          _$_RemoteFrameBufferProtocolVersionHandshakeMessage>
+  _$$RemoteFrameBufferProtocolVersionHandshakeMessageImplCopyWith<
+          _$RemoteFrameBufferProtocolVersionHandshakeMessageImpl>
       get copyWith =>
-          __$$_RemoteFrameBufferProtocolVersionHandshakeMessageCopyWithImpl<
-                  _$_RemoteFrameBufferProtocolVersionHandshakeMessage>(
+          __$$RemoteFrameBufferProtocolVersionHandshakeMessageImplCopyWithImpl<
+                  _$RemoteFrameBufferProtocolVersionHandshakeMessageImpl>(
               this, _$identity);
 }
 
@@ -756,14 +759,14 @@ abstract class _RemoteFrameBufferProtocolVersionHandshakeMessage
     extends RemoteFrameBufferProtocolVersionHandshakeMessage {
   const factory _RemoteFrameBufferProtocolVersionHandshakeMessage(
           {required final RemoteFrameBufferProtocolVersion version}) =
-      _$_RemoteFrameBufferProtocolVersionHandshakeMessage;
+      _$RemoteFrameBufferProtocolVersionHandshakeMessageImpl;
   const _RemoteFrameBufferProtocolVersionHandshakeMessage._() : super._();
 
   @override
   RemoteFrameBufferProtocolVersion get version;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferProtocolVersionHandshakeMessageCopyWith<
-          _$_RemoteFrameBufferProtocolVersionHandshakeMessage>
+  _$$RemoteFrameBufferProtocolVersionHandshakeMessageImplCopyWith<
+          _$RemoteFrameBufferProtocolVersionHandshakeMessageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

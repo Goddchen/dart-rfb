@@ -65,12 +65,12 @@ class _$RemoteFrameBufferFrameBufferUpdateMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferFrameBufferUpdateMessageCopyWith<$Res>
+abstract class _$$RemoteFrameBufferFrameBufferUpdateMessageImplCopyWith<$Res>
     implements $RemoteFrameBufferFrameBufferUpdateMessageCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferFrameBufferUpdateMessageCopyWith(
-          _$_RemoteFrameBufferFrameBufferUpdateMessage value,
-          $Res Function(_$_RemoteFrameBufferFrameBufferUpdateMessage) then) =
-      __$$_RemoteFrameBufferFrameBufferUpdateMessageCopyWithImpl<$Res>;
+  factory _$$RemoteFrameBufferFrameBufferUpdateMessageImplCopyWith(
+          _$RemoteFrameBufferFrameBufferUpdateMessageImpl value,
+          $Res Function(_$RemoteFrameBufferFrameBufferUpdateMessageImpl) then) =
+      __$$RemoteFrameBufferFrameBufferUpdateMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -79,13 +79,13 @@ abstract class _$$_RemoteFrameBufferFrameBufferUpdateMessageCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferFrameBufferUpdateMessageCopyWithImpl<$Res>
+class __$$RemoteFrameBufferFrameBufferUpdateMessageImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferFrameBufferUpdateMessageCopyWithImpl<$Res,
-        _$_RemoteFrameBufferFrameBufferUpdateMessage>
-    implements _$$_RemoteFrameBufferFrameBufferUpdateMessageCopyWith<$Res> {
-  __$$_RemoteFrameBufferFrameBufferUpdateMessageCopyWithImpl(
-      _$_RemoteFrameBufferFrameBufferUpdateMessage _value,
-      $Res Function(_$_RemoteFrameBufferFrameBufferUpdateMessage) _then)
+        _$RemoteFrameBufferFrameBufferUpdateMessageImpl>
+    implements _$$RemoteFrameBufferFrameBufferUpdateMessageImplCopyWith<$Res> {
+  __$$RemoteFrameBufferFrameBufferUpdateMessageImplCopyWithImpl(
+      _$RemoteFrameBufferFrameBufferUpdateMessageImpl _value,
+      $Res Function(_$RemoteFrameBufferFrameBufferUpdateMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,7 +93,7 @@ class __$$_RemoteFrameBufferFrameBufferUpdateMessageCopyWithImpl<$Res>
   $Res call({
     Object? rectangles = null,
   }) {
-    return _then(_$_RemoteFrameBufferFrameBufferUpdateMessage(
+    return _then(_$RemoteFrameBufferFrameBufferUpdateMessageImpl(
       rectangles: null == rectangles
           ? _value.rectangles
           : rectangles // ignore: cast_nullable_to_non_nullable
@@ -104,9 +104,10 @@ class __$$_RemoteFrameBufferFrameBufferUpdateMessageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferFrameBufferUpdateMessage
+class _$RemoteFrameBufferFrameBufferUpdateMessageImpl
     extends _RemoteFrameBufferFrameBufferUpdateMessage {
-  const _$_RemoteFrameBufferFrameBufferUpdateMessage({required this.rectangles})
+  const _$RemoteFrameBufferFrameBufferUpdateMessageImpl(
+      {required this.rectangles})
       : super._();
 
   @override
@@ -121,7 +122,7 @@ class _$_RemoteFrameBufferFrameBufferUpdateMessage
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferFrameBufferUpdateMessage &&
+            other is _$RemoteFrameBufferFrameBufferUpdateMessageImpl &&
             const DeepCollectionEquality()
                 .equals(other.rectangles, rectangles));
   }
@@ -133,11 +134,12 @@ class _$_RemoteFrameBufferFrameBufferUpdateMessage
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferFrameBufferUpdateMessageCopyWith<
-          _$_RemoteFrameBufferFrameBufferUpdateMessage>
+  _$$RemoteFrameBufferFrameBufferUpdateMessageImplCopyWith<
+          _$RemoteFrameBufferFrameBufferUpdateMessageImpl>
       get copyWith =>
-          __$$_RemoteFrameBufferFrameBufferUpdateMessageCopyWithImpl<
-              _$_RemoteFrameBufferFrameBufferUpdateMessage>(this, _$identity);
+          __$$RemoteFrameBufferFrameBufferUpdateMessageImplCopyWithImpl<
+                  _$RemoteFrameBufferFrameBufferUpdateMessageImpl>(
+              this, _$identity);
 }
 
 abstract class _RemoteFrameBufferFrameBufferUpdateMessage
@@ -145,15 +147,15 @@ abstract class _RemoteFrameBufferFrameBufferUpdateMessage
   const factory _RemoteFrameBufferFrameBufferUpdateMessage(
       {required final Iterable<
               RemoteFrameBufferFrameBufferUpdateMessageRectangle>
-          rectangles}) = _$_RemoteFrameBufferFrameBufferUpdateMessage;
+          rectangles}) = _$RemoteFrameBufferFrameBufferUpdateMessageImpl;
   const _RemoteFrameBufferFrameBufferUpdateMessage._() : super._();
 
   @override
   Iterable<RemoteFrameBufferFrameBufferUpdateMessageRectangle> get rectangles;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferFrameBufferUpdateMessageCopyWith<
-          _$_RemoteFrameBufferFrameBufferUpdateMessage>
+  _$$RemoteFrameBufferFrameBufferUpdateMessageImplCopyWith<
+          _$RemoteFrameBufferFrameBufferUpdateMessageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -256,15 +258,17 @@ class _$RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<
+abstract class _$$RemoteFrameBufferFrameBufferUpdateMessageRectangleImplCopyWith<
         $Res>
     implements
         $RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith(
-          _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle value,
-          $Res Function(_$_RemoteFrameBufferFrameBufferUpdateMessageRectangle)
+  factory _$$RemoteFrameBufferFrameBufferUpdateMessageRectangleImplCopyWith(
+          _$RemoteFrameBufferFrameBufferUpdateMessageRectangleImpl value,
+          $Res Function(
+                  _$RemoteFrameBufferFrameBufferUpdateMessageRectangleImpl)
               then) =
-      __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<$Res>;
+      __$$RemoteFrameBufferFrameBufferUpdateMessageRectangleImplCopyWithImpl<
+          $Res>;
   @override
   @useResult
   $Res call(
@@ -280,14 +284,16 @@ abstract class _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<$Res>
+class __$$RemoteFrameBufferFrameBufferUpdateMessageRectangleImplCopyWithImpl<
+        $Res>
     extends _$RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<
-        $Res, _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle>
+        $Res, _$RemoteFrameBufferFrameBufferUpdateMessageRectangleImpl>
     implements
-        _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<$Res> {
-  __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl(
-      _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle _value,
-      $Res Function(_$_RemoteFrameBufferFrameBufferUpdateMessageRectangle)
+        _$$RemoteFrameBufferFrameBufferUpdateMessageRectangleImplCopyWith<
+            $Res> {
+  __$$RemoteFrameBufferFrameBufferUpdateMessageRectangleImplCopyWithImpl(
+      _$RemoteFrameBufferFrameBufferUpdateMessageRectangleImpl _value,
+      $Res Function(_$RemoteFrameBufferFrameBufferUpdateMessageRectangleImpl)
           _then)
       : super(_value, _then);
 
@@ -301,7 +307,7 @@ class __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<$Res>
     Object? x = null,
     Object? y = null,
   }) {
-    return _then(_$_RemoteFrameBufferFrameBufferUpdateMessageRectangle(
+    return _then(_$RemoteFrameBufferFrameBufferUpdateMessageRectangleImpl(
       encodingType: null == encodingType
           ? _value.encodingType
           : encodingType // ignore: cast_nullable_to_non_nullable
@@ -332,9 +338,9 @@ class __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle
+class _$RemoteFrameBufferFrameBufferUpdateMessageRectangleImpl
     implements _RemoteFrameBufferFrameBufferUpdateMessageRectangle {
-  const _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle(
+  const _$RemoteFrameBufferFrameBufferUpdateMessageRectangleImpl(
       {required this.encodingType,
       required this.height,
       required this.pixelData,
@@ -364,7 +370,7 @@ class _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle &&
+            other is _$RemoteFrameBufferFrameBufferUpdateMessageRectangleImpl &&
             (identical(other.encodingType, encodingType) ||
                 other.encodingType == encodingType) &&
             (identical(other.height, height) || other.height == height) &&
@@ -382,11 +388,11 @@ class _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<
-          _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle>
+  _$$RemoteFrameBufferFrameBufferUpdateMessageRectangleImplCopyWith<
+          _$RemoteFrameBufferFrameBufferUpdateMessageRectangleImpl>
       get copyWith =>
-          __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWithImpl<
-                  _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle>(
+          __$$RemoteFrameBufferFrameBufferUpdateMessageRectangleImplCopyWithImpl<
+                  _$RemoteFrameBufferFrameBufferUpdateMessageRectangleImpl>(
               this, _$identity);
 }
 
@@ -399,7 +405,7 @@ abstract class _RemoteFrameBufferFrameBufferUpdateMessageRectangle
           required final int width,
           required final int x,
           required final int y}) =
-      _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle;
+      _$RemoteFrameBufferFrameBufferUpdateMessageRectangleImpl;
 
   @override
   RemoteFrameBufferEncodingType get encodingType;
@@ -415,8 +421,8 @@ abstract class _RemoteFrameBufferFrameBufferUpdateMessageRectangle
   int get y;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleCopyWith<
-          _$_RemoteFrameBufferFrameBufferUpdateMessageRectangle>
+  _$$RemoteFrameBufferFrameBufferUpdateMessageRectangleImplCopyWith<
+          _$RemoteFrameBufferFrameBufferUpdateMessageRectangleImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -515,17 +521,17 @@ class _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl<
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith<
+abstract class _$$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImplCopyWith<
         $Res>
     implements
         $RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith<
             $Res> {
-  factory _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith(
-          _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader value,
+  factory _$$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImplCopyWith(
+          _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImpl value,
           $Res Function(
-                  _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader)
+                  _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImpl)
               then) =
-      __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl<
+      __$$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImplCopyWithImpl<
           $Res>;
   @override
   @useResult
@@ -541,16 +547,17 @@ abstract class _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyW
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl<
+class __$$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImplCopyWithImpl<
         $Res>
     extends _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl<
-        $Res, _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader>
+        $Res, _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImpl>
     implements
-        _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith<
+        _$$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImplCopyWith<
             $Res> {
-  __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl(
-      _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader _value,
-      $Res Function(_$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader)
+  __$$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImplCopyWithImpl(
+      _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImpl _value,
+      $Res Function(
+              _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImpl)
           _then)
       : super(_value, _then);
 
@@ -563,7 +570,7 @@ class __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl<
     Object? x = null,
     Object? y = null,
   }) {
-    return _then(_$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader(
+    return _then(_$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImpl(
       encodingType: null == encodingType
           ? _value.encodingType
           : encodingType // ignore: cast_nullable_to_non_nullable
@@ -590,9 +597,9 @@ class __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl<
 
 /// @nodoc
 
-class _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader
+class _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImpl
     extends _RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader {
-  const _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader(
+  const _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImpl(
       {required this.encodingType,
       required this.height,
       required this.width,
@@ -621,7 +628,7 @@ class _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other
-                is _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader &&
+                is _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImpl &&
             (identical(other.encodingType, encodingType) ||
                 other.encodingType == encodingType) &&
             (identical(other.height, height) || other.height == height) &&
@@ -637,11 +644,11 @@ class _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith<
-          _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader>
+  _$$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImplCopyWith<
+          _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImpl>
       get copyWith =>
-          __$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWithImpl<
-                  _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader>(
+          __$$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImplCopyWithImpl<
+                  _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImpl>(
               this, _$identity);
 }
 
@@ -653,7 +660,7 @@ abstract class _RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader
           required final int width,
           required final int x,
           required final int y}) =
-      _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader;
+      _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImpl;
   const _RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader._()
       : super._();
 
@@ -669,7 +676,7 @@ abstract class _RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader
   int get y;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderCopyWith<
-          _$_RemoteFrameBufferFrameBufferUpdateMessageRectangleHeader>
+  _$$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImplCopyWith<
+          _$RemoteFrameBufferFrameBufferUpdateMessageRectangleHeaderImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

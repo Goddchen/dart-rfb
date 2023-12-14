@@ -125,12 +125,12 @@ class _$RemoteFrameBufferPointerEventMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferPointerEventMessageCopyWith<$Res>
+abstract class _$$RemoteFrameBufferPointerEventMessageImplCopyWith<$Res>
     implements $RemoteFrameBufferPointerEventMessageCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferPointerEventMessageCopyWith(
-          _$_RemoteFrameBufferPointerEventMessage value,
-          $Res Function(_$_RemoteFrameBufferPointerEventMessage) then) =
-      __$$_RemoteFrameBufferPointerEventMessageCopyWithImpl<$Res>;
+  factory _$$RemoteFrameBufferPointerEventMessageImplCopyWith(
+          _$RemoteFrameBufferPointerEventMessageImpl value,
+          $Res Function(_$RemoteFrameBufferPointerEventMessageImpl) then) =
+      __$$RemoteFrameBufferPointerEventMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -147,13 +147,13 @@ abstract class _$$_RemoteFrameBufferPointerEventMessageCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferPointerEventMessageCopyWithImpl<$Res>
+class __$$RemoteFrameBufferPointerEventMessageImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferPointerEventMessageCopyWithImpl<$Res,
-        _$_RemoteFrameBufferPointerEventMessage>
-    implements _$$_RemoteFrameBufferPointerEventMessageCopyWith<$Res> {
-  __$$_RemoteFrameBufferPointerEventMessageCopyWithImpl(
-      _$_RemoteFrameBufferPointerEventMessage _value,
-      $Res Function(_$_RemoteFrameBufferPointerEventMessage) _then)
+        _$RemoteFrameBufferPointerEventMessageImpl>
+    implements _$$RemoteFrameBufferPointerEventMessageImplCopyWith<$Res> {
+  __$$RemoteFrameBufferPointerEventMessageImplCopyWithImpl(
+      _$RemoteFrameBufferPointerEventMessageImpl _value,
+      $Res Function(_$RemoteFrameBufferPointerEventMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -170,7 +170,7 @@ class __$$_RemoteFrameBufferPointerEventMessageCopyWithImpl<$Res>
     Object? x = null,
     Object? y = null,
   }) {
-    return _then(_$_RemoteFrameBufferPointerEventMessage(
+    return _then(_$RemoteFrameBufferPointerEventMessageImpl(
       button1Down: null == button1Down
           ? _value.button1Down
           : button1Down // ignore: cast_nullable_to_non_nullable
@@ -217,9 +217,9 @@ class __$$_RemoteFrameBufferPointerEventMessageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferPointerEventMessage
+class _$RemoteFrameBufferPointerEventMessageImpl
     extends _RemoteFrameBufferPointerEventMessage {
-  const _$_RemoteFrameBufferPointerEventMessage(
+  const _$RemoteFrameBufferPointerEventMessageImpl(
       {required this.button1Down,
       required this.button2Down,
       required this.button3Down,
@@ -262,7 +262,7 @@ class _$_RemoteFrameBufferPointerEventMessage
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferPointerEventMessage &&
+            other is _$RemoteFrameBufferPointerEventMessageImpl &&
             (identical(other.button1Down, button1Down) ||
                 other.button1Down == button1Down) &&
             (identical(other.button2Down, button2Down) ||
@@ -300,10 +300,10 @@ class _$_RemoteFrameBufferPointerEventMessage
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferPointerEventMessageCopyWith<
-          _$_RemoteFrameBufferPointerEventMessage>
-      get copyWith => __$$_RemoteFrameBufferPointerEventMessageCopyWithImpl<
-          _$_RemoteFrameBufferPointerEventMessage>(this, _$identity);
+  _$$RemoteFrameBufferPointerEventMessageImplCopyWith<
+          _$RemoteFrameBufferPointerEventMessageImpl>
+      get copyWith => __$$RemoteFrameBufferPointerEventMessageImplCopyWithImpl<
+          _$RemoteFrameBufferPointerEventMessageImpl>(this, _$identity);
 }
 
 abstract class _RemoteFrameBufferPointerEventMessage
@@ -318,7 +318,7 @@ abstract class _RemoteFrameBufferPointerEventMessage
       required final bool button7Down,
       required final bool button8Down,
       required final int x,
-      required final int y}) = _$_RemoteFrameBufferPointerEventMessage;
+      required final int y}) = _$RemoteFrameBufferPointerEventMessageImpl;
   const _RemoteFrameBufferPointerEventMessage._() : super._();
 
   @override
@@ -343,7 +343,7 @@ abstract class _RemoteFrameBufferPointerEventMessage
   int get y;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferPointerEventMessageCopyWith<
-          _$_RemoteFrameBufferPointerEventMessage>
+  _$$RemoteFrameBufferPointerEventMessageImplCopyWith<
+          _$RemoteFrameBufferPointerEventMessageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

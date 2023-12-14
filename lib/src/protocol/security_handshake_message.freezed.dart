@@ -63,25 +63,25 @@ class _$RemoteFrameBufferSecurityHandshakeMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferSecurityHandshakeMessageCopyWith<$Res>
+abstract class _$$RemoteFrameBufferSecurityHandshakeMessageImplCopyWith<$Res>
     implements $RemoteFrameBufferSecurityHandshakeMessageCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferSecurityHandshakeMessageCopyWith(
-          _$_RemoteFrameBufferSecurityHandshakeMessage value,
-          $Res Function(_$_RemoteFrameBufferSecurityHandshakeMessage) then) =
-      __$$_RemoteFrameBufferSecurityHandshakeMessageCopyWithImpl<$Res>;
+  factory _$$RemoteFrameBufferSecurityHandshakeMessageImplCopyWith(
+          _$RemoteFrameBufferSecurityHandshakeMessageImpl value,
+          $Res Function(_$RemoteFrameBufferSecurityHandshakeMessageImpl) then) =
+      __$$RemoteFrameBufferSecurityHandshakeMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Iterable<RemoteFrameBufferSecurityType> securityTypes});
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferSecurityHandshakeMessageCopyWithImpl<$Res>
+class __$$RemoteFrameBufferSecurityHandshakeMessageImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferSecurityHandshakeMessageCopyWithImpl<$Res,
-        _$_RemoteFrameBufferSecurityHandshakeMessage>
-    implements _$$_RemoteFrameBufferSecurityHandshakeMessageCopyWith<$Res> {
-  __$$_RemoteFrameBufferSecurityHandshakeMessageCopyWithImpl(
-      _$_RemoteFrameBufferSecurityHandshakeMessage _value,
-      $Res Function(_$_RemoteFrameBufferSecurityHandshakeMessage) _then)
+        _$RemoteFrameBufferSecurityHandshakeMessageImpl>
+    implements _$$RemoteFrameBufferSecurityHandshakeMessageImplCopyWith<$Res> {
+  __$$RemoteFrameBufferSecurityHandshakeMessageImplCopyWithImpl(
+      _$RemoteFrameBufferSecurityHandshakeMessageImpl _value,
+      $Res Function(_$RemoteFrameBufferSecurityHandshakeMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -89,7 +89,7 @@ class __$$_RemoteFrameBufferSecurityHandshakeMessageCopyWithImpl<$Res>
   $Res call({
     Object? securityTypes = null,
   }) {
-    return _then(_$_RemoteFrameBufferSecurityHandshakeMessage(
+    return _then(_$RemoteFrameBufferSecurityHandshakeMessageImpl(
       securityTypes: null == securityTypes
           ? _value.securityTypes
           : securityTypes // ignore: cast_nullable_to_non_nullable
@@ -100,9 +100,9 @@ class __$$_RemoteFrameBufferSecurityHandshakeMessageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferSecurityHandshakeMessage
+class _$RemoteFrameBufferSecurityHandshakeMessageImpl
     extends _RemoteFrameBufferSecurityHandshakeMessage {
-  const _$_RemoteFrameBufferSecurityHandshakeMessage(
+  const _$RemoteFrameBufferSecurityHandshakeMessageImpl(
       {required this.securityTypes})
       : super._();
 
@@ -118,7 +118,7 @@ class _$_RemoteFrameBufferSecurityHandshakeMessage
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferSecurityHandshakeMessage &&
+            other is _$RemoteFrameBufferSecurityHandshakeMessageImpl &&
             const DeepCollectionEquality()
                 .equals(other.securityTypes, securityTypes));
   }
@@ -130,25 +130,26 @@ class _$_RemoteFrameBufferSecurityHandshakeMessage
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferSecurityHandshakeMessageCopyWith<
-          _$_RemoteFrameBufferSecurityHandshakeMessage>
+  _$$RemoteFrameBufferSecurityHandshakeMessageImplCopyWith<
+          _$RemoteFrameBufferSecurityHandshakeMessageImpl>
       get copyWith =>
-          __$$_RemoteFrameBufferSecurityHandshakeMessageCopyWithImpl<
-              _$_RemoteFrameBufferSecurityHandshakeMessage>(this, _$identity);
+          __$$RemoteFrameBufferSecurityHandshakeMessageImplCopyWithImpl<
+                  _$RemoteFrameBufferSecurityHandshakeMessageImpl>(
+              this, _$identity);
 }
 
 abstract class _RemoteFrameBufferSecurityHandshakeMessage
     extends RemoteFrameBufferSecurityHandshakeMessage {
   const factory _RemoteFrameBufferSecurityHandshakeMessage(
       {required final Iterable<RemoteFrameBufferSecurityType>
-          securityTypes}) = _$_RemoteFrameBufferSecurityHandshakeMessage;
+          securityTypes}) = _$RemoteFrameBufferSecurityHandshakeMessageImpl;
   const _RemoteFrameBufferSecurityHandshakeMessage._() : super._();
 
   @override
   Iterable<RemoteFrameBufferSecurityType> get securityTypes;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferSecurityHandshakeMessageCopyWith<
-          _$_RemoteFrameBufferSecurityHandshakeMessage>
+  _$$RemoteFrameBufferSecurityHandshakeMessageImplCopyWith<
+          _$RemoteFrameBufferSecurityHandshakeMessageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

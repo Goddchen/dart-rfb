@@ -95,12 +95,12 @@ class _$RemoteFrameBufferServerInitMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RemoteFrameBufferServerInitMessageCopyWith<$Res>
+abstract class _$$RemoteFrameBufferServerInitMessageImplCopyWith<$Res>
     implements $RemoteFrameBufferServerInitMessageCopyWith<$Res> {
-  factory _$$_RemoteFrameBufferServerInitMessageCopyWith(
-          _$_RemoteFrameBufferServerInitMessage value,
-          $Res Function(_$_RemoteFrameBufferServerInitMessage) then) =
-      __$$_RemoteFrameBufferServerInitMessageCopyWithImpl<$Res>;
+  factory _$$RemoteFrameBufferServerInitMessageImplCopyWith(
+          _$RemoteFrameBufferServerInitMessageImpl value,
+          $Res Function(_$RemoteFrameBufferServerInitMessageImpl) then) =
+      __$$RemoteFrameBufferServerInitMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -114,13 +114,13 @@ abstract class _$$_RemoteFrameBufferServerInitMessageCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RemoteFrameBufferServerInitMessageCopyWithImpl<$Res>
+class __$$RemoteFrameBufferServerInitMessageImplCopyWithImpl<$Res>
     extends _$RemoteFrameBufferServerInitMessageCopyWithImpl<$Res,
-        _$_RemoteFrameBufferServerInitMessage>
-    implements _$$_RemoteFrameBufferServerInitMessageCopyWith<$Res> {
-  __$$_RemoteFrameBufferServerInitMessageCopyWithImpl(
-      _$_RemoteFrameBufferServerInitMessage _value,
-      $Res Function(_$_RemoteFrameBufferServerInitMessage) _then)
+        _$RemoteFrameBufferServerInitMessageImpl>
+    implements _$$RemoteFrameBufferServerInitMessageImplCopyWith<$Res> {
+  __$$RemoteFrameBufferServerInitMessageImplCopyWithImpl(
+      _$RemoteFrameBufferServerInitMessageImpl _value,
+      $Res Function(_$RemoteFrameBufferServerInitMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -131,7 +131,7 @@ class __$$_RemoteFrameBufferServerInitMessageCopyWithImpl<$Res>
     Object? name = null,
     Object? serverPixelFormat = null,
   }) {
-    return _then(_$_RemoteFrameBufferServerInitMessage(
+    return _then(_$RemoteFrameBufferServerInitMessageImpl(
       frameBufferHeightInPixels: null == frameBufferHeightInPixels
           ? _value.frameBufferHeightInPixels
           : frameBufferHeightInPixels // ignore: cast_nullable_to_non_nullable
@@ -154,9 +154,9 @@ class __$$_RemoteFrameBufferServerInitMessageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RemoteFrameBufferServerInitMessage
+class _$RemoteFrameBufferServerInitMessageImpl
     extends _RemoteFrameBufferServerInitMessage {
-  const _$_RemoteFrameBufferServerInitMessage(
+  const _$RemoteFrameBufferServerInitMessageImpl(
       {required this.frameBufferHeightInPixels,
       required this.frameBufferWidthInPixels,
       required this.name,
@@ -181,7 +181,7 @@ class _$_RemoteFrameBufferServerInitMessage
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RemoteFrameBufferServerInitMessage &&
+            other is _$RemoteFrameBufferServerInitMessageImpl &&
             (identical(other.frameBufferHeightInPixels,
                     frameBufferHeightInPixels) ||
                 other.frameBufferHeightInPixels == frameBufferHeightInPixels) &&
@@ -200,10 +200,10 @@ class _$_RemoteFrameBufferServerInitMessage
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RemoteFrameBufferServerInitMessageCopyWith<
-          _$_RemoteFrameBufferServerInitMessage>
-      get copyWith => __$$_RemoteFrameBufferServerInitMessageCopyWithImpl<
-          _$_RemoteFrameBufferServerInitMessage>(this, _$identity);
+  _$$RemoteFrameBufferServerInitMessageImplCopyWith<
+          _$RemoteFrameBufferServerInitMessageImpl>
+      get copyWith => __$$RemoteFrameBufferServerInitMessageImplCopyWithImpl<
+          _$RemoteFrameBufferServerInitMessageImpl>(this, _$identity);
 }
 
 abstract class _RemoteFrameBufferServerInitMessage
@@ -213,7 +213,7 @@ abstract class _RemoteFrameBufferServerInitMessage
           required final int frameBufferWidthInPixels,
           required final String name,
           required final RemoteFrameBufferPixelFormat serverPixelFormat}) =
-      _$_RemoteFrameBufferServerInitMessage;
+      _$RemoteFrameBufferServerInitMessageImpl;
   const _RemoteFrameBufferServerInitMessage._() : super._();
 
   @override
@@ -226,7 +226,7 @@ abstract class _RemoteFrameBufferServerInitMessage
   RemoteFrameBufferPixelFormat get serverPixelFormat;
   @override
   @JsonKey(ignore: true)
-  _$$_RemoteFrameBufferServerInitMessageCopyWith<
-          _$_RemoteFrameBufferServerInitMessage>
+  _$$RemoteFrameBufferServerInitMessageImplCopyWith<
+          _$RemoteFrameBufferServerInitMessageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
