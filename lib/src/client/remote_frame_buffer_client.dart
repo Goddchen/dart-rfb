@@ -170,6 +170,7 @@ class RemoteFrameBufferClient {
     required final String hostname,
     final String? password,
     final int port = 5900,
+    final Duration? timeout,
   }) async =>
       (await TaskEither<Object, void>.tryCatch(
         () async {
@@ -178,6 +179,7 @@ class RemoteFrameBufferClient {
             await RawSocket.connect(
               hostname,
               port,
+              timeout: timeout,
             ),
           );
         },
