@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:dart_rfb/src/client/config.dart';
 import 'package:dart_rfb/src/client/remote_frame_buffer_client.dart';
+import 'package:dart_rfb/src/constants.dart';
 import 'package:dart_rfb/src/extensions/raw_socket_extensions.dart';
 import 'package:dart_rfb/src/protocol/encoding_type.dart';
 import 'package:fpdart/fpdart.dart';
@@ -61,7 +62,7 @@ class RemoteFrameBufferFrameBufferUpdateMessage
                 pixelData: await socket
                     .readSync(
                       length: numberOfDataBytes,
-                      readWaitDuration: none(),
+                      readWaitDuration: some(Constants.socketReadWaitDuration),
                     )
                     .run(),
                 width: rectangleHeader.width,
