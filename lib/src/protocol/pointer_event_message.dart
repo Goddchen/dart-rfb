@@ -26,32 +26,32 @@ class RemoteFrameBufferPointerEventMessage
   ByteData toBytes() {
     Uint8 buttonMask = Uint8(0);
     if (button1Down) {
-      buttonMask = buttonMask.setBit(0);
+      buttonMask = buttonMask.setNthBit(0);
     }
     if (button2Down) {
-      buttonMask = buttonMask.setBit(1);
+      buttonMask = buttonMask.setNthBit(1);
     }
     if (button3Down) {
-      buttonMask = buttonMask.setBit(2);
+      buttonMask = buttonMask.setNthBit(2);
     }
     if (button4Down) {
-      buttonMask = buttonMask.setBit(3);
+      buttonMask = buttonMask.setNthBit(3);
     }
     if (button5Down) {
-      buttonMask = buttonMask.setBit(4);
+      buttonMask = buttonMask.setNthBit(4);
     }
     if (button6Down) {
-      buttonMask = buttonMask.setBit(5);
+      buttonMask = buttonMask.setNthBit(5);
     }
     if (button7Down) {
-      buttonMask = buttonMask.setBit(6);
+      buttonMask = buttonMask.setNthBit(6);
     }
     if (button8Down) {
-      buttonMask = buttonMask.setBit(7);
+      buttonMask = buttonMask.setNthBit(7);
     }
     return ByteData(6)
       ..setUint8(0, 5)
-      ..setUint8(1, buttonMask.value)
+      ..setUint8(1, buttonMask)
       ..setUint16(2, x)
       ..setUint16(4, y);
   }
