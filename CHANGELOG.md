@@ -44,3 +44,7 @@
 ## 0.7.0
 
 - Refactoring: replace `startReadLoop()` with `Stream<RemoteFrameBufferClientReadMessage> incomingMessages` and `void handleIncomingMessages()`
+
+## 0.8.0
+- Upgrade `binary` to 4.0.0
+- Manage Dart SDK via `fvm`

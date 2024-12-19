@@ -46,7 +46,7 @@ void main() {
       equals(
         (ByteData(6)
               ..setUint8(0, 5)
-              ..setUint8(1, Uint8(0).setBit(0).value)
+              ..setUint8(1, Uint8(0).setNthBit(0))
               ..setUint16(2, 0)
               ..setUint16(4, 0))
             .buffer
